@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.WaterIntakeActivity">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/my_drawer_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/bar">
+
+            <ImageView
+                android:id="@+id/bar1"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bar" />
+
+            <ImageView
+                android:id="@+id/bar2"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bar1"
+                android:src="@drawable/bar" />
+
+            <ImageView
+                android:id="@+id/bar3"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bar2"
+                android:src="@drawable/bar" />
+
+            <ImageView
+                android:id="@+id/bar4"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bar3"
+                android:src="@drawable/bar" />
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/title"
+                android:layout_marginLeft="35dp"
+                android:layout_toRightOf="@+id/bar1"
+                android:text="Hydration level - 1"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/fragment_container"/>
+
+    </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/appnavigation"
+        app:itemIconTint="@color/water_color"
+        android:layout_gravity="start"
+        />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>

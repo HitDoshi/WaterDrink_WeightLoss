@@ -1,0 +1,103 @@
+package com.example.waterdrink_weightloss.fragment;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.NumberPicker;
+
+import com.example.waterdrink_weightloss.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link TimeFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+
+public class TimeFragment extends Fragment {
+
+    NumberPicker wake_up_hour , wake_up_min ;
+    NumberPicker bed_hour , bed_min ;
+    Button next;
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public TimeFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment TimeFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static TimeFragment newInstance(String param1, String param2) {
+        TimeFragment fragment = new TimeFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_time, container, false);
+        wake_up_hour = view.findViewById(R.id.wake_up_hour);
+        wake_up_min = view.findViewById(R.id.wake_up_min);
+
+        bed_hour = view.findViewById(R.id.bed_hour);
+        bed_min = view.findViewById(R.id.bed_min);
+
+        next = view.findViewById(R.id.next);
+
+        wake_up_hour.setMaxValue(23);
+        wake_up_hour.setMinValue(0);
+        wake_up_min.setMinValue(0);
+        wake_up_min.setMaxValue(59);
+        wake_up_hour.setValue(7);
+        wake_up_min.setValue(30);
+
+        bed_hour.setMaxValue(23);
+        bed_hour.setMinValue(0);
+        bed_min.setMinValue(0);
+        bed_min.setMaxValue(59);
+        bed_hour.setValue(22);
+        bed_min.setValue(0);
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), LoadingActivity.class);
+                startActivity(intent);
+            }
+        });
+        return view;
+    }
+}
