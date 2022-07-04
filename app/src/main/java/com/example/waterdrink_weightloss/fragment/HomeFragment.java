@@ -31,7 +31,6 @@ public class HomeFragment extends Fragment {
     TextView weather_cancel , weather_ok ;
     TextView physical_cancel , physical_ok;
 
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -84,7 +83,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.responsiveui, container, false);
 
         progressBar = view.findViewById(R.id.progress_bar);
         textView = view.findViewById(R.id.textview_progress);

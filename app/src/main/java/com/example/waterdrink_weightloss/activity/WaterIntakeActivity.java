@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.fragment.DrinkReportFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -45,7 +46,7 @@ public class WaterIntakeActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.fragment_container,new HomeFragment());
+        ft.replace(R.id.fragment_container,new DrinkReportFragment());
         ft.commit();
 
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
@@ -67,7 +68,11 @@ public class WaterIntakeActivity extends AppCompatActivity
         {
             case R.id.home:
             {
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
 
+                ft.replace(R.id.fragment_container,new HomeFragment());
+                ft.commit();
                 return true;
             }
             case R.id.share_app:
@@ -87,6 +92,17 @@ public class WaterIntakeActivity extends AppCompatActivity
             case R.id.rate_app:
             {
                 break;
+            }
+
+            case R.id.drink_report:
+            {
+
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                ft.replace(R.id.fragment_container,new DrinkReportFragment());
+                ft.commit();
+                return true;
             }
         }
         return false;
