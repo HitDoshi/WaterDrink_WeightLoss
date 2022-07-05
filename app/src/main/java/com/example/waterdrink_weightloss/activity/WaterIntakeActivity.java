@@ -23,6 +23,7 @@ import android.widget.Toolbar;
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.fragment.DrinkReportFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
+import com.example.waterdrink_weightloss.fragment.MonthGraphFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class WaterIntakeActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.fragment_container,new DrinkReportFragment());
+        ft.replace(R.id.fragment_container,new MonthGraphFragment());
         ft.commit();
 
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
@@ -108,13 +109,13 @@ public class WaterIntakeActivity extends AppCompatActivity
         return false;
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
 }

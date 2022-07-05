@@ -1,6 +1,6 @@
 <androidx.cardview.widget.CardView android:id="@+id/cardview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:backgroundTint="@color/light_blue"
     android:background="@drawable/cardcorner"
     app:layout_constraintStart_toStartOf="parent"
@@ -32,14 +32,6 @@
             app:layout_constraintDimensionRatio="1"
             >
 
-            <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/c1"
-            app:layout_constraintTop_toTopOf="@+id/c1">
             <LinearLayout
                 android:id="@+id/l1"
                 android:layout_width="wrap_content"
@@ -229,8 +221,8 @@
                     android:textColor="@color/black" />
             </LinearLayout>
 
-            </RelativeLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -269,7 +261,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     app:layout_constraintDimensionRatio="1">
 
                     <ProgressBar
