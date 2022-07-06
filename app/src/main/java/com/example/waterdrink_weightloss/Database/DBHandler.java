@@ -177,13 +177,13 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // we have created a new method for reading all the courses.
-    public ArrayList<DataModel> readDataMonthWise(int select) {
+    public ArrayList<DataModel> readDataMonthWise(int month,int year) {
         // on below line we are creating a
         // database for reading our database.
         SQLiteDatabase db = this.getReadableDatabase();
 
         // on below line we are creating a cursor with query to read data from database.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE month=+"+select, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE month=+" + month + " AND year=+" + year, null);
 
         // on below line we are creating a new array list.
         ArrayList<DataModel> courseModalArrayList = new ArrayList<>();

@@ -7,6 +7,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 </data>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,13 +39,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_marginRight="20dp" />
 
         <TextView
+            android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Month"
-            android:id="@+id/month"
-            android:gravity="center"
+            android:layout_marginRight="20dp"
             android:background="@drawable/textview_shape"
-            android:layout_marginRight="20dp" />
+            android:gravity="center"
+            android:text="Month" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -155,7 +160,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                              android:orientation="horizontal"
                              app:layout_constraintBottom_toBottomOf="@+id/c1"
                              app:layout_constraintTop_toTopOf="@+id/c1">
-         -->
+                        -->
+
+
                         <LinearLayout
                             android:id="@+id/l1"
                             android:layout_width="wrap_content"
@@ -167,19 +174,36 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             app:layout_constraintEnd_toStartOf="@+id/l2"
                             >
 
-                            <ProgressBar
-                                android:id="@+id/w1"
+                            <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center" />
+                                >
+
+                                <ProgressBar
+                                    android:id="@+id/w1"
+                                    style="@style/CircularDeterminateProgressBar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/circle" />
 
                             <TextView
                                 android:id="@+id/name_w1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
                                 android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="1"
+                                android:textColor="@color/black" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -193,21 +217,37 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             app:layout_constraintEnd_toStartOf="@+id/l3"
                             android:orientation="vertical">
 
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+
                             <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
                                 android:id="@+id/w2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center" />
 
+                                <TextView
+                                    android:id="@+id/name_w2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:text="0%"
+                                    android:textColor="@color/black" />
+                            </RelativeLayout>
+
                             <TextView
-                                android:id="@+id/name_w2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="2"
                                 android:textColor="@color/black" />
-                        </LinearLayout>
 
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/l3"
@@ -221,19 +261,35 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             app:layout_constraintBottom_toBottomOf="parent"
                             >
 
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
                             <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
                                 android:id="@+id/w3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center" />
 
+                                <TextView
+                                    android:id="@+id/name_w3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:text="0%"
+                                    android:textColor="@color/black" />
+                            </RelativeLayout>
+
+
                             <TextView
-                                android:id="@+id/name_w3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="3"
                                 android:textColor="@color/black" />
+
                         </LinearLayout>
 
 
@@ -249,7 +305,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             app:layout_constraintBottom_toBottomOf="parent"
                             >
 
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
                             <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
                                 android:id="@+id/w4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -260,7 +322,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="4"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
@@ -277,7 +348,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             app:layout_constraintBottom_toBottomOf="parent"
                             >
 
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
                             <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
                                 android:id="@+id/w5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -288,7 +365,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="5"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
@@ -301,9 +387,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:orientation="vertical"
                             app:layout_constraintStart_toEndOf="@+id/l5"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent">
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
 
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
                             <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
                                 android:id="@+id/w6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -314,8 +407,19 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
                                 android:textColor="@color/black" />
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="6"
+                                android:textColor="@color/black" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -330,7 +434,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             app:layout_constraintEnd_toEndOf="parent"
                             >
 
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
                             <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
                                 android:id="@+id/w7"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -341,11 +451,897 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Mon"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="7"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
                         <!--</RelativeLayout>-->
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/second_line"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintDimensionRatio="1"
+                        >
+
+                        <!-- <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_alignParentTop="true"
+                             android:layout_marginTop="20dp"
+                             android:orientation="horizontal"
+                             app:layout_constraintBottom_toBottomOf="@+id/c1"
+                             app:layout_constraintTop_toTopOf="@+id/c1">
+         -->
+                        <LinearLayout
+                            android:id="@+id/l8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/l9"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="8"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@+id/l8"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_toRightOf="@+id/l8"
+                            app:layout_constraintEnd_toStartOf="@+id/l10"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="9"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l9"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l9"
+                            app:layout_constraintEnd_toStartOf="@+id/l11"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="10"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l10"
+                            app:layout_constraintEnd_toStartOf="@+id/l12"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l10"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="11"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l12"
+                            app:layout_constraintEnd_toStartOf="@+id/l13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l11"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l11"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="12"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l13"
+                            app:layout_constraintEnd_toStartOf="@+id/l14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l12"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l12"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="13"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l13"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l13"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="14"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                        <!--</RelativeLayout>-->
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/third_line"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintDimensionRatio="1"
+                        >
+
+                        <!-- <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_alignParentTop="true"
+                             android:layout_marginTop="20dp"
+                             android:orientation="horizontal"
+                             app:layout_constraintBottom_toBottomOf="@+id/c1"
+                             app:layout_constraintTop_toTopOf="@+id/c1">
+         -->
+                        <LinearLayout
+                            android:id="@+id/l15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/l16"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="15"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@+id/l15"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_toRightOf="@+id/l15"
+                            app:layout_constraintEnd_toStartOf="@+id/l17"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="16"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l16"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l18"
+                            app:layout_constraintEnd_toStartOf="@+id/l16"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                            <ProgressBar
+                                style="@style/CircularDeterminateProgressBar"
+                                android:background="@drawable/circle"
+                                android:id="@+id/w17"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w17"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="17"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l17"
+                            app:layout_constraintEnd_toStartOf="@+id/l19"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l17"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l19"
+                            app:layout_constraintEnd_toStartOf="@+id/l18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l20"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l20"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w19"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w19"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l20"
+                            app:layout_constraintEnd_toStartOf="@+id/l21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l19"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l19"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent">
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l20"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l20"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w21"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w21"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                        <!--</RelativeLayout>-->
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/forth_line"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintDimensionRatio="1"
+                        >
+
+                        <!-- <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_alignParentTop="true"
+                             android:layout_marginTop="20dp"
+                             android:orientation="horizontal"
+                             app:layout_constraintBottom_toBottomOf="@+id/c1"
+                             app:layout_constraintTop_toTopOf="@+id/c1">
+         -->
+                        <LinearLayout
+                            android:id="@+id/l22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/l23"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w22"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w22"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@+id/l22"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_toRightOf="@+id/l22"
+                            app:layout_constraintEnd_toStartOf="@+id/l24"
+                            android:orientation="vertical">
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w23"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w23"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l23"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l23"
+                            app:layout_constraintEnd_toStartOf="@+id/l25"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l24"
+                            app:layout_constraintEnd_toStartOf="@+id/l24"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l26"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w25"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w25"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/l26"
+                            app:layout_constraintEnd_toStartOf="@+id/l27"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l25"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l25"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w26"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w26"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l27"
+                            app:layout_constraintEnd_toStartOf="@+id/l28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l26"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l26"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent">
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w27"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w27"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/l28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/l27"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@+id/l27"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            >
+
+                            <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                                android:id="@+id/w28"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/name_w28"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="0%"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                        <!--</RelativeLayout>-->
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fifth_line"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintDimensionRatio="1"
+                        >
+
+                    <!-- <RelativeLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentTop="true"
+                         android:layout_marginTop="20dp"
+                         android:orientation="horizontal"
+                         app:layout_constraintBottom_toBottomOf="@+id/c1"
+                         app:layout_constraintTop_toTopOf="@+id/c1">
+     -->
+                    <LinearLayout
+                        android:id="@+id/l29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/l30"
+                        >
+
+                        <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                            android:id="@+id/w29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+
+                        <TextView
+                            android:id="@+id/name_w29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0%"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/l30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/l29"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_toRightOf="@+id/l29"
+                        app:layout_constraintEnd_toStartOf="@+id/l31"
+                        android:orientation="vertical">
+
+                        <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                            android:id="@+id/w30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+
+                        <TextView
+                            android:id="@+id/name_w30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0%"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/l31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/l30"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@+id/l30"
+                        app:layout_constraintEnd_toStartOf="@+id/l30"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+
+                        <ProgressBar style="@style/CircularDeterminateProgressBar"
+android:background="@drawable/circle"
+                            android:id="@+id/w31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+
+                        <TextView
+                            android:id="@+id/name_w31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0%"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -389,11 +1385,12 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 app:layout_constraintDimensionRatio="1">
 
                                 <ProgressBar
-                                    android:layout_centerInParent="true"
                                     android:id="@+id/progress_bar_today"
                                     style="@style/CircularDeterminateProgressBar"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/circle"
                                     android:indeterminateOnly="false"
                                     android:progress="0"
                                     android:progressDrawable="@drawable/circle"
@@ -446,7 +1443,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:id="@+id/t1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Avg"
+                                android:text="Monthly Average"
                                 android:layout_gravity="center"
                                 android:textColor="@color/black"
                                 android:textStyle="bold"
@@ -464,7 +1461,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toTopOf="@+id/r2"
                                 app:layout_constraintStart_toStartOf="parent"
-                                android:text="abc"
+                                android:text="0 ml"
                                 android:id="@+id/completed_ml"/>
 
                             <RelativeLayout
@@ -478,9 +1475,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 app:layout_constraintDimensionRatio="1">
 
                                 <ProgressBar
-                                    android:layout_centerInParent="true"
-                                    android:id="@+id/progress_bar"
                                     style="@style/CircularDeterminateProgressBar"
+                                    android:background="@drawable/circle"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/avg_progress_bar"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:indeterminateOnly="false"
@@ -496,7 +1494,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                     tools:progress="10" />
 
                                 <TextView
-                                    android:id="@+id/textview_progress"
+                                    android:id="@+id/avg_textview_progress"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
@@ -514,4 +1512,5 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

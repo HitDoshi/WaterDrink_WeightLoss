@@ -1,34 +1,36 @@
 package com.example.waterdrink_weightloss.fragment;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.example.waterdrink_weightloss.BuildConfig;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.databinding.FragmentDrinkReportBinding;
 import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,13 +47,23 @@ public class MonthGraphFragment extends Fragment {
     FragmentMonthGraphBinding MonthReportFragmentBinding;
     String[] month = {"January","February","March","April","May","Jun","July","August","September",
             "October","November","December"};
+    String[] xAxisLables = new String[]{"1","2", "3", "4","5","6","7","8","9","10",
+            "1","2", "3", "4","5","6","7","8","9","10",
+            "1","2", "3", "4","5","6","7","8","9","10",
+            };
+
     ArrayList<String> days = new ArrayList<String>();
     ArrayList<DataModel> arrayList = new ArrayList<>();
-    int position , j=1 , size;
+    ArrayList<Integer> linearlayout = new ArrayList<Integer>();
+    int[] progressbar = new int[31];
+    ArrayList<Integer> textview = new ArrayList<>();
+    Resources r ;
+    String packageName ;
+    Calendar calendar;
+
+    int position , j=1 , size , year , total=0;
     DBHandler dbHandler;
     ArrayList barEntriesArrayList;
-    BarChart barChart;
-    Calendar calendar;
 
     // variable for our bar data.
     BarData barData;
@@ -102,6 +114,9 @@ public class MonthGraphFragment extends Fragment {
         MonthReportFragmentBinding = FragmentMonthGraphBinding.inflate(getLayoutInflater());
 
         View view = inflater.inflate(R.layout.fragment_month_graph, container, false);
+        setId();
+        /*ProgressBar a = view.findViewById(progressbar.get(1));
+        a.setProgress(50);*/
 
         return MonthReportFragmentBinding.getRoot();
     }
@@ -114,16 +129,18 @@ public class MonthGraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 position--;
-                MonthReportFragmentBinding.selectedMonth.setText(month[position]);
-                if(position<11)
+
+                if (position==-1)
                 {
-                    MonthReportFragmentBinding.rightArrow.setEnabled(true);
+                    year--;
+                    position=11;
                 }
-                if (position<1)
-                {
-                    MonthReportFragmentBinding.leftArrow.setEnabled(false);
-                }
-                setData(position);
+
+                calendar = new GregorianCalendar(year, position, 1);
+                size = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                MonthReportFragmentBinding.selectedMonth.setText(month[position] + "  " + year);
+                setData(position,year,size);
+
             }
         });
 
@@ -131,33 +148,60 @@ public class MonthGraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 position++;
-                MonthReportFragmentBinding.selectedMonth.setText(month[position]);
 
-                if(position>10)
+                if(position==12)
                 {
-                    MonthReportFragmentBinding.rightArrow.setEnabled(false);
+                    position=0;
+                    year++;
                 }
-                if (position>0)
-                {
-                        MonthReportFragmentBinding.leftArrow.setEnabled(true);
-                }
-                setData(position);
+
+                MonthReportFragmentBinding.selectedMonth.setText(month[position] + "  " + year);
+                calendar = new GregorianCalendar(year, position, 1);
+                size = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                setData(position,year,size);
+
             }
         });
 
+        MonthReportFragmentBinding.week.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment1 =new DrinkReportFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment1);
+                fragmentTransaction.commit();
+            }
+        });
+
+        MonthReportFragmentBinding.year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment1 =new YearGraphFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment1);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Calendar calendar = Calendar.getInstance();
-        position = calendar.get(Calendar.MONTH)+1;
-        MonthReportFragmentBinding.selectedMonth.setText(month[position]);
+        calendar = Calendar.getInstance();
+        position = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
+        Log.d("year",year+"");
+        MonthReportFragmentBinding.selectedMonth.setText(month[position] + "  " + year);
+        calendar = new GregorianCalendar(year, position, 1);
         size = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        setData(position);
+        setData(position,year,size);
+
+        //setId();
     }
 
-    private void setData(int position) {
+    private void setData(int position,int year,int size) {
 
         days.clear();
         for(int i=0;i<size;i++){
@@ -167,7 +211,7 @@ public class MonthGraphFragment extends Fragment {
         Log.d("DaysOfMonth",size+"");
         j=1;
         arrayList.clear();
-        arrayList = dbHandler.readDataMonthWise(position);
+        arrayList = dbHandler.readDataMonthWise(position+1,year);
         Log.d("size",arrayList.size()+"");
         Collections.sort(arrayList, new Comparator<DataModel>() {
             @Override
@@ -195,13 +239,14 @@ public class MonthGraphFragment extends Fragment {
 
             if (j != arrayList.get(i).getDay()) {
                 for (int k = j; k < arrayList.get(i).getDay(); k++) {
-                    barEntriesArrayList.add(new BarEntry(j, 0));
+                    barEntriesArrayList.add(new BarEntry(j, 50));
                     //Log.d("Enter", arrayList.get(i).getAchievement() + "");
                     j++;
                 }
             }
 
             barEntriesArrayList.add(new BarEntry(j, arrayList.get(i).getAchievement()));
+            total += arrayList.get(i).getAchievement();
             //Log.d("Achieve", arrayList.get(i).getAchievement() + "");
             j++;
         }
@@ -212,21 +257,13 @@ public class MonthGraphFragment extends Fragment {
 
         if(arrayList.size()>0) {
             // creating a new bar data set.
-            barDataSet = new BarDataSet(barEntriesArrayList, "Geeks for Geeks");
+            barDataSet = new BarDataSet(barEntriesArrayList,null);
 
             // creating a new bar data and
             // passing our bar data set.
 
             // below line is to set data
             // to our bar chart.
-            XAxis xAxis = MonthReportFragmentBinding.graph.getXAxis();
-
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(days));
-            xAxis.setPosition(XAxis.XAxisPosition.TOP);
-            xAxis.setGranularity(1);
-            xAxis.setCenterAxisLabels(true);
-            xAxis.setGranularityEnabled(true);
-
             barData = new BarData(barDataSet);
             MonthReportFragmentBinding.graph.setData(barData);
             MonthReportFragmentBinding.graph.setScaleEnabled(true);
@@ -235,7 +272,7 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.graph.setScaleEnabled(false);
 
             // adding color to our bar data set.
-            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            barDataSet.setColors(R.color.water_color);
 
             // setting text color.
             barDataSet.setValueTextColor(Color.BLACK);
@@ -246,5 +283,37 @@ public class MonthGraphFragment extends Fragment {
         {
             MonthReportFragmentBinding.graph.clear();
         }
+
+        MonthReportFragmentBinding.completedMl.setText(total/size+"");
+        int temp = ((int) (  ( (float) (int)(total/size)) / (float) (500) * 100));
+        MonthReportFragmentBinding.avgProgressBar.setProgress(temp);
+        if (temp<99)
+            MonthReportFragmentBinding.avgTextviewProgress.setText(temp+"%");
+        else
+            MonthReportFragmentBinding.avgTextviewProgress.setText(100+"%");
+
+        //progressbar();
+    }
+
+/*
+    private void progressbar() {
+
+        MonthReportFragmentBinding.w1.setProgress((Integer) barEntriesArrayList.get(1));
+        int temp = ((int) (  ( (float) (int)(barEntriesArrayList.get(1))) / (float) (500) * 100));
+        MonthReportFragmentBinding.nameW1.setText(temp+"%");
+    }*/
+
+    private void setId(){
+
+        r = getResources();
+        packageName = getActivity().getPackageName();
+
+        for (int i=0;i<31;i++){
+            progressbar[i] = r.getIdentifier("R.id.w"+i+1,"id",packageName);
+        }
+
+        Log.d("abc",String.valueOf(progressbar[1]));
+        MonthReportFragmentBinding.w1.setProgress(50);
+        MonthReportFragmentBinding.nameW1.setText(50+"%");
     }
 }
