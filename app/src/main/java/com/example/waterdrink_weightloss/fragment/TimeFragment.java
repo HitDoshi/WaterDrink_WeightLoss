@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.PrefManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,6 +95,8 @@ public class TimeFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PrefManager prefManager = new PrefManager(getActivity());
+                prefManager.setFirstTimeLaunch(false);
                 Intent intent = new Intent(getContext(), LoadingActivity.class);
                 startActivity(intent);
             }

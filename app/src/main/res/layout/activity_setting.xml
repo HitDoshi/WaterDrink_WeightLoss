@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+
+    tools:context=".activity.SettingActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Personal Information"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/dark_purple"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:gravity="right"
+                android:layout_marginRight="20dp"
+                android:id="@+id/gender"
+
+                android:textColor="@color/water_color"
+                />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="60 kg"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/weight"
+            android:textColor="@color/water_color"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wake-up time"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="7:30 am"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/wake_up_time"
+            android:textColor="@color/water_color"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bedtime"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="11:00 pm"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/bed_time"
+            android:textColor="@color/water_color"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/horizontal_line"
+        android:padding="20dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="General"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:textColor="@color/dark_purple"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unit"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="kg,ml"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/unit"
+            android:textColor="@color/water_color"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Intake Goal"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="1500 ml"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/goal"
+            android:textColor="@color/water_color"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hide Tips"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+
+            />
+
+        <Switch
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/hide_tips"
+             />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theme"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+
+            />
+
+        <Switch
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:id="@+id/theme"
+            android:textColor="@color/water_color"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.example.waterdrink_weightloss.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -33,11 +34,12 @@ public class UserInformation extends AppCompatActivity {
         //setContentView(R.layout.activity_user_information);
 
         // Checking for first time launch - before calling setContentView()
-       /* prefManager = new PrefManager(this);
+        PrefManager prefManager = new PrefManager(this);
         if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
+            Intent intent = new Intent(this,WaterIntakeActivity.class);
+            startActivity(intent);
             finish();
-        }*/
+        }
 
 /*
         // Making notification bar transparent

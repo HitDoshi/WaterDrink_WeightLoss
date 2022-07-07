@@ -60,14 +60,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/target_textview"
-                android:text="Drink 182ml"
+                android:text="Drink 1500ml"
                 android:textColor="@color/water_color"
                 android:backgroundTint="#00546F"
                 />
 
         </LinearLayout>
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintHeight_default="spread"
             android:id="@+id/relativelayout"
             android:layout_width="0dp"
@@ -88,8 +88,10 @@
                 android:progressDrawable="@drawable/circle"
                 android:rotation="-90"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/relativelayout"
+                app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
                 tools:progress="10" />
             <!--
                     <ImageView
@@ -105,27 +107,28 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/water_color"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/progress_bar"
-                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                 app:layout_constraintStart_toStartOf="@+id/progress_bar"
-                app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                app:layout_constraintTop_toTopOf="@+id/progress_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
                 tools:text="0%" />
 
             <TextView
                 android:id="@+id/remember_water_text"
-                app:layout_constraintStart_toStartOf="@+id/progress_bar"
-                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-                app:layout_constraintTop_toBottomOf="@+id/progress_bar"
-                app:layout_constraintBottom_toTopOf="@+id/textview_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:layout_below="@id/textview_progress"
                 android:layout_centerInParent="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/dark_purple"
+                app:layout_constraintStart_toStartOf="@+id/progress_bar"
+                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                app:layout_constraintTop_toTopOf="@+id/textview_progress"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
                 tools:text="1250ml more" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
             android:id="@+id/dialog_linear3d"
@@ -182,7 +185,6 @@
             app:layout_constraintBottom_toTopOf="@+id/cardview"
             >
 
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -227,8 +229,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundTint="@color/light_blue"
             android:background="@drawable/cardcorner"
             app:layout_constraintTop_toBottomOf="@+id/linear4"
@@ -252,7 +254,7 @@
                     android:textColor="@color/black"
                     />
 
-                <androidx.cardview.widget.CardView
+               <!-- <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -305,10 +307,28 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+-->
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                <androidx.recyclerview.widget.RecyclerView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:id="@+id/recyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+       </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

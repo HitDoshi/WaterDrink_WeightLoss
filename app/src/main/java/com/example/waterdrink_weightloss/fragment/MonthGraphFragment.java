@@ -166,7 +166,7 @@ public class MonthGraphFragment extends Fragment {
         MonthReportFragmentBinding.week.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment1 =new DrinkReportFragment();
+                Fragment fragment1 =new WeekGraphFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,fragment1);
@@ -197,6 +197,7 @@ public class MonthGraphFragment extends Fragment {
         calendar = new GregorianCalendar(year, position, 1);
         size = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         setData(position,year,size);
+        getTodayRecord();
 
         //setId();
     }
@@ -239,7 +240,7 @@ public class MonthGraphFragment extends Fragment {
 
             if (j != arrayList.get(i).getDay()) {
                 for (int k = j; k < arrayList.get(i).getDay(); k++) {
-                    barEntriesArrayList.add(new BarEntry(j, 50));
+                    barEntriesArrayList.add(new BarEntry(j, 0));
                     //Log.d("Enter", arrayList.get(i).getAchievement() + "");
                     j++;
                 }
@@ -251,7 +252,7 @@ public class MonthGraphFragment extends Fragment {
             j++;
         }
 
-        for (int i=j;i<size;i++){
+        for (int i=j;i<=size;i++){
             barEntriesArrayList.add(new BarEntry(i,0));
         }
 
@@ -284,7 +285,7 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.graph.clear();
         }
 
-        MonthReportFragmentBinding.completedMl.setText(total/size+"");
+        MonthReportFragmentBinding.completedMl.setText(total/size+"ml");
         int temp = ((int) (  ( (float) (int)(total/size)) / (float) (500) * 100));
         MonthReportFragmentBinding.avgProgressBar.setProgress(temp);
         if (temp<99)
@@ -315,5 +316,30 @@ public class MonthGraphFragment extends Fragment {
         Log.d("abc",String.valueOf(progressbar[1]));
         MonthReportFragmentBinding.w1.setProgress(50);
         MonthReportFragmentBinding.nameW1.setText(50+"%");
+    }
+
+    private void getTodayRecord()
+    {
+        Calendar calendar = Calendar.getInstance();
+        ArrayList<DataModel> todayRecord = new ArrayList<>();
+        todayRecord = dbHandler.readDataDateWise(calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.YEAR));
+
+        if (todayRecord.size()!=0)
+        {
+            MonthReportFragmentBinding.completedMlToday.setText(todayRecord.get(0).getAchievement()+"ml");
+            int temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (500) * 100));
+            MonthReportFragmentBinding.progressBarToday.setProgress(temp);
+            if (temp<99)
+                MonthReportFragmentBinding.textviewProgressToday.setText(temp+"%");
+            else
+                MonthReportFragmentBinding.textviewProgressToday.setText(100+"%");
+        }
+        else
+        {
+            MonthReportFragmentBinding.completedMlToday.setText("0 ml");
+            MonthReportFragmentBinding.progressBarToday.setProgress(0);
+            MonthReportFragmentBinding.textviewProgressToday.setText("0%");
+        }
     }
 }

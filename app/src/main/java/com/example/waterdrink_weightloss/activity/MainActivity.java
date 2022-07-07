@@ -24,12 +24,20 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         start = findViewById(R.id.start);
+        PrefManager prefManager = new PrefManager(this);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WaterIntakeActivity.class);
-                startActivity(intent);
+                if (!prefManager.isFirstTimeLaunch()) {
+                    Intent intent = new Intent(getApplicationContext(),WaterIntakeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Intent intent = new Intent(MainActivity.this, UserInformation.class);
+                    startActivity(intent);
+                }
             }
         });
 

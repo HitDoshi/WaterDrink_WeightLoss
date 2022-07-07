@@ -50,7 +50,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+0 ml"
+                android:text="+200 ml"
                 android:textColor="@color/black"
                 />
         </LinearLayout>
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/Warm_weather">
+        android:id="@+id/warm_weather">
 
         <ImageView
             android:layout_width="wrap_content"
