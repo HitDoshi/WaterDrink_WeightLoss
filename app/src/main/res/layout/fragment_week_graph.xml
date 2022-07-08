@@ -41,7 +41,7 @@
                 <TextView
                     android:id="@+id/month"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/textview_shape"
                     android:gravity="center"
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/selected_month"
+                    android:id="@+id/selected_week"
                     android:text="2022" />
 
                 <ImageView
@@ -201,7 +201,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:text="Mon"
+                                        android:text="Sun"
                                         android:textColor="@color/black" />
 
                                 </LinearLayout>
@@ -449,9 +449,9 @@
                                             android:id="@+id/week_name7"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
                                             android:layout_gravity="center"
                                             android:text="0%"
-                                            android:layout_centerInParent="true"
                                             android:textColor="@color/black" />
                                     </RelativeLayout>
 
@@ -459,7 +459,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:text="Sun"
+                                        android:text="Mon"
                                         android:textColor="@color/black" />
 
                                 </LinearLayout>

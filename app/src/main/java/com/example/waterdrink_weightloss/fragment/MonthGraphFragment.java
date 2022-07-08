@@ -1,5 +1,7 @@
 package com.example.waterdrink_weightloss.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -45,6 +47,8 @@ public class MonthGraphFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     FragmentMonthGraphBinding MonthReportFragmentBinding;
+    int target_ml;
+    SharedPreferences sharedPreferences;
     String[] month = {"January","February","March","April","May","Jun","July","August","September",
             "October","November","December"};
     String[] xAxisLables = new String[]{"1","2", "3", "4","5","6","7","8","9","10",
@@ -189,6 +193,9 @@ public class MonthGraphFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
+        target_ml = sharedPreferences.getInt("target_ml", 1500);
         calendar = Calendar.getInstance();
         position = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -286,12 +293,13 @@ public class MonthGraphFragment extends Fragment {
         }
 
         MonthReportFragmentBinding.completedMl.setText(total/size+"ml");
-        int temp = ((int) (  ( (float) (int)(total/size)) / (float) (500) * 100));
+        int temp = ((int) (  ( (float) (int)(total/size)) / (float) (target_ml) * 100));
         MonthReportFragmentBinding.avgProgressBar.setProgress(temp);
         if (temp<99)
             MonthReportFragmentBinding.avgTextviewProgress.setText(temp+"%");
         else
             MonthReportFragmentBinding.avgTextviewProgress.setText(100+"%");
+        total = 0;//important
 
         //progressbar();
     }
@@ -300,7 +308,7 @@ public class MonthGraphFragment extends Fragment {
     private void progressbar() {
 
         MonthReportFragmentBinding.w1.setProgress((Integer) barEntriesArrayList.get(1));
-        int temp = ((int) (  ( (float) (int)(barEntriesArrayList.get(1))) / (float) (500) * 100));
+        int temp = ((int) (  ( (float) (int)(barEntriesArrayList.get(1))) / (float) (target_ml) * 100));
         MonthReportFragmentBinding.nameW1.setText(temp+"%");
     }*/
 
@@ -328,7 +336,7 @@ public class MonthGraphFragment extends Fragment {
         if (todayRecord.size()!=0)
         {
             MonthReportFragmentBinding.completedMlToday.setText(todayRecord.get(0).getAchievement()+"ml");
-            int temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (500) * 100));
+            int temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (target_ml) * 100));
             MonthReportFragmentBinding.progressBarToday.setProgress(temp);
             if (temp<99)
                 MonthReportFragmentBinding.textviewProgressToday.setText(temp+"%");

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.Try;
 import com.example.waterdrink_weightloss.fragment.DrinkReportFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
 import com.example.waterdrink_weightloss.fragment.MonthGraphFragment;
@@ -88,6 +89,8 @@ public class WaterIntakeActivity extends AppCompatActivity
 
             case R.id.history:
             {
+                Intent intent = new Intent(getApplicationContext(), Try.class);
+                startActivity(intent);
                 break;
             }
 

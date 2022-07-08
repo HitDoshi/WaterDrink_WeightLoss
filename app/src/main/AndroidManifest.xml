@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrink_WeightLoss">
         <activity
+            android:name=".Try"
+            android:exported="false" />
+        <activity
             android:name=".activity.ChangeUserInfoActivity"
             android:exported="false" />
         <activity
@@ -44,7 +47,8 @@
 
         <receiver
             android:name=".activity.ExecutableServices"
-            android:enabled="true" />
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

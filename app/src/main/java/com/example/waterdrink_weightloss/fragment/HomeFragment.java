@@ -1,24 +1,19 @@
 package com.example.waterdrink_weightloss.fragment;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.hardware.GeomagneticField;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,16 +31,11 @@ import com.example.waterdrink_weightloss.activity.ExecutableServices;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
-import com.google.android.material.navigation.NavigationView;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
 
 public class HomeFragment extends Fragment {
 
@@ -81,6 +71,7 @@ public class HomeFragment extends Fragment {
     TextView physical_cancel , physical_ok;
     FragmentHomeBinding fb;
     List<ReminderListData> reminderListDataList = new ArrayList<>();
+    ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -284,7 +275,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ReminderListAdapter adapter = new ReminderListAdapter(reminderListDataList);
+        ReminderListAdapter adapter = new ReminderListAdapter(getActivity(),reminderListDataList
+                                                                                    ,pendingIntentArrayList);
         fb.recyclerView.setHasFixedSize(true);
         fb.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fb.recyclerView.setAdapter(adapter);
@@ -382,11 +374,11 @@ public class HomeFragment extends Fragment {
     }
 
     void setReminder() throws ParseException {
-        int wakeupHour = 2 ;
-        int wakeupMin = 52 ;
-        int badHour = 11 ;
+        int wakeupHour = 7 ;
+        int wakeupMin = 30 ;
+        int badHour = 22 ;
         int badMin = 0 ;
-        int interval = 1 ;
+        int interval = 60 ;
 
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
 /*
@@ -397,7 +389,7 @@ public class HomeFragment extends Fragment {
         Date d2 = df.parse("0:120:0"); // date 2
         long sum = d1.getTime() + d2.getTime();
 */
-
+/*
         String myTime = "12:42";
         SimpleDateFormat df1 = new SimpleDateFormat("HH:mm");
         Date d = df1.parse(myTime);
@@ -406,14 +398,15 @@ public class HomeFragment extends Fragment {
         cal.add(Calendar.MINUTE, 2);
         String newTime = df1.format(cal.getTime());
 
-        Log.d("Time",newTime);
+        Log.d("Time",newTime);*/
 
         Calendar calendar = Calendar.getInstance();
+        Calendar currentTime = Calendar.getInstance();
        /* SimpleDateFormat df = new SimpleDateFormat("HH");*/
-
-        calendar.set(Calendar.HOUR_OF_DAY,wakeupHour);
+        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        /*calendar.set(Calendar.HOUR_OF_DAY,wakeupHour);
         calendar.set(Calendar.MINUTE,wakeupMin);
-        calendar.add(Calendar.MINUTE,interval);
+        calendar.add(Calendar.MINUTE,interval);*/
 /*
 
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
@@ -430,34 +423,42 @@ public class HomeFragment extends Fragment {
       /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
         Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
 
+        int temp=0;
 
-
-        for ( int k=0;k<5;k++)
+        //Log.d("RealTime",calendar.getTimeInMillis()+"");
+        while (i<badHour)
         {
             calendar.set(Calendar.HOUR_OF_DAY,i);
             calendar.set(Calendar.MINUTE,j);
+            calendar.set(Calendar.SECOND,0);
             calendar.add(Calendar.MINUTE,interval);
-            Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));
+            Log.d("Calender",calendar.get(Calendar.HOUR_OF_DAY)+" "+calendar.get(Calendar.MINUTE));
 
-            i = calendar.get(Calendar.HOUR);
+            i = calendar.get(Calendar.HOUR_OF_DAY);
             j = calendar.get(Calendar.MINUTE);
             ReminderListData data = new ReminderListData();
-            data.setTime(i+":"+j);
-            reminderListDataList.add(data);
+            String first , second  ;
+            first = String.format("%02d", i);
+            second = String.format("%02d", j);
+            data.setTime(first+":"+second);
 
+            if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
+                reminderListDataList.add(data);
+            }
+
+            Intent intent = new Intent(getActivity(), ExecutableServices.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+            //for repeting
+            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+            Log.d("Time",calendar.getTimeInMillis()+"");
+            pendingIntentArrayList.add(pendingIntent);
+            Log.d("Start","start");
+            temp++;
         }
 
         //Log.d("Cal",cal.getTime()+"");
-       /* AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(getActivity(), ExecutableServices.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-
-        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-        //for repeting
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-        Log.d("Start","start");*/
-
 
     }
 }

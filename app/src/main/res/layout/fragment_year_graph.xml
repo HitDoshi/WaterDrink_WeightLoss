@@ -191,9 +191,9 @@
                                             android:id="@+id/year_name1"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
                                             android:layout_gravity="center"
                                             android:text="0%"
-                                            android:layout_centerInParent="true"
                                             android:textColor="@color/black" />
                                     </RelativeLayout>
 
@@ -747,7 +747,7 @@
                                             app:layout_constraintRight_toRightOf="parent"
                                             app:layout_constraintTop_toTopOf="parent"
                                             app:layout_constraintVertical_bias="0.0"
-                                            tools:progress="10" />
+                                            />
 
                                         <TextView
                                             android:id="@+id/textview_progress_today"
@@ -821,12 +821,12 @@
                                         app:layout_constraintDimensionRatio="1">
 
                                         <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:layout_centerInParent="true"
                                             android:id="@+id/avg_progress_bar"
+                                            style="@style/CircularDeterminateProgressBar"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
+                                            android:layout_centerInParent="true"
+                                            android:background="@drawable/circle"
                                             android:indeterminateOnly="false"
                                             android:progress="0"
                                             android:progressDrawable="@drawable/circle"
@@ -837,7 +837,7 @@
                                             app:layout_constraintRight_toRightOf="parent"
                                             app:layout_constraintTop_toTopOf="parent"
                                             app:layout_constraintVertical_bias="0.0"
-                                            tools:progress="10" />
+                                            />
 
                                         <TextView
                                             android:id="@+id/avg_textview_progress"

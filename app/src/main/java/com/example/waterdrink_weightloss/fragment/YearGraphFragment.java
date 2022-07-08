@@ -1,5 +1,7 @@
 package com.example.waterdrink_weightloss.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -49,6 +52,8 @@ public class YearGraphFragment extends Fragment {
     FragmentYearGraphBinding fragmentYearGraphBinding;
     Calendar calendar;
     Resources r ;
+    int target_ml;
+    SharedPreferences sharedPreferences;
     String packageName ;
     ArrayList barEntriesArrayList;
     ArrayList<String> months = new ArrayList<String>();
@@ -107,10 +112,10 @@ public class YearGraphFragment extends Fragment {
         xAxisLabel.add("Nov");
         xAxisLabel.add("Dec");
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        mParam1 = getArguments().getString(ARG_PARAM1);
+        mParam2 = getArguments().getString(ARG_PARAM2);
     }
+}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -173,6 +178,10 @@ public class YearGraphFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
+        target_ml = sharedPreferences.getInt("target_ml", 1500);
+
         calendar = Calendar.getInstance();
         position = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -293,13 +302,14 @@ public class YearGraphFragment extends Fragment {
         }
 
         fragmentYearGraphBinding.completedMl.setText(sum/12+"ml");
-        int temp = ((int) (  ( (float) (int)(sum/12)) / (float) (500) * 100));
+        int temp = ((int) (  ( (float) (int)(sum/12)) / (float) (target_ml) * 100));
         fragmentYearGraphBinding.avgProgressBar.setProgress(temp);
+        Log.d("Temp1",temp+"");
         if (temp<99)
             fragmentYearGraphBinding.avgTextviewProgress.setText(temp+"%");
         else
             fragmentYearGraphBinding.avgTextviewProgress.setText(100+"%");
-        sum=0;
+        sum=0;//important
 
         //progressbar();
     }
@@ -308,7 +318,7 @@ public class YearGraphFragment extends Fragment {
     private void progressbar() {
 
         MonthReportFragmentBinding.w1.setProgress((Integer) barEntriesArrayList.get(1));
-        int temp = ((int) (  ( (float) (int)(barEntriesArrayList.get(1))) / (float) (500) * 100));
+        int temp = ((int) (  ( (float) (int)(barEntriesArrayList.get(1))) / (float) (target_ml) * 100));
         MonthReportFragmentBinding.nameW1.setText(temp+"%");
     }*/
 
@@ -336,7 +346,8 @@ public class YearGraphFragment extends Fragment {
         if (todayRecord.size()!=0)
         {
             fragmentYearGraphBinding.completedMlToday.setText(todayRecord.get(0).getAchievement()+"ml");
-            int temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (500) * 100));
+            int temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (target_ml) * 100));
+            Log.d("Temp2",temp+"");
             fragmentYearGraphBinding.progressBarToday.setProgress(temp);
             if (temp<99)
                 fragmentYearGraphBinding.textviewProgressToday.setText(temp+"%");
