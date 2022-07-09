@@ -1,5 +1,7 @@
 package com.example.waterdrink_weightloss.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -21,7 +24,8 @@ import com.example.waterdrink_weightloss.activity.UserInformation;
  */
 public class GenderFragment extends Fragment {
 
-    UserInformation userInformation;
+    Button set;
+    SharedPreferences userDataSharedPreferences;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,12 +75,27 @@ public class GenderFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_gender, container, false);
         LinearLayout male = view.findViewById(R.id.male);
         LinearLayout female = view.findViewById(R.id.female);
+        //set = view.findViewById(R.id.set);
+        userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String g = userDataSharedPreferences.getString("gender","-");
+
+        if (!g.equals("-")) {
+            if (g.equals("Male")){
+                male.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+                female.setBackgroundColor(0);
+            }
+            else {
+                female.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+                male.setBackgroundColor(0);
+            }
+        }
 
         male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 male.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
                 female.setBackgroundColor(0);
+                userDataSharedPreferences.edit().putString("gender","Male").apply();
             }
         });
 
@@ -85,9 +104,22 @@ public class GenderFragment extends Fragment {
             public void onClick(View view) {
                 female.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
                 male.setBackgroundColor(0);
+                userDataSharedPreferences.edit().putString("gender","Female").apply();
             }
         });
+/*
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });*/
 
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

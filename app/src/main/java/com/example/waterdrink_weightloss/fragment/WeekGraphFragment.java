@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +22,7 @@ import android.view.ViewGroup;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
+import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
 import com.example.waterdrink_weightloss.databinding.FragmentWeekGraphBinding;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -32,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 /**
@@ -56,6 +57,7 @@ public class WeekGraphFragment extends Fragment {
     int j=1 , total=0;
     ArrayList barEntriesArrayList;
     final ArrayList<String> xAxisLabel = new ArrayList<>();
+    ArrayList<Integer> setWeekData =  new ArrayList<Integer>();
 
     // variable for our bar data.
     BarData barData;
@@ -203,6 +205,7 @@ public class WeekGraphFragment extends Fragment {
                 setData();
             }
         });
+
     }
 
     @Override
@@ -270,6 +273,7 @@ public class WeekGraphFragment extends Fragment {
         }
         // creating a new array list
         barEntriesArrayList = new ArrayList<>();
+        setWeekData.clear();
 
         c1.set(Calendar.DAY_OF_WEEK,1);
 
@@ -285,6 +289,7 @@ public class WeekGraphFragment extends Fragment {
             }
 
             barEntriesArrayList.add(new BarEntry(i,sum));
+            setWeekData.add(i,sum);
             sum = 0;
         }
 
@@ -354,9 +359,10 @@ public class WeekGraphFragment extends Fragment {
         else
             fragmentWeekGraphBinding.avgTextviewProgress.setText(100+"%");
         total = 0;//important
-        //progressbar();
-    }
 
+        //progressbar();
+        setWeeklyData();
+    }
 
     private void getTodayRecord()
     {
@@ -381,5 +387,12 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.progressBarToday.setProgress(0);
             fragmentWeekGraphBinding.textviewProgressToday.setText("0%");
         }
+    }
+
+    private void setWeeklyData(){
+        CalendarAdapter calendarAdapter = new CalendarAdapter( getActivity(), setWeekData,xAxisLabel,null);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 7);
+        fragmentWeekGraphBinding.calendarRecyclerView.setLayoutManager(layoutManager);
+        fragmentWeekGraphBinding.calendarRecyclerView.setAdapter(calendarAdapter);
     }
 }

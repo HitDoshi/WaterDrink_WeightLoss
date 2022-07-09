@@ -1,12 +1,16 @@
 package com.example.waterdrink_weightloss.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.example.waterdrink_weightloss.R;
@@ -20,6 +24,8 @@ import com.example.waterdrink_weightloss.activity.UserInformation;
 public class AgeWightFragment extends Fragment {
 
     NumberPicker age , weight ;
+    Button set;
+    SharedPreferences userDataSharedPreferences;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,14 +75,44 @@ public class AgeWightFragment extends Fragment {
 
         age = view.findViewById(R.id.select_age);
         weight = view.findViewById(R.id.select_weight);
+        //set = view.findViewById(R.id.set);
+        userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
+        String a1;
+        String w1 ;
+        a1  = userDataSharedPreferences.getString("age","21");
+        w1 = userDataSharedPreferences.getString("weight","55");
         age.setMinValue(1);
         age.setMaxValue(100);
-        age.setValue(20);
+        age.setValue(Integer.parseInt(a1));
+
         weight.setMinValue(1);
         weight.setMaxValue(1000);
-        weight.setValue(53);
+        weight.setValue(Integer.parseInt(w1));
 
+        age.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                userDataSharedPreferences.edit().putString("age", String.valueOf(age.getValue())).apply();
+            }
+        });
+
+        weight.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                userDataSharedPreferences.edit().putString("weight", String.valueOf(newValue)).apply();
+            }
+        });
+
+       /* set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userDataSharedPreferences.edit().putString("age", String.valueOf(age.getValue())).apply();
+                userDataSharedPreferences.edit().putString("weight", String.valueOf(weight.getValue())).apply();
+            }
+        });
+*/
         return view;
     }
+
 }

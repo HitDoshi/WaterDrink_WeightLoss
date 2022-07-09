@@ -3,32 +3,26 @@ package com.example.waterdrink_weightloss.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.Try;
-import com.example.waterdrink_weightloss.fragment.DrinkReportFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
-import com.example.waterdrink_weightloss.fragment.MonthGraphFragment;
 import com.example.waterdrink_weightloss.fragment.WeekGraphFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.Objects;
 
 public class WaterIntakeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -41,6 +35,7 @@ public class WaterIntakeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_intake);
+
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
         bar = findViewById(R.id.bar);
@@ -89,8 +84,7 @@ public class WaterIntakeActivity extends AppCompatActivity
 
             case R.id.history:
             {
-                Intent intent = new Intent(getApplicationContext(), Try.class);
-                startActivity(intent);
+
                 break;
             }
 
@@ -112,10 +106,16 @@ public class WaterIntakeActivity extends AppCompatActivity
 
             case R.id.setting:
             {
-                Intent intent = new Intent(this,SettingActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(this,SettingActivity.class));
                 return true;
             }
+
+            case R.id.reminder:
+            {
+                startActivity(new Intent(this,ReminderActivity.class));
+                return true;
+            }
+
         }
         return false;
     }

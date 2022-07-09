@@ -40,7 +40,6 @@
                 android:gravity="right"
                 android:layout_marginRight="20dp"
                 android:id="@+id/gender"
-
                 android:textColor="@color/water_color"
                 />
 
@@ -201,25 +200,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hide Tips"
-            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/black"
-
+            android:layout_marginLeft="20dp"
             />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
             android:id="@+id/hide_tips"
-             />
-
+            android:theme="@style/SwitchCompatTheme" />
     </LinearLayout>
 
 
@@ -227,25 +224,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Theme"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
-
+            android:layout_gravity="center_vertical"
             />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_marginRight="20dp"
             android:id="@+id/theme"
-            android:textColor="@color/water_color"
-            />
+            android:theme="@style/SwitchCompatTheme" />
 
     </LinearLayout>
 

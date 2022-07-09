@@ -144,6 +144,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         android:text="Drink Target"
                         android:textColor="@color/dark_purple"
                         />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/calendarRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_weight="1"/>
+<!--
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -153,7 +163,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         app:layout_constraintDimensionRatio="1"
                         >
 
-                        <!-- <RelativeLayout
+                        &lt;!&ndash; <RelativeLayout
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:layout_alignParentTop="true"
@@ -161,7 +171,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                              android:orientation="horizontal"
                              app:layout_constraintBottom_toBottomOf="@+id/c1"
                              app:layout_constraintTop_toTopOf="@+id/c1">
-                        -->
+                        &ndash;&gt;
 
 
                         <LinearLayout
@@ -466,7 +476,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
-                        <!--</RelativeLayout>-->
+                        &lt;!&ndash;</RelativeLayout>&ndash;&gt;
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -477,7 +487,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         app:layout_constraintDimensionRatio="1"
                         >
 
-                        <!-- <RelativeLayout
+                        &lt;!&ndash; <RelativeLayout
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:layout_alignParentTop="true"
@@ -485,7 +495,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                              android:orientation="horizontal"
                              app:layout_constraintBottom_toBottomOf="@+id/c1"
                              app:layout_constraintTop_toTopOf="@+id/c1">
-         -->
+         &ndash;&gt;
                         <LinearLayout
                             android:id="@+id/l8"
                             android:layout_width="wrap_content"
@@ -772,7 +782,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:text="14"
                                 android:textColor="@color/black" />
                         </LinearLayout>
-                        <!--</RelativeLayout>-->
+                        &lt;!&ndash;</RelativeLayout>&ndash;&gt;
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -784,7 +794,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         app:layout_constraintDimensionRatio="1"
                         >
 
-                        <!-- <RelativeLayout
+                        &lt;!&ndash; <RelativeLayout
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:layout_alignParentTop="true"
@@ -792,7 +802,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                              android:orientation="horizontal"
                              app:layout_constraintBottom_toBottomOf="@+id/c1"
                              app:layout_constraintTop_toTopOf="@+id/c1">
-         -->
+         &ndash;&gt;
                         <LinearLayout
                             android:id="@+id/l15"
                             android:layout_width="wrap_content"
@@ -1081,7 +1091,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:text="21"
                                 android:textColor="@color/black" />
                         </LinearLayout>
-                        <!--</RelativeLayout>-->
+                        &lt;!&ndash;</RelativeLayout>&ndash;&gt;
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -1092,7 +1102,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         app:layout_constraintDimensionRatio="1"
                         >
 
-                        <!-- <RelativeLayout
+                        &lt;!&ndash; <RelativeLayout
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:layout_alignParentTop="true"
@@ -1100,7 +1110,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                              android:orientation="horizontal"
                              app:layout_constraintBottom_toBottomOf="@+id/c1"
                              app:layout_constraintTop_toTopOf="@+id/c1">
-         -->
+         &ndash;&gt;
                         <LinearLayout
                             android:id="@+id/l22"
                             android:layout_width="wrap_content"
@@ -1384,7 +1394,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                                 android:text="28"
                                 android:textColor="@color/black" />
                         </LinearLayout>
-                        <!--</RelativeLayout>-->
+                        &lt;!&ndash;</RelativeLayout>&ndash;&gt;
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -1395,7 +1405,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         app:layout_constraintDimensionRatio="1"
                         >
 
-                    <!-- <RelativeLayout
+                    &lt;!&ndash; <RelativeLayout
                          android:layout_width="match_parent"
                          android:layout_height="wrap_content"
                          android:layout_alignParentTop="true"
@@ -1403,7 +1413,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                          android:orientation="horizontal"
                          app:layout_constraintBottom_toBottomOf="@+id/c1"
                          app:layout_constraintTop_toTopOf="@+id/c1">
-     -->
+     &ndash;&gt;
                     <LinearLayout
                         android:id="@+id/l29"
                         android:layout_width="wrap_content"
@@ -1525,6 +1535,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:textColor="@color/black" />
                     </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+-->
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"

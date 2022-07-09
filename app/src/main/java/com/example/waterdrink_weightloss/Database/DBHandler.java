@@ -301,7 +301,7 @@ public class DBHandler extends SQLiteOpenHelper {
                         cursor.getInt(3),
                         cursor.getInt(4),
                         cursor.getString(5)));
-                Toast.makeText(context, cursor.getInt(1)+"", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, cursor.getInt(1)+"", Toast.LENGTH_SHORT).show();
             } while (cursor.moveToNext());
             // moving our cursor to next.
         }

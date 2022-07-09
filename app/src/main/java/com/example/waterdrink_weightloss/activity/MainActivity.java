@@ -1,8 +1,12 @@
 package com.example.waterdrink_weightloss.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,7 +18,7 @@ import com.example.waterdrink_weightloss.R;
 public class MainActivity extends AppCompatActivity {
 
     Button start ;
-
+    SharedPreferences userDataSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         start = findViewById(R.id.start);
         PrefManager prefManager = new PrefManager(this);
+
+        userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override

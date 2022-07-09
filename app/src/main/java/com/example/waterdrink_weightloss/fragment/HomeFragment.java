@@ -27,7 +27,7 @@ import android.widget.Toast;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.ExecutableServices;
+import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
@@ -378,7 +378,7 @@ public class HomeFragment extends Fragment {
         int wakeupMin = 30 ;
         int badHour = 22 ;
         int badMin = 0 ;
-        int interval = 60 ;
+        int interval = 2 ;
 
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
 /*
@@ -441,12 +441,13 @@ public class HomeFragment extends Fragment {
             first = String.format("%02d", i);
             second = String.format("%02d", j);
             data.setTime(first+":"+second);
+            int x = i;
 
             if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
                 reminderListDataList.add(data);
             }
 
-            Intent intent = new Intent(getActivity(), ExecutableServices.class);
+            Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);
             //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
             //for repeting

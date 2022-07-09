@@ -114,12 +114,12 @@
         </LinearLayout>
 
       <Button
+          android:id="@+id/set"
           android:layout_marginTop="10dp"
-          android:id="@+id/next"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:backgroundTint="@color/water_color"
-          android:text="Finish"
+          android:text="SET"
           />
 
   </LinearLayout>

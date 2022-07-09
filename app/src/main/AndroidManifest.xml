@@ -16,8 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrink_WeightLoss">
         <activity
-            android:name=".Try"
-            android:exported="false" />
+            android:name=".activity.ReminderActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.WaterIntakeActivity"/>
         <activity
             android:name=".activity.ChangeUserInfoActivity"
             android:exported="false" />
@@ -46,7 +47,7 @@
         </activity>
 
         <receiver
-            android:name=".activity.ExecutableServices"
+            android:name=".activity.Recevier.ReminderBroadCast"
             android:enabled="true"
             android:exported="true" />
     </application>

@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
 import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
 import com.example.waterdrink_weightloss.databinding.FragmentYearGraphBinding;
 import com.github.mikephil.charting.components.AxisBase;
@@ -59,6 +62,7 @@ public class YearGraphFragment extends Fragment {
     ArrayList<String> months = new ArrayList<String>();
     ArrayList<DataModel> arrayList = new ArrayList<>();
     final ArrayList<String> xAxisLabel = new ArrayList<>();
+    ArrayList<Integer> setYearData = new ArrayList<>();
 
     // variable for our bar data.
     BarData barData;
@@ -220,6 +224,7 @@ public class YearGraphFragment extends Fragment {
 
         // creating a new array list
         barEntriesArrayList = new ArrayList<>();
+        setYearData.clear(); //clear list otherwise added more data at last
 
         // adding new entry to our array list with bar
         // entry and passing x and y axis value to it.
@@ -245,6 +250,7 @@ public class YearGraphFragment extends Fragment {
             }
 
             barEntriesArrayList.add(new BarEntry(i,total));
+            setYearData.add(i,total);
             total = 0;
         }
 
@@ -311,6 +317,7 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.avgTextviewProgress.setText(100+"%");
         sum=0;//important
 
+        setMYearlyData();
         //progressbar();
     }
 
@@ -360,5 +367,12 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.progressBarToday.setProgress(0);
             fragmentYearGraphBinding.textviewProgressToday.setText("0%");
         }
+    }
+
+    private void setMYearlyData(){
+        CalendarAdapter calendarAdapter = new CalendarAdapter( getActivity(), setYearData,xAxisLabel,year);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 6);
+        fragmentYearGraphBinding.calendarRecyclerView.setLayoutManager(layoutManager);
+        fragmentYearGraphBinding.calendarRecyclerView.setAdapter(calendarAdapter);
     }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.fragment.AgeWightFragment;
@@ -63,6 +64,21 @@ public class UserInformation extends AppCompatActivity {
 
         // Set the adapter
         viewPager.setAdapter(viewAdapter);
-    }
+/*
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Toast.makeText(UserInformation.this, "Select", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });*/
+    }
 }

@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ import com.example.waterdrink_weightloss.BuildConfig;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
+
 import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -58,9 +62,8 @@ public class MonthGraphFragment extends Fragment {
 
     ArrayList<String> days = new ArrayList<String>();
     ArrayList<DataModel> arrayList = new ArrayList<>();
-    ArrayList<Integer> linearlayout = new ArrayList<Integer>();
     int[] progressbar = new int[31];
-    ArrayList<Integer> textview = new ArrayList<>();
+    ArrayList<Integer> setMonthData = new ArrayList<>();
     Resources r ;
     String packageName ;
     Calendar calendar;
@@ -163,7 +166,6 @@ public class MonthGraphFragment extends Fragment {
                 calendar = new GregorianCalendar(year, position, 1);
                 size = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
                 setData(position,year,size);
-
             }
         });
 
@@ -234,6 +236,7 @@ public class MonthGraphFragment extends Fragment {
 
         // creating a new array list
         barEntriesArrayList = new ArrayList<>();
+        setMonthData.clear();
 
         // adding new entry to our array list with bar
         // entry and passing x and y axis value to it.
@@ -248,12 +251,14 @@ public class MonthGraphFragment extends Fragment {
             if (j != arrayList.get(i).getDay()) {
                 for (int k = j; k < arrayList.get(i).getDay(); k++) {
                     barEntriesArrayList.add(new BarEntry(j, 0));
+                    setMonthData.add(j-1,0);
                     //Log.d("Enter", arrayList.get(i).getAchievement() + "");
                     j++;
                 }
             }
 
             barEntriesArrayList.add(new BarEntry(j, arrayList.get(i).getAchievement()));
+            setMonthData.add(j-1,arrayList.get(i).getAchievement());
             total += arrayList.get(i).getAchievement();
             //Log.d("Achieve", arrayList.get(i).getAchievement() + "");
             j++;
@@ -261,6 +266,7 @@ public class MonthGraphFragment extends Fragment {
 
         for (int i=j;i<=size;i++){
             barEntriesArrayList.add(new BarEntry(i,0));
+            setMonthData.add(i-1,0);
         }
 
         if(arrayList.size()>0) {
@@ -301,6 +307,7 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.avgTextviewProgress.setText(100+"%");
         total = 0;//important
 
+        setMonthlyData();
         //progressbar();
     }
 
@@ -322,8 +329,8 @@ public class MonthGraphFragment extends Fragment {
         }
 
         Log.d("abc",String.valueOf(progressbar[1]));
-        MonthReportFragmentBinding.w1.setProgress(50);
-        MonthReportFragmentBinding.nameW1.setText(50+"%");
+        /*MonthReportFragmentBinding.w1.setProgress(50);
+        MonthReportFragmentBinding.nameW1.setText(50+"%");*/
     }
 
     private void getTodayRecord()
@@ -349,5 +356,12 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.progressBarToday.setProgress(0);
             MonthReportFragmentBinding.textviewProgressToday.setText("0%");
         }
+    }
+
+    private void setMonthlyData(){
+        CalendarAdapter calendarAdapter = new CalendarAdapter( getActivity(), setMonthData,null,year);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 7);
+        MonthReportFragmentBinding.calendarRecyclerView.setLayoutManager(layoutManager);
+        MonthReportFragmentBinding.calendarRecyclerView.setAdapter(calendarAdapter);
     }
 }
