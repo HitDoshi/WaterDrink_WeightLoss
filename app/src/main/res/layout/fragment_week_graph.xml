@@ -515,6 +515,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
+                                        android:textColor="@color/black"
                                         android:id="@+id/completed_ml_today"/>
 
                                     <RelativeLayout
@@ -601,6 +602,7 @@
                                         app:layout_constraintBottom_toTopOf="@+id/r2"
                                         app:layout_constraintStart_toStartOf="parent"
                                         android:text="0 ml"
+                                        android:textColor="@color/black"
                                         android:id="@+id/completed_ml"/>
 
                                     <RelativeLayout

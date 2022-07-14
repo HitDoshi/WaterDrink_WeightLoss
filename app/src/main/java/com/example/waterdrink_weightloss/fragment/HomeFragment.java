@@ -213,10 +213,6 @@ public class HomeFragment extends Fragment {
         if (sharedPreferences.getBoolean("Tips",false)){
             fb.linear1.setVisibility(View.GONE);
         }
-        else
-        {
-            fb.linear1.setVisibility(View.VISIBLE);
-        }
 
         fb.weather.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -288,7 +284,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         target_ml = sharedPreferences.getInt("target_ml", 1500);
         glass_size = sharedPreferences.getInt("glass_size", 300);
@@ -454,9 +449,7 @@ public class HomeFragment extends Fragment {
             int x = i;
             if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
                 reminderListDataList.add(data);
-                Log.d("IF","YES");
             }
-            Log.d("Time",System.currentTimeMillis()+" "+calendar.getTimeInMillis());
 
            /* Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);

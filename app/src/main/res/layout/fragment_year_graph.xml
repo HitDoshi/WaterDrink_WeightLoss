@@ -730,10 +730,11 @@
                                         />
 
                                     <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:id="@+id/completed_ml_today"/>
+                                        android:id="@+id/completed_ml_today"
+                                        android:layout_width="11dp"
+                                        android:layout_height="31dp"
+                                        android:textColor="@color/black"
+                                        android:layout_gravity="center" />
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
@@ -818,6 +819,7 @@
                                         app:layout_constraintBottom_toTopOf="@+id/r2"
                                         app:layout_constraintStart_toStartOf="parent"
                                         android:text="0 ml"
+                                        android:textColor="@color/black"
                                         android:id="@+id/completed_ml"/>
 
                                     <RelativeLayout

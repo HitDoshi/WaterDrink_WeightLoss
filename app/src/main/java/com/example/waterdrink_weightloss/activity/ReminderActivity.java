@@ -81,7 +81,7 @@ public class ReminderActivity extends AppCompatActivity {
         int interval = 60 ;*/
 
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
-        temp  =0 ;
+        temp = 0 ;
 /*
 
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
@@ -145,7 +145,6 @@ public class ReminderActivity extends AppCompatActivity {
             if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
                 reminderListDataList.add(data);
             }
-
             Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), temp , intent,
                     0);
@@ -157,6 +156,7 @@ public class ReminderActivity extends AppCompatActivity {
             pendingIntentArrayList.add(pendingIntent);
             //Log.d("Start","start");
             Log.d("set ",temp+"");
+            //alarmManager.cancel(pendingIntent);
             temp++;
         }
 
@@ -173,8 +173,10 @@ public class ReminderActivity extends AppCompatActivity {
                     0);
 
             AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.cancel(pendingIntent);
-            Log.d("remove ",i+"");
+
+            if(pendingIntent!=null){
+                alarmManager.cancel(pendingIntent);
+                Log.d("remove ",i+"");}
         }
     }
 
