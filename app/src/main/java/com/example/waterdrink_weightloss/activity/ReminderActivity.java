@@ -8,16 +8,26 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
@@ -26,33 +36,55 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class ReminderActivity extends AppCompatActivity {
 
     SwitchCompat reminder;
     EditText reminder_interval;
+    ImageView edit_reminder;
+    TextView time;
     List<ReminderListData> reminderListDataList = new ArrayList<>();
-    ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
+    public ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     int temp=0;
+    Boolean isChange=false;
     SharedPreferences reminderSharedPreferences;
-    int wakeupHour , wakeupMin ,  badHour , badMin , interval=5 ;
+    int wakeupHour , wakeupMin ,  badHour , badMin , interval = 60 ;
+    Drawable upArrow;
+    List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getSupportActionBar().setTitle("Reminder");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        upArrow = getResources().getDrawable(R.drawable.arrow_back);
+
+        PrefManager prefManager = new PrefManager(getApplicationContext());
+        Paper.init(this);
 
         reminderSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         interval = reminderSharedPreferences.getInt("Interval",60);
 
         reminder = findViewById(R.id.reminder);
         reminder_interval = findViewById(R.id.reminder_interval);
+        edit_reminder = findViewById(R.id.edit_reminder);
+        time = findViewById(R.id.time);
+
         reminder_interval.setText(interval+"");
 
         if(reminderSharedPreferences.getBoolean("ReminderOnOff",false)){
             reminder.setChecked(true);
         }//Important.. Write this code before reminder Onclick CheckedChange Listener.
+
+        if(reminderSharedPreferences.getBoolean("Theme",false)){
+            darkStatusBar();
+        }else{
+            lightStatusBar();
+        }
 
         reminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -71,6 +103,30 @@ public class ReminderActivity extends AppCompatActivity {
             }
         });
 
+        edit_reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prefManager.setFirstTimeLaunch(true);
+                startActivity(new Intent(getApplicationContext(), UserInformation.class));
+            }
+        });
+
+        reminder_interval.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                isChange = true;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     void setReminder() throws ParseException {
@@ -82,6 +138,8 @@ public class ReminderActivity extends AppCompatActivity {
 
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
         temp = 0 ;
+        reminderTime.clear();
+        pendingIntentArrayList.clear();
 /*
 
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
@@ -120,10 +178,11 @@ public class ReminderActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,
                 interval*60*1000,pendingIntent );
 */
-
       /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
         Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
 
+//        Paper.book().write("PendingReminderList",pendingIntentArrayList);
+//        Paper.book().write("ReminderTimeList",reminderTime);
         //Log.d("RealTime",calendar.getTimeInMillis()+"");
         while (i<badHour)
         {
@@ -144,21 +203,27 @@ public class ReminderActivity extends AppCompatActivity {
 
             if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
                 reminderListDataList.add(data);
+//}
+                Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), temp, intent,
+                        0);
+                //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+                //for repeting
+                AlarmManager alarmManager = (AlarmManager) getApplicationContext().
+                        getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                Log.d("Time", calendar.getTimeInMillis() + "");
+                pendingIntentArrayList.add(pendingIntent);
+                reminderTime.add(new ReminderTime(i,j));
+                temp++;
+                Log.d("set ",temp+"");
             }
-            Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), temp , intent,
-                    0);
-            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-            //for repeting
-            AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-            Log.d("Time",calendar.getTimeInMillis()+"");
-            pendingIntentArrayList.add(pendingIntent);
             //Log.d("Start","start");
-            Log.d("set ",temp+"");
             //alarmManager.cancel(pendingIntent);
-            temp++;
         }
+
+//        Paper.book().write("PendingReminderList", pendingIntentArrayList);
+//        Paper.book().write("ReminderTimeList", reminderTime);
 
         setSharedPreference();
         //Log.d("Cal",cal.getTime()+"");
@@ -168,14 +233,10 @@ public class ReminderActivity extends AppCompatActivity {
 
         for (int i=0;i<temp;i++) {
 
-            Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), temp, intent,
-                    0);
-
             AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
 
-            if(pendingIntent!=null){
-                alarmManager.cancel(pendingIntent);
+            if(pendingIntentArrayList.get(i)!=null){
+                alarmManager.cancel(pendingIntentArrayList.get(i));
                 Log.d("remove ",i+"");}
         }
     }
@@ -201,42 +262,43 @@ public class ReminderActivity extends AppCompatActivity {
 
         badHour = reminderSharedPreferences.getInt("bed_hour",11);
         badMin = reminderSharedPreferences.getInt("bed_min",0);
+
+        time.setText(wakeupHour + ":" + wakeupMin +" - " + badHour +":" +badMin);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        if(!reminder_interval.getText().toString().equals("")){
-            if(Integer.parseInt(reminder_interval.getText().toString())>0) {
-                reminderSharedPreferences.edit().putInt("Interval", Integer.parseInt(reminder_interval.getText().toString())).apply();
-            }else{
+        if(isChange) {
+            if (!reminder_interval.getText().toString().equals("")) {
+                if (Integer.parseInt(reminder_interval.getText().toString()) > 0) {
+                    reminderSharedPreferences.edit().putInt("Interval", Integer.parseInt(reminder_interval.getText().toString())).apply();
+                } else {
+                    reminder_interval.setText("60");
+                    reminderSharedPreferences.edit().putInt("Interval", 60).apply();
+                    Toast.makeText(this, "Please Enter Reminder Interval Greater Then 0 min", Toast.LENGTH_SHORT).show();
+                }
+            } else {
                 reminder_interval.setText("60");
                 reminderSharedPreferences.edit().putInt("Interval", 60).apply();
                 Toast.makeText(this, "Please Enter Reminder Interval Greater Then 0 min", Toast.LENGTH_SHORT).show();
             }
-        }
-        else {
-            reminder_interval.setText("60");
-            reminderSharedPreferences.edit().putInt("Interval", 60).apply();
-            Toast.makeText(this, "Please Enter Reminder Interval Greater Then 0 min", Toast.LENGTH_SHORT).show();
-        }
 
-        interval = reminderSharedPreferences.getInt("Interval",60);
+            interval = reminderSharedPreferences.getInt("Interval",60);
 
-        try {
-            setReminder();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            try {
+                setReminder();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
-
-        removeReminder();
+        //removeReminder();
     }
 
     @Override
@@ -244,5 +306,26 @@ public class ReminderActivity extends AppCompatActivity {
         super.onBackPressed();
         startActivity(new Intent(getApplicationContext(),WaterIntakeActivity.class));
         finish();
+    }
+
+    public void darkStatusBar(){
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+    }
+
+    public void lightStatusBar(){
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        Spannable text = new SpannableString(getSupportActionBar().getTitle());
+        text.setSpan(new ForegroundColorSpan(Color.BLACK), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        getSupportActionBar().setTitle(text);
+        upArrow.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
     }
 }

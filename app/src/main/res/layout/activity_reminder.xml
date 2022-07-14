@@ -73,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/edit"
+            android:id="@+id/edit_reminder"
             android:layout_marginRight="10dp"
             android:backgroundTint="@color/water_color"
             android:textSize="18dp"

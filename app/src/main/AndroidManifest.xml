@@ -17,27 +17,34 @@
         android:theme="@style/Theme.WaterDrink_WeightLoss">
         <activity
             android:name=".activity.ReminderActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
             android:parentActivityName=".activity.WaterIntakeActivity"/>
         <activity
             android:name=".activity.ChangeUserInfoActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".activity.SettingActivity"
             android:exported="false"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".activity.WaterIntakeActivity" />
         <activity
             android:name=".fragment.LoadingActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".activity.WaterIntakeActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
              />
         <activity
             android:name=".activity.UserInformation"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

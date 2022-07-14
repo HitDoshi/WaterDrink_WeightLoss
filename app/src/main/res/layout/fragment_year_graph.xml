@@ -7,6 +7,10 @@
 
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -95,7 +99,7 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/graph"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="250dp"
                 app:layout_constraintBottom_toTopOf="@+id/last"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -104,21 +108,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:id="@+id/last"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/graph"
                 app:layout_constraintBottom_toBottomOf="parent">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fillViewport="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardview"
@@ -148,558 +143,13 @@
                                 android:id="@+id/calendarRecyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
+                                android:overScrollMode="never"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 android:layout_weight="1"/>
 
-                           <!-- <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/c1"
-                                android:layout_marginTop="10dp"
-                                app:layout_constraintDimensionRatio="1"
-                                >
-
-                                &lt;!&ndash; <RelativeLayout
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:layout_alignParentTop="true"
-                                     android:layout_marginTop="20dp"
-                                     android:orientation="horizontal"
-                                     app:layout_constraintBottom_toBottomOf="@+id/c1"
-                                     app:layout_constraintTop_toTopOf="@+id/c1">
-                                &ndash;&gt;
-
-
-                                <LinearLayout
-                                    android:id="@+id/year_l1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/l2"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        >
-
-                                        <ProgressBar
-                                            android:id="@+id/year_p1"
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:background="@drawable/circle" />
-
-                                        <TextView
-                                            android:id="@+id/year_name1"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Jan"
-                                        android:textColor="@color/black" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/l2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l1"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    android:layout_toRightOf="@+id/year_l1"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l3"
-                                    android:orientation="vertical">
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        >
-
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p2"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name2"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Feb"
-                                        android:textColor="@color/black" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/year_l3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/l2"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/l2"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l4"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p3"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name_3"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Mar"
-                                        android:textColor="@color/black" />
-
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:id="@+id/year_l4"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l3"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l5"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l3"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
-
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p4"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name4"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Apr"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:id="@+id/year_l5"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l6"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l4"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l4"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
-
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p5"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name5"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="May"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/year_l6"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l5"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l5"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        >
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p6"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name6"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Jun"
-                                        android:textColor="@color/black" />
-
-                                </LinearLayout>
-
-                                &lt;!&ndash;</RelativeLayout>&ndash;&gt;
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/second_line"
-                                android:layout_marginTop="10dp"
-                                app:layout_constraintDimensionRatio="1"
-                                >
-
-                                &lt;!&ndash; <RelativeLayout
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:layout_alignParentTop="true"
-                                     android:layout_marginTop="20dp"
-                                     android:orientation="horizontal"
-                                     app:layout_constraintBottom_toBottomOf="@+id/c1"
-                                     app:layout_constraintTop_toTopOf="@+id/c1">
-                 &ndash;&gt;
-                                <LinearLayout
-                                    android:id="@+id/year_l7"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l8"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        >
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p7"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name7"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Jul"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/year_l8"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l7"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    android:layout_toRightOf="@+id/year_l7"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l9"
-                                    android:orientation="vertical">
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p8"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name8"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Aug"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:id="@+id/year_l9"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l8"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l8"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l10"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        >
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p9"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name9"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Sep"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/year_l10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l9"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l11"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l9"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        >
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p10"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name10"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Oct"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/year_l11"
-                                    app:layout_constraintEnd_toStartOf="@+id/year_l12"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l10"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l10"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p11"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name11"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Nov"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/year_l12"
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/year_l10"
-                                    android:orientation="vertical"
-                                    app:layout_constraintStart_toEndOf="@+id/year_l11"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
-                                        <ProgressBar
-                                            style="@style/CircularDeterminateProgressBar"
-                                            android:background="@drawable/circle"
-                                            android:id="@+id/year_p12"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center" />
-
-                                        <TextView
-                                            android:id="@+id/year_name12"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:text="0%"
-                                            android:layout_centerInParent="true"
-                                            android:textColor="@color/black" />
-                                    </RelativeLayout>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="Dec"
-                                        android:textColor="@color/black" />
-                                </LinearLayout>
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
--->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -731,8 +181,8 @@
 
                                     <TextView
                                         android:id="@+id/completed_ml_today"
-                                        android:layout_width="11dp"
-                                        android:layout_height="31dp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:textColor="@color/black"
                                         android:layout_gravity="center" />
 
@@ -867,8 +317,9 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-                </ScrollView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+    </ScrollView>
 </layout>

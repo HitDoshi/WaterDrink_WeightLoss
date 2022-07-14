@@ -7,15 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
-import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 
 public class ReminderBroadCast extends BroadcastReceiver {
     @Override
@@ -30,7 +27,7 @@ public class ReminderBroadCast extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context,"Drink Water").setContentTitle("Water Drink Reminder")
-                .setSmallIcon(R.drawable.img)
+                .setSmallIcon(R.drawable.frontpage)
                 .setContentText("Let's Drink Some Water And Healthy Your Body")
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);

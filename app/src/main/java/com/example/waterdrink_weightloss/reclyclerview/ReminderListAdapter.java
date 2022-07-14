@@ -2,34 +2,35 @@ package com.example.waterdrink_weightloss.reclyclerview;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
+import com.example.waterdrink_weightloss.activity.ReminderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapter.ViewHolder>{
     private List<ReminderListData> listdata;
     List<ReminderListData> l;
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     Activity activity;
+    List<ReminderTime> pendingReminderList = new ArrayList<ReminderTime>();
+    List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
 
     // RecyclerView recyclerView;
     public ReminderListAdapter(Activity activity , List<ReminderListData> listdata) {
@@ -45,6 +46,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.reminder_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
+
         return viewHolder;
     }
 
@@ -53,12 +55,18 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         final ReminderListData reminderListData = listdata.get(position);
 
         holder.textView.setText(reminderListData.getTime());
+        ReminderActivity reminderActivity = new ReminderActivity();
+        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
 
         /*holder.imageView.setImageResource(listdata[position].getImgId());*/
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(view.getContext(),"click on item: "+reminderListData.getTime(),Toast.LENGTH_LONG).show();
+               /* pendingReminderList = Paper.book().read("PendingReminderList");
+                 Log.d("PendingReminderList",pendingReminderList.size()+"");
+                reminderTime = Paper.book().read("PendingReminderList");
+                Log.d("PendingReminderList",reminderTime.size()+"")*/;
             }
         });
 

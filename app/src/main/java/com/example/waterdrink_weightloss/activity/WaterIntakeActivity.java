@@ -28,9 +28,12 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.fragment.CupSizeFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
 import com.example.waterdrink_weightloss.fragment.WeekGraphFragment;
 import com.google.android.material.navigation.NavigationView;
+
+import io.paperdb.Paper;
 
 public class WaterIntakeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -53,6 +56,8 @@ public class WaterIntakeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         /*this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
         setContentView(R.layout.activity_water_intake);
@@ -73,6 +78,10 @@ public class WaterIntakeActivity extends AppCompatActivity
             bar2.setColorFilter(Color.WHITE);
             bar3.setColorFilter(Color.WHITE);
             bar4.setColorFilter(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
+        }
+        else {
+
         }
 //            toolbar.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.black)));
             toolbar.getBackground().setAlpha(0);
@@ -153,6 +162,16 @@ public class WaterIntakeActivity extends AppCompatActivity
             case R.id.reminder:
             {
                 startActivity(new Intent(this,ReminderActivity.class));
+                return true;
+            }
+
+            case  R.id.cupSize:
+            {
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                ft.replace(R.id.fragment_container,new CupSizeFragment());
+                ft.commit();
                 return true;
             }
 

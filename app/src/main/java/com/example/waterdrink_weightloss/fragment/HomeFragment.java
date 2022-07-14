@@ -37,7 +37,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
-    int glass_size = 300 , target_ml = 1500  ,total_ml = 0;
+    int CupSize = 300 , target_ml = 1500  ,total_ml = 0;
     int id = 0;
     int day,month,year, percentage;
     String glass_add_record=null;
@@ -260,13 +260,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(target_ml!=0) {
-                    total_ml += glass_size ;
+                    total_ml += CupSize;
 
                     if (glass_add_record!=null) {
-                        glass_add_record += "," + String.valueOf(glass_size);
+                        glass_add_record += "," + String.valueOf(CupSize);
                     }
                     else {
-                        glass_add_record = String.valueOf(glass_size);
+                        glass_add_record = String.valueOf(CupSize);
                     }
                     setCompletedData();
                     dbHandler.updateData(id,day,month,year,total_ml,glass_add_record);
@@ -286,9 +286,9 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
         target_ml = sharedPreferences.getInt("target_ml", 1500);
-        glass_size = sharedPreferences.getInt("glass_size", 300);
+        CupSize = sharedPreferences.getInt("CupSize", 300);
         fb.targetTextview.setText(target_ml + " ml");
-        fb.addGlass.setText(glass_size+"ml");
+        fb.addGlass.setText(CupSize +"ml");
 
         arrayList.clear();
         arrayList = dbHandler.readData();
@@ -376,7 +376,7 @@ public class HomeFragment extends Fragment {
     {
         sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
-        sharedPreferences.edit().putInt("target_ml",target_ml).putInt("glass_size",glass_size) .apply();
+        sharedPreferences.edit().putInt("target_ml",target_ml).putInt("CupSize", CupSize) .apply();
 
         fb.targetTextview.setText(target_ml + " ml");
     }
