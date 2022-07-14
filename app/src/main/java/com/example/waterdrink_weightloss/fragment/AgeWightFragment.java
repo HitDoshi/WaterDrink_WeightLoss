@@ -6,12 +6,17 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.UserInformation;
@@ -26,6 +31,12 @@ public class AgeWightFragment extends Fragment {
     NumberPicker age , weight ;
     Button set;
     SharedPreferences userDataSharedPreferences;
+    SeekBar seekBar;
+    TextView setTarget;
+    EditText editTarget;
+    int DrinkTarget;
+    SharedPreferences targetSharedPref;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,6 +88,7 @@ public class AgeWightFragment extends Fragment {
         weight = view.findViewById(R.id.select_weight);
         //set = view.findViewById(R.id.set);
         userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        targetSharedPref = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         String a1;
         String w1 ;
@@ -104,6 +116,53 @@ public class AgeWightFragment extends Fragment {
             }
         });
 
+        seekBar = view.findViewById(R.id.seekbar);
+        editTarget = view.findViewById(R.id.targetSetEditText);
+        setTarget = view.findViewById(R.id.target);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int target, boolean b) {
+                DrinkTarget = target + 500 ;
+                setTarget.setText(DrinkTarget +" ml");
+                editTargetSharedPref(DrinkTarget);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        editTarget.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (!editTarget.getText().toString().equals("")) {
+                    DrinkTarget = Integer.parseInt(editTarget.getText().toString());
+                } else {
+                    DrinkTarget = 1500;
+                }
+                setTarget.setText(editTarget.getText() + " ml");
+                editTargetSharedPref(DrinkTarget);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
        /* set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,4 +174,18 @@ public class AgeWightFragment extends Fragment {
         return view;
     }
 
+    private void editTargetSharedPref(int target) {
+        targetSharedPref.edit().putInt("target_ml",target).apply();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        int t = targetSharedPref.getInt("target_ml",1500);
+        setTarget.setText(t+"ml");
+        editTarget.setText(t+"");
+        seekBar.setProgress(t-500);
+
+    }
 }

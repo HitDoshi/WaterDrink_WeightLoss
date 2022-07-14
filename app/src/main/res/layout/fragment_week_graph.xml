@@ -7,15 +7,15 @@
 
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".fragment.DrinkReportFragment">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -92,33 +92,35 @@
 
             </LinearLayout>
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/graph"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/last"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/select_date_range" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toTopOf="@+id/last"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_weight="10"
+            app:layout_constraintTop_toBottomOf="@+id/select_date_range" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:id="@+id/last"
+                android:layout_weight="1"
+                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/graph"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/graph">
 
-                <ScrollView
+              <!--  <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fillViewport="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent">-->
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardview"
@@ -129,7 +131,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/last"
-                        app:layout_constraintBottom_toBottomOf="@+id/last"
                         android:layout_marginTop="20dp">
 
                         <LinearLayout
@@ -155,12 +156,12 @@
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/calendarRecyclerView"
                                     android:layout_width="match_parent"
-                                    android:layout_height="0dp"
+                                    android:layout_height="wrap_content"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    android:layout_weight="1"/>
+                                    />
                                 <!-- <RelativeLayout
                                      android:layout_width="match_parent"
                                      android:layout_height="wrap_content"
@@ -481,9 +482,10 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="0dp"
                                 android:gravity="center"
                                 android:id="@+id/c2"
+                                android:layout_weight="2"
                                 >
 
                                 <LinearLayout
@@ -491,6 +493,7 @@
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:padding="20dp"
+                                    android:layout_weight="1"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="@+id/c2"
                                     app:layout_constraintBottom_toBottomOf="@+id/c2"
@@ -563,6 +566,7 @@
                                     android:src="@drawable/vertical_line"/>
 
                                 <LinearLayout
+                                    android:layout_weight="1"
                                     android:layout_width="0dp"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
@@ -644,8 +648,9 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-                </ScrollView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--</ScrollView>-->
+            </LinearLayout>
+
     </LinearLayout>
+    </ScrollView>
 </layout>

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,9 +32,8 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
     Activity activity;
 
     // RecyclerView recyclerView;
-    public ReminderListAdapter(Activity activity , List<ReminderListData> listdata, ArrayList<PendingIntent> pendingIntent) {
+    public ReminderListAdapter(Activity activity , List<ReminderListData> listdata) {
         this.listdata = listdata;
-        this.pendingIntentArrayList = pendingIntent ;
         this.activity = activity;
     }
 
@@ -95,8 +95,8 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 listdata.remove(position);
-                AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
-                alarmManager.cancel(pendingIntentArrayList.get(position));
+               /* AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+                alarmManager.cancel(pendingIntentArrayList.get(position));*/
                 notifyDataSetChanged();
                 return true;
             }

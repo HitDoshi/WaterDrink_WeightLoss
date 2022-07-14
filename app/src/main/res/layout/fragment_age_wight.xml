@@ -5,48 +5,72 @@
     android:layout_height="wrap_content"
     tools:context=".fragment.AgeWightFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:gravity="center">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Age"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:textColor="@color/water_color"
-            android:textSize="18dp"
-            android:layout_marginTop="20dp"
-            />
+            android:orientation="vertical"
+            android:layout_marginRight="50dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@color/water_color"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                />
 
-       <NumberPicker
-           android:id="@+id/select_age"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center_horizontal"
-           />
+           <NumberPicker
+               android:id="@+id/select_age"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_horizontal"
+               />
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weight"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:textColor="@color/water_color"
-            android:textSize="18dp"
-            android:layout_marginTop="70dp"
-            />
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@color/water_color"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                />
 
-        <NumberPicker
-            android:id="@+id/select_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            />
+            <NumberPicker
+                android:id="@+id/select_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                />
+        </LinearLayout>
 
+    </LinearLayout>
        <!-- <Button
             android:id="@+id/set"
             android:layout_width="wrap_content"
@@ -55,6 +79,61 @@
             android:text="SET"
             android:backgroundTint="@color/water_color"/>
 -->
-    </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="-:Water Drink Goal:-"
+            android:textColor="@color/water_color"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="50dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/targetSetEditText"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/water_color"
+                android:inputType="number"
+                android:layout_marginLeft="5dp"
+                android:maxLength="15" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/target"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    />
+
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:max="3500"
+                    android:layout_marginTop="10dp"
+                    android:progressTint="@color/water_color"
+                    android:thumbTint="@color/dark_purple"
+                    android:layout_marginBottom="25dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

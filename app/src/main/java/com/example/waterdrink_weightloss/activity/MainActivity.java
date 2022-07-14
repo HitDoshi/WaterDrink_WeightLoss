@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
+       if(userDataSharedPreferences.getBoolean("Theme",false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

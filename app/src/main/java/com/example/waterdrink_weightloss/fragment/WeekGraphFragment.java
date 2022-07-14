@@ -8,12 +8,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,7 +102,7 @@ public class WeekGraphFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         xAxisLabel.add("Sun");
         xAxisLabel.add("Mon");
         xAxisLabel.add("Tue");
@@ -115,6 +117,7 @@ public class WeekGraphFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentWeekGraphBinding = FragmentWeekGraphBinding.inflate(getLayoutInflater());
+
         return fragmentWeekGraphBinding.getRoot();
     }
 
@@ -211,8 +214,6 @@ public class WeekGraphFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         target_ml = sharedPreferences.getInt("target_ml", 1500);
 
@@ -336,13 +337,19 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.graph.animateY(1500);
             fragmentWeekGraphBinding.graph.setPinchZoom(false);
             fragmentWeekGraphBinding.graph.setScaleEnabled(false);
+
+            if(sharedPreferences.getBoolean("Theme",false)){
+                fragmentWeekGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
+                fragmentWeekGraphBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
+                // setting text color.
+                barDataSet.setValueTextColor(Color.WHITE);
+            }
+
+            barDataSet.setColors(Color.parseColor("#14BFF5"));//water color
             fragmentWeekGraphBinding.graph.getAxisRight().setEnabled(false);
 
             // adding color to our bar data set.
-            barDataSet.setColors(R.color.water_color);
 
-            // setting text color.
-            barDataSet.setValueTextColor(Color.BLACK);
             fragmentWeekGraphBinding.graph.notifyDataSetChanged();
             fragmentWeekGraphBinding.graph.invalidate();
         }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -107,7 +108,9 @@ public class MonthGraphFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         dbHandler = new DBHandler(getContext());
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -119,6 +122,7 @@ public class MonthGraphFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         MonthReportFragmentBinding = FragmentMonthGraphBinding.inflate(getLayoutInflater());
+
 
         View view = inflater.inflate(R.layout.fragment_month_graph, container, false);
         setId();
@@ -195,7 +199,6 @@ public class MonthGraphFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         target_ml = sharedPreferences.getInt("target_ml", 1500);
         calendar = Calendar.getInstance();
@@ -285,11 +288,16 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.graph.setPinchZoom(false);
             MonthReportFragmentBinding.graph.setScaleEnabled(false);
 
-            // adding color to our bar data set.
-            barDataSet.setColors(R.color.water_color);
+            if(sharedPreferences.getBoolean("Theme",false)){
+                MonthReportFragmentBinding.graph.getXAxis().setTextColor(Color.WHITE);
+                MonthReportFragmentBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
+                // setting text color.
+                barDataSet.setValueTextColor(Color.WHITE);
+            }
 
-            // setting text color.
-            barDataSet.setValueTextColor(Color.BLACK);
+            // adding color to our bar data set.
+            barDataSet.setColors(Color.parseColor("#14BFF5"));//water color
+
             MonthReportFragmentBinding.graph.notifyDataSetChanged();
             MonthReportFragmentBinding.graph.invalidate();
         }

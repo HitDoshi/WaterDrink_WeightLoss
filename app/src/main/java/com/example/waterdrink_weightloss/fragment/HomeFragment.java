@@ -1,9 +1,7 @@
 package com.example.waterdrink_weightloss.fragment;
 
-import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
@@ -72,6 +69,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding fb;
     List<ReminderListData> reminderListDataList = new ArrayList<>();
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
+    int wakeupHour , wakeupMin ,  badHour , badMin , interval=60 ;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -100,6 +98,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
 //        fb = DataBindingUtil.setContentView(getActivity(),R.layout.responsiveui);
         //weather dialog
@@ -211,6 +210,14 @@ public class HomeFragment extends Fragment {
         fb.targetTextview.setText("90");
         */
 
+        if (sharedPreferences.getBoolean("Tips",false)){
+            fb.linear1.setVisibility(View.GONE);
+        }
+        else
+        {
+            fb.linear1.setVisibility(View.VISIBLE);
+        }
+
         fb.weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -275,17 +282,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ReminderListAdapter adapter = new ReminderListAdapter(getActivity(),reminderListDataList
-                                                                                    ,pendingIntentArrayList);
-        fb.recyclerView.setHasFixedSize(true);
-        fb.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        fb.recyclerView.setAdapter(adapter);
+        Log.d("onViewCreated","onViewCreated Home Fragment");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         target_ml = sharedPreferences.getInt("target_ml", 1500);
@@ -338,6 +340,7 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
+
     }
 
     private void setCompletedData() {
@@ -356,12 +359,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        Log.d("Resume","Resume HomeFragment");
         try {
+
+            wakeupHour = sharedPreferences.getInt("wake_up_hour",7);
+            wakeupMin = sharedPreferences.getInt("wake_up_min",0);
+
+            badHour = sharedPreferences.getInt("bed_hour",11);
+            badMin = sharedPreferences.getInt("bed_min",0);
+
+            interval = sharedPreferences.getInt("Interval",60);
+
             setReminder();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
     void setSharedPreferencesData()
@@ -374,13 +387,9 @@ public class HomeFragment extends Fragment {
     }
 
     void setReminder() throws ParseException {
-        int wakeupHour = 7 ;
-        int wakeupMin = 30 ;
-        int badHour = 22 ;
-        int badMin = 0 ;
-        int interval = 2 ;
 
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
+        reminderListDataList.clear();
 /*
 
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
@@ -431,6 +440,7 @@ public class HomeFragment extends Fragment {
             calendar.set(Calendar.HOUR_OF_DAY,i);
             calendar.set(Calendar.MINUTE,j);
             calendar.set(Calendar.SECOND,0);
+            Log.d("Interval",interval+"");
             calendar.add(Calendar.MINUTE,interval);
             Log.d("Calender",calendar.get(Calendar.HOUR_OF_DAY)+" "+calendar.get(Calendar.MINUTE));
 
@@ -442,12 +452,13 @@ public class HomeFragment extends Fragment {
             second = String.format("%02d", j);
             data.setTime(first+":"+second);
             int x = i;
-
             if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
                 reminderListDataList.add(data);
+                Log.d("IF","YES");
             }
+            Log.d("Time",System.currentTimeMillis()+" "+calendar.getTimeInMillis());
 
-            Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
+           /* Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);
             //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
             //for repeting
@@ -455,11 +466,19 @@ public class HomeFragment extends Fragment {
             alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
             Log.d("Time",calendar.getTimeInMillis()+"");
             pendingIntentArrayList.add(pendingIntent);
-            Log.d("Start","start");
-            temp++;
+            Log.d("Start",reminderListDataList.size()+"");
+            temp++;*/
         }
-
+        setRecyclerView();
         //Log.d("Cal",cal.getTime()+"");
+    }
 
+    public void setRecyclerView()
+    {
+        ReminderListAdapter adapter = new ReminderListAdapter(getActivity(),reminderListDataList);
+        fb.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        fb.recyclerView.setHasFixedSize(true);
+        fb.recyclerView.setAdapter(adapter);
+        Log.d("Tag",reminderListDataList.size()+"");
     }
 }

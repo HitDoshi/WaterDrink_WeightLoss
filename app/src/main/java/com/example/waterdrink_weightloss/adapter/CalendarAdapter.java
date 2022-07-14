@@ -64,7 +64,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
             /*calendar.set(Calendar.DAY_OF_WEEK,i+1);
 
-
             for (int j=0;j<arrayList.size();j++) {
                 if (calendar.get(Calendar.DAY_OF_MONTH)==arrayList.get(j).getDay()){
                     *//*total += arrayList.get(j).getAchievement();

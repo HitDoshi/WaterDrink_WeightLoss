@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -96,6 +97,7 @@ public class YearGraphFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -103,6 +105,7 @@ public class YearGraphFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHandler = new DBHandler(getContext());
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         xAxisLabel.add("Jan");
         xAxisLabel.add("Feb");
         xAxisLabel.add("Mar");
@@ -119,6 +122,7 @@ public class YearGraphFragment extends Fragment {
         mParam1 = getArguments().getString(ARG_PARAM1);
         mParam2 = getArguments().getString(ARG_PARAM2);
     }
+
 }
 
     @Override
@@ -182,7 +186,6 @@ public class YearGraphFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         target_ml = sharedPreferences.getInt("target_ml", 1500);
 
@@ -294,11 +297,15 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.graph.setScaleEnabled(false);
             fragmentYearGraphBinding.graph.getAxisRight().setEnabled(false);
 
+            if(sharedPreferences.getBoolean("Theme",false)){
+                fragmentYearGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
+                fragmentYearGraphBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
+                // setting text color.
+                barDataSet.setValueTextColor(Color.WHITE);
+            }
             // adding color to our bar data set.
-            barDataSet.setColors(R.color.water_color);
+            barDataSet.setColors(Color.parseColor("#14BFF5"));//water color
 
-            // setting text color.
-            barDataSet.setValueTextColor(Color.BLACK);
             fragmentYearGraphBinding.graph.notifyDataSetChanged();
             fragmentYearGraphBinding.graph.invalidate();
         }

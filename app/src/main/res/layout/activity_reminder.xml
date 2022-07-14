@@ -93,14 +93,55 @@
             android:layout_marginLeft="10dp"
             android:text="Reminder Interval"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="60 min"
-            android:gravity="right"
+            android:gravity="center_horizontal|end"
+            android:orientation="horizontal" >
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:inputType="number"
+            android:text="60"
+            android:textColor="@color/water_color"
+            android:backgroundTint="@color/water_color"
+            android:id="@+id/reminder_interval" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min"
             android:layout_marginRight="10dp"
             android:textColor="@color/water_color"
             />
+        </LinearLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reminder"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/dark_purple"
+            android:layout_gravity="center_vertical"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:id="@+id/reminder"
+            android:theme="@style/SwitchCompatTheme" />
+
+    </LinearLayout>
+
 </LinearLayout>

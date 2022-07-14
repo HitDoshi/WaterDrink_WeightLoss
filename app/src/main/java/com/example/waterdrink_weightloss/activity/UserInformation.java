@@ -5,18 +5,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.fragment.AgeWightFragment;
 import com.example.waterdrink_weightloss.fragment.GenderFragment;
 import com.example.waterdrink_weightloss.fragment.TimeFragment;
 import com.google.android.material.tabs.TabLayout;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserInformation extends AppCompatActivity {
 
