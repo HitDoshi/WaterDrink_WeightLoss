@@ -86,7 +86,7 @@ public class TimeFragment extends Fragment {
         h1 = userDataSharedPreferences.getInt("wake_up_hour",7);
         m1 = userDataSharedPreferences.getInt("wake_up_min",0);
 
-        h2 = userDataSharedPreferences.getInt("bed_hour",11);
+        h2 = userDataSharedPreferences.getInt("bed_hour",22);
         m2 = userDataSharedPreferences.getInt("bed_min",0);
 
         wake_up_hour.setMaxValue(23);
@@ -102,6 +102,34 @@ public class TimeFragment extends Fragment {
         bed_min.setMaxValue(59);
         bed_hour.setValue(h2);
         bed_min.setValue(m2);
+
+        wake_up_hour.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+
+        wake_up_min.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+
+        bed_hour.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+
+        bed_min.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
 
         set.setOnClickListener(new View.OnClickListener() {
             @Override

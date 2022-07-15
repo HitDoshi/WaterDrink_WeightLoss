@@ -1,10 +1,14 @@
 package com.example.waterdrink_weightloss.activity.Model;
 
+import android.app.PendingIntent;
+import android.content.Intent;
+
 import com.example.waterdrink_weightloss.activity.ReminderActivity;
 
 public class ReminderTime {
 
     int hour , min;
+    Intent pendingIntent;
 
     public int getHour() {
         return hour;
@@ -22,9 +26,18 @@ public class ReminderTime {
         this.min = min;
     }
 
-    public ReminderTime(int hour , int min){
+    public Intent getPendingIntent() {
+        return pendingIntent;
+    }
+
+    public void setPendingIntent(Intent pendingIntent) {
+        this.pendingIntent = pendingIntent;
+    }
+
+    public ReminderTime(int hour , int min , Intent pendingIntent){
         this.hour = hour;
         this.min = min;
+        this.pendingIntent = pendingIntent;
     }
 }
 

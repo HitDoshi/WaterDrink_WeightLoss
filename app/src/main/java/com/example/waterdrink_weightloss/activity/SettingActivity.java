@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ public class SettingActivity extends AppCompatActivity {
     SharedPreferences themeSharedPref;
     SwitchCompat theme , tips;
     Drawable upArrow;
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +61,11 @@ public class SettingActivity extends AppCompatActivity {
         themeSharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
 
         gender.setText(userDataSharedPreferences.getString("gender","21"));
-        weight.setText(userDataSharedPreferences.getString("weight","55"));
-        wake_up_time.setText(userDataSharedPreferences.getInt("wake_up_hour",7) + " : "+
-                userDataSharedPreferences.getInt("wake_up_min",0));
-        bed_time.setText(userDataSharedPreferences.getInt("bed_hour",11) + " : "+
-                userDataSharedPreferences.getInt("bed_min",0));
+        weight.setText(userDataSharedPreferences.getString("weight","55") + "kg");
+        wake_up_time.setText(String.format("%02d",userDataSharedPreferences.getInt("wake_up_hour",7)) + " : "+
+                String.format("%02d",userDataSharedPreferences.getInt("wake_up_min",0)) );
+        bed_time.setText(String.format("%02d",userDataSharedPreferences.getInt("bed_hour",11)) + " : "+
+                String.format("%02d",userDataSharedPreferences.getInt("bed_min",0)) );
         goal.setText(userDataSharedPreferences.getInt("target_ml",1500)+ " ml");
         theme.setChecked(themeSharedPref.getBoolean("Theme",false));
         tips.setChecked(themeSharedPref.getBoolean("Tips",false));

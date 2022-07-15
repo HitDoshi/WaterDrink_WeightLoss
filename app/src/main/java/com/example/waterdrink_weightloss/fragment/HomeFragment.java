@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
@@ -33,6 +34,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 public class HomeFragment extends Fragment {
 
@@ -67,7 +70,7 @@ public class HomeFragment extends Fragment {
     TextView weather_cancel , weather_ok ;
     TextView physical_cancel , physical_ok;
     FragmentHomeBinding fb;
-    List<ReminderListData> reminderListDataList = new ArrayList<>();
+    List<ReminderTime> reminderListDataList = new ArrayList<>();
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     int wakeupHour , wakeupMin ,  badHour , badMin , interval=60 ;
 
@@ -98,6 +101,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Paper.init(getContext());
         sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
 //        fb = DataBindingUtil.setContentView(getActivity(),R.layout.responsiveui);
@@ -383,86 +387,97 @@ public class HomeFragment extends Fragment {
 
     void setReminder() throws ParseException {
 
-        int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
+//        int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
+//        reminderListDataList.clear();
+///*
+//
+//        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+//        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        Date d1 = df.parse("13:30:0"); //date 1
+//        Date d2 = df.parse("0:120:0"); // date 2
+//        long sum = d1.getTime() + d2.getTime();
+//*/
+///*
+//        String myTime = "12:42";
+//        SimpleDateFormat df1 = new SimpleDateFormat("HH:mm");
+//        Date d = df1.parse(myTime);
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(d);
+//        cal.add(Calendar.MINUTE, 2);
+//        String newTime = df1.format(cal.getTime());
+//
+//        Log.d("Time",newTime);*/
+//
+//        Calendar calendar = Calendar.getInstance();
+//        Calendar currentTime = Calendar.getInstance();
+//       /* SimpleDateFormat df = new SimpleDateFormat("HH");*/
+//        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+//        /*calendar.set(Calendar.HOUR_OF_DAY,wakeupHour);
+//        calendar.set(Calendar.MINUTE,wakeupMin);
+//        calendar.add(Calendar.MINUTE,interval);*/
+///*
+//
+//        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//
+//        Intent intent = new Intent(getActivity(), ExecutableServices.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+//
+//        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+//        //for repeting
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,
+//                interval*60*1000,pendingIntent );
+//*/
+//
+//      /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
+//        Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
+//
+//        int temp=0;
+//
+//        //Log.d("RealTime",calendar.getTimeInMillis()+"");
+//        while (i<badHour)
+//        {
+//            calendar.set(Calendar.HOUR_OF_DAY,i);
+//            calendar.set(Calendar.MINUTE,j);
+//            calendar.set(Calendar.SECOND,0);
+//            Log.d("Interval",interval+"");
+//            calendar.add(Calendar.MINUTE,interval);
+//            Log.d("Calender",calendar.get(Calendar.HOUR_OF_DAY)+" "+calendar.get(Calendar.MINUTE));
+//
+//            i = calendar.get(Calendar.HOUR_OF_DAY);
+//            j = calendar.get(Calendar.MINUTE);
+//            ReminderListData data = new ReminderListData();
+//            String first , second  ;
+//            first = String.format("%02d", i);
+//            second = String.format("%02d", j);
+//            data.setTime(first+":"+second);
+//            int x = i;
+//            if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
+//                reminderListDataList.add(data);
+//            }
+//
+//           /* Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);
+//            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+//            //for repeting
+//            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+//            Log.d("Time",calendar.getTimeInMillis()+"");
+//            pendingIntentArrayList.add(pendingIntent);
+//            Log.d("Start",reminderListDataList.size()+"");
+//            temp++;*/
+//        }
         reminderListDataList.clear();
-/*
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        reminderListDataList = Paper.book().read("ReminderTimeList");
 
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-        df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date d1 = df.parse("13:30:0"); //date 1
-        Date d2 = df.parse("0:120:0"); // date 2
-        long sum = d1.getTime() + d2.getTime();
-*/
-/*
-        String myTime = "12:42";
-        SimpleDateFormat df1 = new SimpleDateFormat("HH:mm");
-        Date d = df1.parse(myTime);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
-        cal.add(Calendar.MINUTE, 2);
-        String newTime = df1.format(cal.getTime());
-
-        Log.d("Time",newTime);*/
-
-        Calendar calendar = Calendar.getInstance();
-        Calendar currentTime = Calendar.getInstance();
-       /* SimpleDateFormat df = new SimpleDateFormat("HH");*/
-        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        /*calendar.set(Calendar.HOUR_OF_DAY,wakeupHour);
-        calendar.set(Calendar.MINUTE,wakeupMin);
-        calendar.add(Calendar.MINUTE,interval);*/
-/*
-
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(getActivity(), ExecutableServices.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-
-        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-        //for repeting
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,
-                interval*60*1000,pendingIntent );
-*/
-
-      /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
-        Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
-
-        int temp=0;
-
-        //Log.d("RealTime",calendar.getTimeInMillis()+"");
-        while (i<badHour)
-        {
-            calendar.set(Calendar.HOUR_OF_DAY,i);
-            calendar.set(Calendar.MINUTE,j);
-            calendar.set(Calendar.SECOND,0);
-            Log.d("Interval",interval+"");
-            calendar.add(Calendar.MINUTE,interval);
-            Log.d("Calender",calendar.get(Calendar.HOUR_OF_DAY)+" "+calendar.get(Calendar.MINUTE));
-
-            i = calendar.get(Calendar.HOUR_OF_DAY);
-            j = calendar.get(Calendar.MINUTE);
-            ReminderListData data = new ReminderListData();
-            String first , second  ;
-            first = String.format("%02d", i);
-            second = String.format("%02d", j);
-            data.setTime(first+":"+second);
-            int x = i;
-            if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
-                reminderListDataList.add(data);
-            }
-
-           /* Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);
-            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-            //for repeting
-            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-            Log.d("Time",calendar.getTimeInMillis()+"");
-            pendingIntentArrayList.add(pendingIntent);
-            Log.d("Start",reminderListDataList.size()+"");
-            temp++;*/
+        Log.d("R",sharedPreferences.getBoolean("ReminderOnOff",false)+"");
+        if(reminderListDataList!=null && reminderListDataList.size()!=0) {
+            Log.d("S", reminderListDataList.size() + "");
+                setRecyclerView();
         }
-        setRecyclerView();
+        else{
+            fb.cardview.setVisibility(View.GONE);
+        }
         //Log.d("Cal",cal.getTime()+"");
     }
 
@@ -472,6 +487,6 @@ public class HomeFragment extends Fragment {
         fb.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fb.recyclerView.setHasFixedSize(true);
         fb.recyclerView.setAdapter(adapter);
-        Log.d("Tag",reminderListDataList.size()+"");
+        //Log.d("Tag",reminderListDataList.size()+"");
     }
 }

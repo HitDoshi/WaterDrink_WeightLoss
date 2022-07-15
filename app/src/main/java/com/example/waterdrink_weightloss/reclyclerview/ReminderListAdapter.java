@@ -2,7 +2,9 @@ package com.example.waterdrink_weightloss.reclyclerview;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,7 +27,7 @@ import java.util.List;
 import io.paperdb.Paper;
 
 public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapter.ViewHolder>{
-    private List<ReminderListData> listdata;
+    private List<ReminderTime> listdata;
     List<ReminderListData> l;
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     Activity activity;
@@ -33,7 +35,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
     List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
 
     // RecyclerView recyclerView;
-    public ReminderListAdapter(Activity activity , List<ReminderListData> listdata) {
+    public ReminderListAdapter(Activity activity , List<ReminderTime> listdata) {
         this.listdata = listdata;
         this.activity = activity;
     }
@@ -43,6 +45,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Paper.init(activity);
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.reminder_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
@@ -52,11 +55,12 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        final ReminderListData reminderListData = listdata.get(position);
+        final ReminderTime reminderListData = listdata.get(position);
 
-        holder.textView.setText(reminderListData.getTime());
+        holder.textView.setText(String.format("%02d",reminderListData.getHour())+":"+
+                String.format("%02d",reminderListData.getMin()) );
         ReminderActivity reminderActivity = new ReminderActivity();
-        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
+//        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
 
         /*holder.imageView.setImageResource(listdata[position].getImgId());*/
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -102,9 +106,14 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+                listdata = Paper.book().read("ReminderTimeList");
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,position,
+                        listdata.get(position).getPendingIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmManager.cancel(pendingIntent);
+                pendingIntent.cancel();
                 listdata.remove(position);
-               /* AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
-                alarmManager.cancel(pendingIntentArrayList.get(position));*/
+                Paper.book().write("ReminderTimeList",listdata);
                 notifyDataSetChanged();
                 return true;
             }

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         PrefManager prefManager = new PrefManager(this);
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
 
        if(userDataSharedPreferences.getBoolean("Theme",false)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -54,6 +55,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

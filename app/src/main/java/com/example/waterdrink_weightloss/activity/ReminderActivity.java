@@ -43,6 +43,7 @@ public class ReminderActivity extends AppCompatActivity {
     SwitchCompat reminder;
     EditText reminder_interval;
     ImageView edit_reminder;
+    List<String> a = new ArrayList<>();
     TextView time;
     List<ReminderListData> reminderListDataList = new ArrayList<>();
     public ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
@@ -91,6 +92,7 @@ public class ReminderActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
                     try {
+                        setSharedPreference();
                         setReminder();
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -139,9 +141,26 @@ public class ReminderActivity extends AppCompatActivity {
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
         temp = 0 ;
         reminderTime.clear();
+        for (int k=0;k<pendingIntentArrayList.size();k++){
+            pendingIntentArrayList.get(k).cancel();
+        }
         pendingIntentArrayList.clear();
-/*
+        reminderTime = Paper.book().read("ReminderTimeList");
+        if(reminderTime!=null) {
+            for (int k = 0; k < reminderTime.size(); k++) {
+                AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                PendingIntent ped = PendingIntent.getBroadcast(getApplicationContext(), k,
+                        reminderTime.get(k).getPendingIntent(), 0);
+                alarmManager.cancel(ped);
+                ped.cancel();
+            }
+            reminderTime.clear();
+        }
+        else{
+            reminderTime = new ArrayList<ReminderTime>();
+        }
 
+/*
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date d1 = df.parse("13:30:0"); //date 1
@@ -181,8 +200,8 @@ public class ReminderActivity extends AppCompatActivity {
       /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
         Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
 
-//        Paper.book().write("PendingReminderList",pendingIntentArrayList);
-//        Paper.book().write("ReminderTimeList",reminderTime);
+        //Paper.book().write("PendingReminderList",pendingIntentArrayList);
+        Paper.book().write("ReminderTimeList",reminderTime);
         //Log.d("RealTime",calendar.getTimeInMillis()+"");
         while (i<badHour)
         {
@@ -202,19 +221,23 @@ public class ReminderActivity extends AppCompatActivity {
             int x = i;
 
             if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
+                if(temp==0){
+                    setSharedPreference();
+                }
                 reminderListDataList.add(data);
 //}
                 Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), temp, intent,
-                        0);
+                        PendingIntent.FLAG_UPDATE_CURRENT);
                 //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
                 //for repeting
                 AlarmManager alarmManager = (AlarmManager) getApplicationContext().
                         getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-                Log.d("Time", calendar.getTimeInMillis() + "");
+                //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
-                reminderTime.add(new ReminderTime(i,j));
+                reminderTime.add(new ReminderTime(i,j,intent));
+                a.add("abc");
                 temp++;
                 Log.d("set ",temp+"");
             }
@@ -222,23 +245,30 @@ public class ReminderActivity extends AppCompatActivity {
             //alarmManager.cancel(pendingIntent);
         }
 
-//        Paper.book().write("PendingReminderList", pendingIntentArrayList);
-//        Paper.book().write("ReminderTimeList", reminderTime);
-
-        setSharedPreference();
+        Paper.book().write("ReminderTimeList", reminderTime);
+        //Paper.book().write("PendingReminderList", pendingIntentArrayList);
+        reminderTime.clear();
+        reminderTime = Paper.book().read("ReminderTimeList");
+        Log.d("SET", reminderTime.get(1).getHour() + " " + reminderTime.get(1).getMin());
+        Log.d("PED",pendingIntentArrayList.size()+"");
         //Log.d("Cal",cal.getTime()+"");
     }
 
     void removeReminder(){
 
-        for (int i=0;i<temp;i++) {
+            reminderTime.clear();
+            reminderTime = Paper.book().read("ReminderTimeList");
+            for (int k = 0; k < reminderTime.size(); k++){
+                AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                PendingIntent p = PendingIntent.getBroadcast(getApplicationContext(), k,
+                        reminderTime.get(k).getPendingIntent(), PendingIntent.FLAG_UPDATE_CURRENT);
+                alarmManager.cancel(p);
+                Log.d("remove ",k+"");
+                p.cancel();
+            }
 
-            AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-
-            if(pendingIntentArrayList.get(i)!=null){
-                alarmManager.cancel(pendingIntentArrayList.get(i));
-                Log.d("remove ",i+"");}
-        }
+            reminderTime.clear();
+            Paper.book().write("ReminderTimeList",reminderTime);
     }
 
     void setSharedPreference(){
@@ -260,10 +290,11 @@ public class ReminderActivity extends AppCompatActivity {
         wakeupHour = reminderSharedPreferences.getInt("wake_up_hour",7);
         wakeupMin = reminderSharedPreferences.getInt("wake_up_min",0);
 
-        badHour = reminderSharedPreferences.getInt("bed_hour",11);
+        badHour = reminderSharedPreferences.getInt("bed_hour",22);
         badMin = reminderSharedPreferences.getInt("bed_min",0);
 
-        time.setText(wakeupHour + ":" + wakeupMin +" - " + badHour +":" +badMin);
+        time.setText(String.format("%02d",wakeupHour) + ":" + String.format("%02d",wakeupMin)
+                +" - " + String.format("%02d",badHour) +":" + String.format("%02d",badMin));
     }
 
     @Override
@@ -314,7 +345,6 @@ public class ReminderActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
-
     }
 
     public void lightStatusBar(){
@@ -326,6 +356,5 @@ public class ReminderActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(text);
         upArrow.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
-
     }
 }

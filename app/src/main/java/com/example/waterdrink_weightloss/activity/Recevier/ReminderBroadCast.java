@@ -13,10 +13,20 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
+import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.paperdb.Paper;
 
 public class ReminderBroadCast extends BroadcastReceiver {
     @Override
+
     public void onReceive(Context context, Intent intent) {
+
+        List<ReminderListData> reminderListDataList = new ArrayList<>();
+        Paper.init(context);
 
         Vibrator vibrator = (Vibrator) context
                 .getSystemService(Context.VIBRATOR_SERVICE);
@@ -39,6 +49,10 @@ public class ReminderBroadCast extends BroadcastReceiver {
         builder.setContentIntent(pendingIntent);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(200,builder.build());
+
+        reminderListDataList = Paper.book().read("ReminderTimeList");
+        reminderListDataList.remove(0);
+        Paper.book().write("ReminderTimeList",reminderListDataList);
 
       /*  ReminderListAdapter reminderListAdapter = new ReminderListAdapter();
         reminderListAdapter.deleteFirstReminder();*/
