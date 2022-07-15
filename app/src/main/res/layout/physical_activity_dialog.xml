@@ -6,7 +6,7 @@
 
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:background="@drawable/dialog_shape">
+    android:background="@drawable/light_dialog_shape">
 
     <TextView
         android:layout_width="match_parent"

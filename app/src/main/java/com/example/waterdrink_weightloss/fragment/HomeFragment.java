@@ -28,7 +28,6 @@ import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
-import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -159,6 +158,14 @@ public class HomeFragment extends Fragment {
         moderate = dialogView2.findViewById(R.id.moderate_active);
         very = dialogView2.findViewById(R.id.very_activity);
 
+        boolean theme = sharedPreferences.getBoolean("Theme",false);
+
+        if(theme){
+            dialogView1.setBackgroundResource(R.drawable.dark_dialog_shape);
+        }else{
+            dialogView1.setBackgroundResource(R.drawable.light_dialog_shape);
+        }
+
     /*    binding.progressBar.setProgress(90);
         binding.targetTextview.setText(String.valueOf(90));
 */
@@ -260,7 +267,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        fb.addGlass.setOnClickListener(new View.OnClickListener() {
+        fb.linear4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(target_ml!=0) {

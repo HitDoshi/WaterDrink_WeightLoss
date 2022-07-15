@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.ReminderActivity;
+import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +86,14 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
     @Override
     public int getItemCount() {
-        return listdata.size();
+
+//        if(listdata.size()>0)
+            return 1;
+//        else {
+//            activity.startActivity(new Intent(activity, WaterIntakeActivity.class));
+//            return 0;
+//
+//        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -114,7 +123,11 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
                 pendingIntent.cancel();
                 listdata.remove(position);
                 Paper.book().write("ReminderTimeList",listdata);
-                notifyDataSetChanged();
+
+                if(listdata.size()!=0)
+                    notifyDataSetChanged();
+                else
+                    activity.startActivity(new Intent(activity, WaterIntakeActivity.class));
                 return true;
             }
         });

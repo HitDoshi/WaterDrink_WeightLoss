@@ -10,5 +10,6 @@
     <color name="water_color">#14BFF5</color>
     <color name="dark_purple">#00546F</color>
     <color name="light_blue">#C6F2FF</color>
+    <color name="light_black">#1E1E1E</color>
 
 </resources>
