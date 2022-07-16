@@ -3,6 +3,7 @@ package com.example.waterdrink_weightloss.fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     SharedPreferences sharedPreferences;
     int CupSize = 300 , target_ml = 1500  ,total_ml = 0;
@@ -57,12 +58,18 @@ public class HomeFragment extends Fragment {
     AlertDialog weather_alertDialog;
     AlertDialog.Builder builder1;
     View dialogView1;
+    TextView g1,g2,g3,g4;
+    TextView w,w1,w2,w3,w4;
+    ImageView f1,f2,f3,f4;
     LinearLayout normal , warm , hot , cold ;
 
     //physical activity dialog
     AlertDialog physical_alertDialog;
     AlertDialog.Builder builder2;
     View dialogView2;
+    TextView t1,t2,t3,t4,t;
+    ImageView i1,i2,i3,i4;
+    TextView p1,p2,p3,p4;
     LinearLayout sedentary , lightly , moderate , very ;
 
     ImageView weather , physical;
@@ -149,6 +156,19 @@ public class HomeFragment extends Fragment {
         warm = dialogView1.findViewById(R.id.warm_weather);
         hot = dialogView1.findViewById(R.id.hot_weather);
         cold = dialogView1.findViewById(R.id.cold_weather);
+        w = dialogView1.findViewById(R.id.w);
+        w1 = dialogView1.findViewById(R.id.w1);
+        w2 = dialogView1.findViewById(R.id.w2);
+        w3 = dialogView1.findViewById(R.id.w3);
+        w4 = dialogView1.findViewById(R.id.w4);
+        g1 = dialogView1.findViewById(R.id.t1);
+        g2 = dialogView1.findViewById(R.id.t2);
+        g3 = dialogView1.findViewById(R.id.t3);
+        g4 = dialogView1.findViewById(R.id.t4);
+        f1 = dialogView1.findViewById(R.id.i1);
+        f2 = dialogView1.findViewById(R.id.i2);
+        f3 = dialogView1.findViewById(R.id.i3);
+        f4 = dialogView1.findViewById(R.id.i4);
 
         //physical activity dialog
         physical_cancel = dialogView2.findViewById(R.id.cancel);
@@ -157,13 +177,31 @@ public class HomeFragment extends Fragment {
         lightly = dialogView2.findViewById(R.id.lightly_activity);
         moderate = dialogView2.findViewById(R.id.moderate_active);
         very = dialogView2.findViewById(R.id.very_activity);
+        t = dialogView2.findViewById(R.id.t);
+        t1  = dialogView2.findViewById(R.id.t1);
+        t2  = dialogView2.findViewById(R.id.t2);
+        t3  = dialogView2.findViewById(R.id.t3);
+        t4  = dialogView2.findViewById(R.id.t4);
+        p1  = dialogView2.findViewById(R.id.p1);
+        p2  = dialogView2.findViewById(R.id.p2);
+        p3  = dialogView2.findViewById(R.id.p3);
+        p4  = dialogView2.findViewById(R.id.p4);
+        i1  = dialogView2.findViewById(R.id.i1);
+        i2  = dialogView2.findViewById(R.id.i2);
+        i3  = dialogView2.findViewById(R.id.i3);
+        i4  = dialogView2.findViewById(R.id.i4);
 
         boolean theme = sharedPreferences.getBoolean("Theme",false);
 
         if(theme){
             dialogView1.setBackgroundResource(R.drawable.dark_dialog_shape);
+            setWeatherDialogDarkMode();
+
+            dialogView2.setBackgroundResource(R.drawable.dark_dialog_shape);
+            setPhysicalDialogDarkMode();
         }else{
             dialogView1.setBackgroundResource(R.drawable.light_dialog_shape);
+            dialogView2.setBackgroundResource(R.drawable.light_dialog_shape);
         }
 
     /*    binding.progressBar.setProgress(90);
@@ -346,7 +384,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
-
     }
 
     private void setCompletedData() {
@@ -354,7 +391,10 @@ public class HomeFragment extends Fragment {
         fb.targetTextview.setText("Drink "+target_ml+" ml");
         percentage = ((int) (  ( (float) (total_ml)) / (float) (target_ml) * 100));
         fb.progressBar.setProgress(percentage);
-        fb.textviewProgress.setText(percentage + " %");
+//        if(percentage<100)
+            fb.textviewProgress.setText(percentage + " %");
+//        else
+//            fb.textviewProgress.setText(100 + " %");
         int remain = target_ml - total_ml;
         if (remain>0)
             fb.rememberWaterText.setText(remain + " ml more");
@@ -495,5 +535,37 @@ public class HomeFragment extends Fragment {
         fb.recyclerView.setHasFixedSize(true);
         fb.recyclerView.setAdapter(adapter);
         //Log.d("Tag",reminderListDataList.size()+"");
+    }
+
+    private void setPhysicalDialogDarkMode(){
+        t.setTextColor(Color.WHITE);
+        t1.setTextColor(Color.WHITE);
+        t2.setTextColor(Color.WHITE);
+        t3.setTextColor(Color.WHITE);
+        t4.setTextColor(Color.WHITE);
+        p1.setTextColor(Color.WHITE);
+        p2.setTextColor(Color.WHITE);
+        p3.setTextColor(Color.WHITE);
+        p4.setTextColor(Color.WHITE);
+        i1.setColorFilter(Color.WHITE);
+        i2.setColorFilter(Color.WHITE);
+        i3.setColorFilter(Color.WHITE);
+        i4.setColorFilter(Color.WHITE);
+    }
+
+    private void setWeatherDialogDarkMode(){
+        w.setTextColor(Color.WHITE);
+        w1.setTextColor(Color.WHITE);
+        w2.setTextColor(Color.WHITE);
+        w3.setTextColor(Color.WHITE);
+        w4.setTextColor(Color.WHITE);
+        g1.setTextColor(Color.WHITE);
+        g2.setTextColor(Color.WHITE);
+        g3.setTextColor(Color.WHITE);
+        g4.setTextColor(Color.WHITE);
+        f1.setColorFilter(Color.WHITE);
+        f2.setColorFilter(Color.WHITE);
+        f3.setColorFilter(Color.WHITE);
+        f4.setColorFilter(Color.WHITE);
     }
 }

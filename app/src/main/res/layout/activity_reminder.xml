@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,8 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/t1"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/dark_purple"
             android:layout_marginLeft="10dp"
             android:text="Set reminder"/>
 
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/dark_purple"
+            android:id="@+id/t2"
             android:layout_marginLeft="10dp"
             android:text="Reminder Time"/>
 
@@ -90,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/dark_purple"
+            android:id="@+id/t3"
             android:layout_marginLeft="10dp"
             android:text="Reminder Interval"/>
 
@@ -131,8 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reminder"
+            android:id="@+id/t4"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/dark_purple"
             android:layout_gravity="center_vertical"
             />
 
@@ -146,3 +147,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</layout>

@@ -75,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/left_arrow"
                     android:id="@+id/left_arrow"
+                    android:layout_gravity="center"
                     android:layout_marginRight="20dp" />
 
                 <TextView
@@ -88,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/right_arrow"
                     android:id="@+id/right_arrow"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="20dp" />
 
             </LinearLayout>
@@ -113,12 +115,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/graph">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardview"
+                        android:backgroundTint="@color/light_blue"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:backgroundTint="@color/light_blue"
-                        android:background="@drawable/cardcorner"
+                        style="@style/CustomCardCorners"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/last"
@@ -133,6 +135,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Drink Target"
+                                android:layout_marginLeft="7dp"
                                 android:textColor="@color/dark_purple"
                                 />
 
@@ -177,10 +180,10 @@
                                     >
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="Today"
-                                        android:layout_gravity="center"
+                                        android:gravity="center"
                                         android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:textSize="18dp"
@@ -259,7 +262,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Weekly Average"
-                                        android:layout_gravity="center"
+                                        android:singleLine="true"
+                                        android:gravity="center"
                                         android:textColor="@color/black"
                                         android:textStyle="bold"
                                         android:textSize="18dp"
@@ -324,7 +328,7 @@
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.example.waterdrink_weightloss.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
+import com.example.waterdrink_weightloss.databinding.ActivityReminderBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
 import java.text.ParseException;
@@ -53,6 +55,7 @@ public class ReminderActivity extends AppCompatActivity {
     int wakeupHour , wakeupMin ,  badHour , badMin , interval = 60 ;
     Drawable upArrow;
     List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
+    ActivityReminderBinding reminderBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class ReminderActivity extends AppCompatActivity {
         upArrow = getResources().getDrawable(R.drawable.arrow_back);
 
         PrefManager prefManager = new PrefManager(getApplicationContext());
+        reminderBinding = ActivityReminderBinding.inflate(getLayoutInflater());
         Paper.init(this);
 
         reminderSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
@@ -345,9 +349,18 @@ public class ReminderActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+        reminderBinding.t1.setTextColor(Color.WHITE);
+        reminderBinding.t2.setTextColor(Color.WHITE);
+        reminderBinding.t3.setTextColor(Color.WHITE);
+        reminderBinding.t4.setTextColor(Color.WHITE);
     }
 
     public void lightStatusBar(){
+//        reminderBinding.t1.setTextColor(getResources().getColor(R.color.black));
+//        reminderBinding.t2.setTextColor(Color.BLACK);
+//        reminderBinding.t3.setTextColor(Color.BLACK);
+//        reminderBinding.t4.setTextColor(Color.BLACK);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.TRANSPARENT);

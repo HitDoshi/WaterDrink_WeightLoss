@@ -52,7 +52,6 @@
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:backgroundTint="@color/water_color"
         android:text="Get Started"
         android:layout_marginBottom="40dp"

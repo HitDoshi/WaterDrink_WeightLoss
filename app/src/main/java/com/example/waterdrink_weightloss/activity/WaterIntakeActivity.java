@@ -49,7 +49,7 @@ public class WaterIntakeActivity extends AppCompatActivity
     SharedPreferences userDataSharedPreferences;
     Toolbar toolbar;
     TextView title;
-    ImageView bar1,bar2,bar3,bar4;
+    ImageView bar1,bar2,bar3,bar4,bell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class WaterIntakeActivity extends AppCompatActivity
         bar2 = findViewById(R.id.bar2);
         bar3 = findViewById(R.id.bar3);
         bar4 = findViewById(R.id.bar4);
+        bell = findViewById(R.id.bell);
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         if(userDataSharedPreferences.getBoolean("Theme",false)){
@@ -78,10 +79,10 @@ public class WaterIntakeActivity extends AppCompatActivity
             bar2.setColorFilter(Color.WHITE);
             bar3.setColorFilter(Color.WHITE);
             bar4.setColorFilter(Color.WHITE);
+            bell.setColorFilter(Color.WHITE);
             getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
         }
         else {
-
         }
 //            toolbar.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.black)));
             toolbar.getBackground().setAlpha(0);

@@ -59,4 +59,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //Paper DB
     implementation 'io.github.pilgr:paperdb:2.7.2'
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.google.android.material:material:1.0.0'
 }

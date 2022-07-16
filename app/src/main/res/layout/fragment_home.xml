@@ -22,17 +22,41 @@
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="30dp"
                 android:src="@drawable/tips_img" />
 
-            <TextView
-                android:id="@+id/tip_text"
+            <ImageView
+                android:id="@+id/polygone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:text="Start drinking first cup water"
-                android:textColor="@color/dark_purple" />
+                android:src="@drawable/polygon" />
+
+            <RelativeLayout
+                android:id="@+id/rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/polygone"
+                android:layout_gravity="center"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/rectangle"/>
+
+                <TextView
+                    android:id="@+id/tip_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerInParent="true"
+                    android:text="Start drinking first cup water"
+                    android:textColor="@color/dark_purple" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -117,6 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
+                android:textStyle="bold"
                 android:layout_below="@id/textview_progress"
                 android:layout_centerInParent="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -129,7 +154,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/dialog_linear3d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,9 +167,9 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/weather"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/cloud_sunny"
                 android:id="@+id/weather"
                 android:layout_marginRight="10dp"
                 android:layout_centerInParent="true"
@@ -161,14 +186,14 @@
                 />
 
             <ImageView
+                android:id="@+id/physical_activity"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_toRightOf="@+id/line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/physical_activity"
-                android:id="@+id/physical_activity"/>
+                android:src="@drawable/sedentary" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear4"
@@ -187,7 +212,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/bottal"
+                android:src="@drawable/bottel"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 />
 
             <TextView
@@ -207,6 +234,7 @@
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 >
 
@@ -220,20 +248,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/down_arrow"
+                    android:layout_marginTop="10dp"
                     />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardview"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue"
-            android:background="@drawable/cardcorner"
+            style="@style/CustomCardCorners"
             app:layout_constraintTop_toBottomOf="@+id/linear4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:cardBackgroundColor="@color/light_blue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="20dp">
@@ -246,7 +275,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:text="Today's Reminder"
                     android:textStyle="bold"
@@ -272,7 +301,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-       </androidx.cardview.widget.CardView>
+       </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

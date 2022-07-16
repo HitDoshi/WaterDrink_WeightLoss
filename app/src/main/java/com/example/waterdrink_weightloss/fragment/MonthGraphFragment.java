@@ -136,6 +136,12 @@ public class MonthGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        if(theme){
+            MonthReportFragmentBinding.leftArrow.setColorFilter(Color.WHITE);
+            MonthReportFragmentBinding.rightArrow.setColorFilter(Color.WHITE);
+        }
+
         MonthReportFragmentBinding.leftArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -287,6 +293,10 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.graph.animateY(1500);
             MonthReportFragmentBinding.graph.setPinchZoom(false);
             MonthReportFragmentBinding.graph.setScaleEnabled(false);
+            MonthReportFragmentBinding.graph.getAxisRight().setEnabled(false);
+            MonthReportFragmentBinding.graph.getAxisLeft().setStartAtZero(true);
+            MonthReportFragmentBinding.graph.getDescription().setEnabled(false);
+            MonthReportFragmentBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
             if(sharedPreferences.getBoolean("Theme",false)){
                 MonthReportFragmentBinding.graph.getXAxis().setTextColor(Color.WHITE);
@@ -372,4 +382,14 @@ public class MonthGraphFragment extends Fragment {
         MonthReportFragmentBinding.calendarRecyclerView.setLayoutManager(layoutManager);
         MonthReportFragmentBinding.calendarRecyclerView.setAdapter(calendarAdapter);
     }
+
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        Fragment fragment1 =new HomeFragment();
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragment_container,fragment1);
+//        fragmentTransaction.commit();
+//    }
 }

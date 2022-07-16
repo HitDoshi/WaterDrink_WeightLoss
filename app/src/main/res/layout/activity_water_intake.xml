@@ -75,6 +75,14 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bell_0n"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"/>
+
     </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout

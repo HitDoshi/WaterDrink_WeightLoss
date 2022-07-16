@@ -1,6 +1,7 @@
 package com.example.waterdrink_weightloss.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
 import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
 import com.example.waterdrink_weightloss.databinding.FragmentYearGraphBinding;
@@ -161,6 +163,12 @@ public class YearGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        if(theme){
+            fragmentYearGraphBinding.leftArrow.setColorFilter(Color.WHITE);
+            fragmentYearGraphBinding.rightArrow.setColorFilter(Color.WHITE);
+        }
+
         fragmentYearGraphBinding.graph.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
 
         fragmentYearGraphBinding.leftArrow.setOnClickListener(new View.OnClickListener() {
@@ -296,6 +304,9 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.graph.setPinchZoom(false);
             fragmentYearGraphBinding.graph.setScaleEnabled(false);
             fragmentYearGraphBinding.graph.getAxisRight().setEnabled(false);
+            fragmentYearGraphBinding.graph.getAxisLeft().setStartAtZero(true);
+            fragmentYearGraphBinding.graph.getDescription().setEnabled(false);
+            fragmentYearGraphBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
             if(sharedPreferences.getBoolean("Theme",false)){
                 fragmentYearGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);

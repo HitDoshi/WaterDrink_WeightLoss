@@ -23,12 +23,14 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.databinding.ActivitySettingBinding;
 import com.example.waterdrink_weightloss.fragment.GenderFragment;
 
 public class SettingActivity extends AppCompatActivity {
 
     TextView gender , weight , wake_up_time , bed_time , goal;
     SharedPreferences userDataSharedPreferences;
+    ActivitySettingBinding settingBinding;
     SharedPreferences themeSharedPref;
     SwitchCompat theme , tips;
     Drawable upArrow;
@@ -46,6 +48,8 @@ public class SettingActivity extends AppCompatActivity {
         upArrow = getResources().getDrawable(R.drawable.arrow_back);
 
         //getWindow().setStatusBarColor(Color.TRANSPARENT);
+
+        settingBinding = ActivitySettingBinding.inflate(getLayoutInflater());
 
         PrefManager prefManager = new PrefManager(getApplicationContext());
 
@@ -161,6 +165,17 @@ public class SettingActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+        settingBinding.t1.setTextColor(Color.WHITE);
+        settingBinding.t2.setTextColor(Color.WHITE);
+        settingBinding.t3.setTextColor(Color.WHITE);
+        settingBinding.t4.setTextColor(Color.WHITE);
+        settingBinding.t5.setTextColor(Color.WHITE);
+        settingBinding.t6.setTextColor(Color.WHITE);
+        settingBinding.t7.setTextColor(Color.WHITE);
+        settingBinding.t8.setTextColor(Color.WHITE);
+        settingBinding.personalDetailPart.setTextColor(Color.WHITE);
+        settingBinding.generalPart.setTextColor(Color.WHITE);
     }
 
     public void lightStatusBar(){
@@ -172,5 +187,16 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(text);
         upArrow.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+//        settingBinding.t1.setTextColor(Integer.parseInt(String.valueOf(R.color.black)));
+//        settingBinding.t2.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.t3.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.t4.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.t5.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.t6.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.t7.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.t8.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.personalDetailPart.setTextColor(getResources().getColor(R.color.dark_purple));
+//        settingBinding.generalPart.setTextColor(getResources().getColor(R.color.dark_purple));
     }
 }

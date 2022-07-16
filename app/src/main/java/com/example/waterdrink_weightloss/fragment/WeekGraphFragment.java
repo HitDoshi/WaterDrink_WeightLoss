@@ -125,6 +125,13 @@ public class WeekGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        if(theme){
+            fragmentWeekGraphBinding.leftArrow.setColorFilter(Color.WHITE);
+            fragmentWeekGraphBinding.rightArrow.setColorFilter(Color.WHITE);
+        }
+
+
         fragmentWeekGraphBinding.graph.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabel));
 
         fragmentWeekGraphBinding.month.setOnClickListener(new View.OnClickListener() {
@@ -337,6 +344,9 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.graph.animateY(1500);
             fragmentWeekGraphBinding.graph.setPinchZoom(false);
             fragmentWeekGraphBinding.graph.setScaleEnabled(false);
+            fragmentWeekGraphBinding.graph.getAxisLeft().setStartAtZero(true);
+            fragmentWeekGraphBinding.graph.getDescription().setEnabled(false);
+            fragmentWeekGraphBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
             if(sharedPreferences.getBoolean("Theme",false)){
                 fragmentWeekGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
@@ -402,4 +412,5 @@ public class WeekGraphFragment extends Fragment {
         fragmentWeekGraphBinding.calendarRecyclerView.setLayoutManager(layoutManager);
         fragmentWeekGraphBinding.calendarRecyclerView.setAdapter(calendarAdapter);
     }
+
 }

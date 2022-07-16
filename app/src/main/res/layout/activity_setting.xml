@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +16,7 @@
         android:layout_marginLeft="10dp"
         android:padding="10dp"
         android:text="Personal Information"
-        android:textColor="@color/dark_purple"
+        android:id="@+id/personal_detail_part"
         android:textStyle="bold"
         android:textSize="18dp" />
 
@@ -29,8 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gender"
+                android:id="@+id/t1"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/dark_purple"
                 />
 
             <TextView
@@ -55,9 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Weight"
+            android:id="@+id/t2"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/dark_purple"
-
             />
 
         <TextView
@@ -82,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wake-up time"
+            android:id="@+id/t3"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/dark_purple"
             />
 
         <TextView
@@ -109,8 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bedtime"
+            android:id="@+id/t4"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/dark_purple"
 
             />
 
@@ -139,8 +139,8 @@
         android:layout_marginLeft="10dp"
         android:padding="10dp"
         android:text="General"
+        android:id="@+id/general_part"
         android:textStyle="bold"
-        android:textColor="@color/dark_purple"
         android:textSize="18dp" />
 
     <LinearLayout
@@ -153,9 +153,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unit"
+            android:id="@+id/t5"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/dark_purple"
-
             />
 
         <TextView
@@ -180,9 +179,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Intake Goal"
+            android:id="@+id/t6"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/dark_purple"
-
             />
 
         <TextView
@@ -206,8 +204,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hide Tips"
+            android:id="@+id/t7"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/dark_purple"
             android:layout_marginLeft="20dp"
             />
 
@@ -230,8 +228,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Theme"
+            android:id="@+id/t8"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/dark_purple"
             android:layout_gravity="center_vertical"
             />
 
@@ -245,3 +243,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</layout>
