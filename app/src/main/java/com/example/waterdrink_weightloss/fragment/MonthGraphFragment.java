@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -382,14 +383,4 @@ public class MonthGraphFragment extends Fragment {
         MonthReportFragmentBinding.calendarRecyclerView.setLayoutManager(layoutManager);
         MonthReportFragmentBinding.calendarRecyclerView.setAdapter(calendarAdapter);
     }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        Fragment fragment1 =new HomeFragment();
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_container,fragment1);
-//        fragmentTransaction.commit();
-//    }
 }
