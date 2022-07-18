@@ -10,24 +10,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/spalsh_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/round_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrink_WeightLoss">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.ReminderActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:parentActivityName=".activity.WaterIntakeActivity"/>
+            android:parentActivityName=".activity.WaterIntakeActivity" />
         <activity
             android:name=".activity.ChangeUserInfoActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".activity.SettingActivity"
-            android:exported="false"
             android:configChanges="orientation|screenSize"
+            android:exported="false"
             android:parentActivityName=".activity.WaterIntakeActivity" />
         <activity
             android:name=".fragment.LoadingActivity"
@@ -36,8 +39,7 @@
         <activity
             android:name=".activity.WaterIntakeActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".activity.UserInformation"
             android:configChanges="orientation|screenSize"

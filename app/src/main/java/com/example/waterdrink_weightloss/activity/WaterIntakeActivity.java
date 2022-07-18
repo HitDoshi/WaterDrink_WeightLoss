@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -185,9 +186,17 @@ public class WaterIntakeActivity extends AppCompatActivity
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
-            finish();
+
+            if(getSupportFragmentManager().
+                    findFragmentById(R.id.fragment_container).getClass().getSimpleName().equals("HomeFragment"))
+            {
+                finishAffinity();
+            }
+            else{
+                Intent intent = new Intent(this, WaterIntakeActivity.class);
+                startActivity(intent);
+                finish();
+            }
             super.onBackPressed();
         }
     }

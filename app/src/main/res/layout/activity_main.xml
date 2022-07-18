@@ -40,6 +40,8 @@
         android:layout_width="308dp"
         android:layout_height="108dp"
         android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
         android:textColor="@color/dark_purple"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,8 +13,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.waterdrink_weightloss.R;
-
-import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,17 +26,20 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        start = findViewById(R.id.start);
-        PrefManager prefManager = new PrefManager(this);
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
 
-       if(userDataSharedPreferences.getBoolean("Theme",false)){
+        if(userDataSharedPreferences.getBoolean("Theme",false)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
+        //startActivity(new Intent(getApplicationContext(),SplashActivity.class));
+
+        start = findViewById(R.id.start);
+        PrefManager prefManager = new PrefManager(this);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override

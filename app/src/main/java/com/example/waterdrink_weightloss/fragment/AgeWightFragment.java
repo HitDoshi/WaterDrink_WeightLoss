@@ -2,6 +2,7 @@ package com.example.waterdrink_weightloss.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -133,6 +134,12 @@ public class AgeWightFragment extends Fragment {
         seekBar = view.findViewById(R.id.seekbar);
         editTarget = view.findViewById(R.id.targetSetEditText);
         setTarget = view.findViewById(R.id.target);
+
+        boolean darkTheme = userDataSharedPreferences.getBoolean("Theme",false);
+
+        if(darkTheme){
+            setTarget.setTextColor(Color.WHITE);
+        }
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
