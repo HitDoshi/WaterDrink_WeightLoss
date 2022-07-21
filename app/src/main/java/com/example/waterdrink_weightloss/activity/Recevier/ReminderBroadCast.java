@@ -33,14 +33,14 @@ public class ReminderBroadCast extends BroadcastReceiver {
         vibrator.vibrate(1000);
 
         //Toast.makeText(context, "Vibrate", Toast.LENGTH_SHORT).show();
-        Log.d("abcvibrate","Vibrate");
+        Log.d("Notification WakeUp","Vibrate");
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context,"Drink Water").setContentTitle("Water Drink Reminder")
                 .setSmallIcon(R.drawable.frontpage)
                 .setContentText("Let's Drink Some Water And Healthy Your Body")
-                .setDefaults(Notification.DEFAULT_SOUND)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         Intent intent1 = new Intent(context, WaterIntakeActivity.class);
         intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -51,8 +51,12 @@ public class ReminderBroadCast extends BroadcastReceiver {
         notificationManager.notify(200,builder.build());
 
         reminderListDataList = Paper.book().read("ReminderTimeList");
+
+        if(reminderListDataList!=null && reminderListDataList.size()!=0)
+        {
         reminderListDataList.remove(0);
         Paper.book().write("ReminderTimeList",reminderListDataList);
+        }
 
       /*  ReminderListAdapter reminderListAdapter = new ReminderListAdapter();
         reminderListAdapter.deleteFirstReminder();*/

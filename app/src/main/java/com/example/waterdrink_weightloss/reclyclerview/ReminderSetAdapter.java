@@ -30,7 +30,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapter.ViewHolder>{
+public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.ViewHolder>{
     private List<ReminderTime> listdata;
     List<ReminderListData> l;
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
@@ -39,12 +39,9 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
     List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
 
     // RecyclerView recyclerView;
-    public ReminderListAdapter(Activity activity , List<ReminderTime> listdata) {
+    public ReminderSetAdapter(Activity activity , List<ReminderTime> listdata) {
         this.listdata = listdata;
         this.activity = activity;
-    }
-
-    public ReminderListAdapter(){
     }
 
     @Override
@@ -92,14 +89,16 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
     @Override
     public int getItemCount() {
 
-//        return listdata.size();
+        //return listdata.size();
         if(listdata.size()>0)
-            return 1;
-        else {
-            activity.startActivity(new Intent(activity, SetReminderActivity.class));
-            return 0;
 
+        return listdata.size();
+
+        else {
+            activity.startActivity(new Intent(activity, WaterIntakeActivity.class));
+            return 0;
         }
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

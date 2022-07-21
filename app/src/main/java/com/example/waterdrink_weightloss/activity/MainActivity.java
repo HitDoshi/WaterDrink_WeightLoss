@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+        startActivity(intent);
+
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
 

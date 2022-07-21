@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.CalendarContract;
@@ -27,6 +28,7 @@ import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
+import com.example.waterdrink_weightloss.adapter.ProgressBarAdapter;
 import com.example.waterdrink_weightloss.databinding.FragmentWeekGraphBinding;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -378,7 +380,13 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.avgTextviewProgress.setText(temp+"%");
         else
             fragmentWeekGraphBinding.avgTextviewProgress.setText(100+"%");
-        total = 0;//important
+
+//        ProgressBarAdapter progressBarAdapter = new ProgressBarAdapter(getActivity(),temp);
+//        fragmentWeekGraphBinding.avgProgressBar.setHasFixedSize(true);
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+//        fragmentWeekGraphBinding.avgProgressBar.setLayoutManager(layoutManager);
+//        fragmentWeekGraphBinding.avgProgressBar.setAdapter(progressBarAdapter);
+//        total = 0;//important
 
         //progressbar();
         setWeeklyData();
@@ -386,6 +394,7 @@ public class WeekGraphFragment extends Fragment {
 
     private void getTodayRecord()
     {
+        int temp=0;
         Calendar calendar = Calendar.getInstance();
         ArrayList<DataModel> todayRecord = new ArrayList<>();
         todayRecord = dbHandler.readDataDateWise(calendar.get(Calendar.DAY_OF_MONTH),
@@ -394,7 +403,7 @@ public class WeekGraphFragment extends Fragment {
         if (todayRecord.size()!=0)
         {
             fragmentWeekGraphBinding.completedMlToday.setText(todayRecord.get(0).getAchievement()+"ml");
-            int temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (target_ml) * 100));
+            temp = ((int) (  ( (float) (int)(todayRecord.get(0).getAchievement())) / (float) (target_ml) * 100));
             fragmentWeekGraphBinding.progressBarToday.setProgress(temp);
             if (temp<99)
                 fragmentWeekGraphBinding.textviewProgressToday.setText(temp+"%");
@@ -407,6 +416,12 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.progressBarToday.setProgress(0);
             fragmentWeekGraphBinding.textviewProgressToday.setText("0%");
         }
+
+//        ProgressBarAdapter progressBarAdapter = new ProgressBarAdapter(getActivity(),temp);
+//        fragmentWeekGraphBinding.progressBarToday.setHasFixedSize(true);
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+//        fragmentWeekGraphBinding.progressBarToday.setLayoutManager(layoutManager);
+//        fragmentWeekGraphBinding.progressBarToday.setAdapter(progressBarAdapter);
     }
 
     private void setWeeklyData(){

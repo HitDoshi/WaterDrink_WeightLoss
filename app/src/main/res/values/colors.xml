@@ -11,5 +11,6 @@
     <color name="dark_purple">#00546F</color>
     <color name="light_blue">#C6F2FF</color>
     <color name="light_black">#1E1E1E</color>
-
+    <color name="endcolor">#096ACC</color>
+    <color name="starcolor">#28CBFF</color>
 </resources>

@@ -189,14 +189,14 @@
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         app:layout_constraintDimensionRatio="1">
 
                                         <ProgressBar
                                             android:id="@+id/progress_bar_today"
                                             style="@style/CircularDeterminateProgressBar"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="150dp"
                                             android:layout_centerInParent="true"
                                             android:background="@drawable/circle"
                                             android:indeterminateOnly="false"
@@ -227,7 +227,7 @@
                                 <ImageView
                                     android:id="@+id/img"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="230dp"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/linear_today"
@@ -276,7 +276,7 @@
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:id="@+id/r2"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
@@ -288,7 +288,7 @@
                                             android:id="@+id/avg_progress_bar"
                                             style="@style/CircularDeterminateProgressBar"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="150dp"
                                             android:layout_centerInParent="true"
                                             android:background="@drawable/circle"
                                             android:indeterminateOnly="false"

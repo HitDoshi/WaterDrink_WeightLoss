@@ -74,6 +74,7 @@ public class WaterIntakeActivity extends AppCompatActivity
         bell = findViewById(R.id.bell);
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
         if(userDataSharedPreferences.getBoolean("Theme",false)){
             title.setTextColor(Color.WHITE);
             bar1.setColorFilter(Color.WHITE);
@@ -104,6 +105,19 @@ public class WaterIntakeActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        bell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(userDataSharedPreferences.getBoolean("ReminderOnOff",false)){
+                    bell.setImageResource(R.drawable.bell_off);
+                    userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
+                }else{
+                    bell.setImageResource(R.drawable.bell_on);
+                    userDataSharedPreferences.edit().putBoolean("ReminderOnOff",true).apply();
+                }
             }
         });
 
@@ -163,7 +177,7 @@ public class WaterIntakeActivity extends AppCompatActivity
 
             case R.id.reminder:
             {
-                startActivity(new Intent(this,ReminderActivity.class));
+                startActivity(new Intent(this,SetReminderActivity.class));
                 return true;
             }
 

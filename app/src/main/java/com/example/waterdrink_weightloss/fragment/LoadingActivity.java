@@ -2,6 +2,7 @@ package com.example.waterdrink_weightloss.fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -27,7 +28,7 @@ public class LoadingActivity extends AppCompatActivity {
 
         gifImageView = findViewById(R.id.gif);
 
-        gifImageView.setDrawingCacheBackgroundColor(Color.BLACK);
+        gifImageView.setBackgroundColor(Color.TRANSPARENT);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

@@ -101,6 +101,12 @@
             app:layout_constraintBottom_toTopOf="@+id/dialog_linear3d"
             app:layout_constraintStart_toStartOf="parent">
 
+            <!--
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img" />-->
+
             <ProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/CircularDeterminateProgressBar"
@@ -110,17 +116,13 @@
                 android:progress="0"
                 android:progressDrawable="@drawable/circle"
                 android:rotation="-90"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/relativelayout"
-                app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
+                app:layout_constraintVertical_bias="0.0"
                 tools:progress="10" />
-            <!--
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/img" />-->
 
             <TextView
                 android:id="@+id/textview_progress"
@@ -203,6 +205,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/linearlayout_shape"
@@ -212,9 +215,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/bottel"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:src="@drawable/water_glass"
                 />
 
             <TextView
@@ -265,7 +266,7 @@
             app:cardBackgroundColor="@color/light_blue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -290,7 +291,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:scrollbars="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

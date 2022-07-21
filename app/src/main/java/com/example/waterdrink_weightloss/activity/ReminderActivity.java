@@ -1,5 +1,6 @@
 package com.example.waterdrink_weightloss.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -24,6 +25,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,9 +36,12 @@ import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.databinding.ActivityReminderBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import io.paperdb.Paper;
@@ -56,6 +62,15 @@ public class ReminderActivity extends AppCompatActivity {
     Drawable upArrow;
     List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
     ActivityReminderBinding reminderBinding;
+    ImageView sound;
+    TextView set;
+
+    AlertDialog set_ReminderDialog;
+    AlertDialog.Builder builder;
+    View dialogView;
+    TextView ok,cancel,k;
+    NumberPicker hour,min;
+    Calendar h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +89,28 @@ public class ReminderActivity extends AppCompatActivity {
         reminderSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         interval = reminderSharedPreferences.getInt("Interval",60);
 
+        builder = new AlertDialog.Builder(this);//this -- important not write other
+        dialogView = getLayoutInflater().inflate(R.layout.set_reminder_dialog,null);
+        //Custom Dialog box add
+        builder.setView(dialogView);
+
+        set_ReminderDialog = builder.create();
+        set_ReminderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         reminder = findViewById(R.id.reminder);
         reminder_interval = findViewById(R.id.reminder_interval);
         edit_reminder = findViewById(R.id.edit_reminder);
         time = findViewById(R.id.time);
+        sound = findViewById(R.id.sound);
+        set = findViewById(R.id.set);
+        //dialog
+        k = dialogView.findViewById(R.id.t);
+        hour = dialogView.findViewById(R.id.hour);
+        min = dialogView.findViewById(R.id.minute);
+        ok = dialogView.findViewById(R.id.ok);
+        cancel = dialogView.findViewById(R.id.cancel);
+
+        h = Calendar.getInstance();
 
         reminder_interval.setText(interval+"");
 
@@ -89,6 +122,24 @@ public class ReminderActivity extends AppCompatActivity {
             darkStatusBar();
         }else{
             lightStatusBar();
+        }
+
+        hour.setMinValue(0);
+        hour.setMaxValue(23);
+        hour.setValue(h.get(Calendar.HOUR_OF_DAY));
+
+        min.setMinValue(0);
+        min.setMaxValue(59);
+        min.setValue(h.get(Calendar.MINUTE));
+
+        boolean theme = reminderSharedPreferences.getBoolean("Theme",false);
+
+        if(theme){
+            dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
+            k.setTextColor(Color.WHITE);
+            //setWeatherDialogDarkMode();
+        }else{
+            dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
         }
 
         reminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -131,6 +182,65 @@ public class ReminderActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        sound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(reminderSharedPreferences.getBoolean("Sound",true)){
+                    sound.setImageResource(R.drawable.sound_off);
+                    reminderSharedPreferences.edit().putBoolean("Sound",false).apply();
+                }else{
+                    sound.setImageResource(R.drawable.sound_on);
+                    reminderSharedPreferences.edit().putBoolean("Sound",true).apply();
+                }
+            }
+        });
+
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                set_ReminderDialog.show();
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                set_ReminderDialog.dismiss();
+
+                reminderTime.clear();
+                pendingIntentArrayList.clear();
+                reminderTime = Paper.book().read("ReminderTimeList");
+                if(reminderTime!=null) {
+                    temp = reminderTime.size()+1;
+                }
+                else{
+                    reminderTime = new ArrayList<ReminderTime>();
+                }
+                Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), temp, intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
+                //for repeting
+                AlarmManager alarmManager = (AlarmManager) getApplicationContext().
+                        getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,( (hour.getValue()*60*60*1000) + (min.getValue()*60*1000) )
+                        , pendingIntent);
+                //Log.d("Time", calendar.getTimeInMillis() + "");
+                pendingIntentArrayList.add(pendingIntent);
+                
+                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent));
+
+                Paper.book().write("ReminderTimeList", reminderTime);
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                set_ReminderDialog.dismiss();
             }
         });
     }
@@ -241,6 +351,21 @@ public class ReminderActivity extends AppCompatActivity {
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
                 reminderTime.add(new ReminderTime(i,j,intent));
+
+                Collections.sort(reminderTime, new Comparator<ReminderTime>() {
+                    @Override
+                    public int compare(ReminderTime reminderTime, ReminderTime t) {
+                        return Integer.compare(reminderTime.getMin(), t.getMin());
+                    }
+                });
+
+                Collections.sort(reminderTime, new Comparator<ReminderTime>() {
+                    @Override
+                    public int compare(ReminderTime reminderTime, ReminderTime t) {
+                        return Integer.compare(reminderTime.getHour(), t.getHour());
+                    }
+                });
+
                 a.add("abc");
                 temp++;
                 Log.d("set ",temp+"");
@@ -354,6 +479,7 @@ public class ReminderActivity extends AppCompatActivity {
         reminderBinding.t2.setTextColor(Color.WHITE);
         reminderBinding.t3.setTextColor(Color.WHITE);
         reminderBinding.t4.setTextColor(Color.WHITE);
+        reminderBinding.t5.setTextColor(Color.WHITE);
     }
 
     public void lightStatusBar(){

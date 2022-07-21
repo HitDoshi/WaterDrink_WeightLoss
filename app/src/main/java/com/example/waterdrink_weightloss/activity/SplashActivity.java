@@ -21,17 +21,18 @@ public class SplashActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        startActivity(new Intent(getApplicationContext(),SplashActivity.class));
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        final Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-
-                finish();
+                //buttons[inew][jnew].setBackgroundColor(Color.BLACK);
+                a();
             }
         }, 2000);
 
-
+    }
+    public void a() {
+        this.finish();
     }
 }

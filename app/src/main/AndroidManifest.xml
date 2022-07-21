@@ -16,38 +16,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrink_WeightLoss">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.SetReminderActivity"
+            android:parentActivityName=".activity.WaterIntakeActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ReminderActivity"
-            android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:parentActivityName=".activity.WaterIntakeActivity" />
-        <activity
-            android:name=".activity.ChangeUserInfoActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:parentActivityName=".activity.WaterIntakeActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activity.SettingActivity"
-            android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:parentActivityName=".activity.WaterIntakeActivity" />
+            android:parentActivityName=".activity.WaterIntakeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".fragment.LoadingActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.WaterIntakeActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.UserInformation"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
