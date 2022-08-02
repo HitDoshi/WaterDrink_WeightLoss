@@ -391,6 +391,10 @@ public class HomeFragment extends Fragment{
         fb.targetTextview.setText("Drink "+target_ml+" ml");
         percentage = ((int) (  ( (float) (total_ml)) / (float) (target_ml) * 100));
         fb.progressBar.setProgress(percentage);
+        if(percentage>50)
+        {
+            fb.tipText.setText("Hold the water in your mouth for a while before swallowing");
+        }
 //        if(percentage<100)
             fb.textviewProgress.setText(percentage + " %");
 //        else

@@ -34,7 +34,7 @@ public class SettingActivity extends AppCompatActivity {
     SharedPreferences themeSharedPref;
     SwitchCompat theme , tips;
     Drawable upArrow;
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

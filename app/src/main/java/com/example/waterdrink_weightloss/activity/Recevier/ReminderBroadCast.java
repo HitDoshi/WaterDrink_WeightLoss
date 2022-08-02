@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.Log;
 
@@ -27,10 +28,15 @@ public class ReminderBroadCast extends BroadcastReceiver {
 
         List<ReminderListData> reminderListDataList = new ArrayList<>();
         Paper.init(context);
+        SharedPreferences userDataSharedPreferences;
 
-        Vibrator vibrator = (Vibrator) context
-                .getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(1000);
+        userDataSharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+    
+        if(userDataSharedPreferences.getBoolean("ReminderOnOff",true)) {
+            Vibrator vibrator = (Vibrator) context
+                    .getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1000);
+        }
 
         //Toast.makeText(context, "Vibrate", Toast.LENGTH_SHORT).show();
         Log.d("Notification WakeUp","Vibrate");

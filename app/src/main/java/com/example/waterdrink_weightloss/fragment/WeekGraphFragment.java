@@ -265,6 +265,7 @@ public class WeekGraphFragment extends Fragment {
         int size=7;
         Log.d("DaysOfMonth",size+"");
         j=1;
+        total = 0;
         arrayList.clear();
         arrayList = dbHandler.readDataWeekWise(day1,month1+1,year1,day7,month7+1,year7);
         Log.d("size",arrayList.size()+"");
@@ -375,6 +376,7 @@ public class WeekGraphFragment extends Fragment {
 
         fragmentWeekGraphBinding.completedMl.setText(total/size+"ml");
         int temp = ((int) (  ( (float) (int)(total/size)) / (float) (target_ml) * 100));
+        Log.d("WeekData",temp+"");
         fragmentWeekGraphBinding.avgProgressBar.setProgress(temp);
         if (temp<99)
             fragmentWeekGraphBinding.avgTextviewProgress.setText(temp+"%");

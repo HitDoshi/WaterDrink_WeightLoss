@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
+        userDataSharedPreferences.edit().putBoolean("ReminderOnOff",true).apply();
 
         if(userDataSharedPreferences.getBoolean("Theme",false)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

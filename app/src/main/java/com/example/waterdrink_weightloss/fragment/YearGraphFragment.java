@@ -219,6 +219,8 @@ public class YearGraphFragment extends Fragment {
 
         Log.d("DaysOfMonth",size+"");
         j=1;
+        sum=0;//important
+
         arrayList.clear();
         arrayList = dbHandler.readDataYearWise(year);
         Log.d("size",arrayList.size()+"");
@@ -333,7 +335,6 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.avgTextviewProgress.setText(temp+"%");
         else
             fragmentYearGraphBinding.avgTextviewProgress.setText(100+"%");
-        sum=0;//important
 
         setMYearlyData();
         //progressbar();

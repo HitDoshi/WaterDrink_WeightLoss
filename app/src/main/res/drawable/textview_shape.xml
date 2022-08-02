@@ -1,6 +1,6 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle"   >
+    android:shape="rectangle">
 
     <solid
         android:color="@color/water_color" >
@@ -10,7 +10,7 @@
         android:left="13dp"
         android:top="5dp"
         android:right="13dp"
-        android:bottom="5dp"    >
+        android:bottom="5dp" >
     </padding>
 
     <corners

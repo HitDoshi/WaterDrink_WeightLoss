@@ -79,7 +79,7 @@
             android:id="@+id/bell"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:src="@drawable/bell_off"
+            android:src="@drawable/bell_on"
             android:layout_gravity="end"
             android:layout_marginRight="10dp"/>
 

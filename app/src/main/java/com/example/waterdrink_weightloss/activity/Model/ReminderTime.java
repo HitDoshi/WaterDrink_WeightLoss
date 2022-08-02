@@ -7,7 +7,7 @@ import com.example.waterdrink_weightloss.activity.ReminderActivity;
 
 public class ReminderTime {
 
-    int hour , min;
+    int hour , min , temp;
     Intent pendingIntent;
 
     public int getHour() {
@@ -26,6 +26,14 @@ public class ReminderTime {
         this.min = min;
     }
 
+    public int getTemp() {
+        return temp;
+    }
+
+    public void setTemp(int temp) {
+        this.temp = temp;
+    }
+
     public Intent getPendingIntent() {
         return pendingIntent;
     }
@@ -34,10 +42,11 @@ public class ReminderTime {
         this.pendingIntent = pendingIntent;
     }
 
-    public ReminderTime(int hour , int min , Intent pendingIntent){
+    public ReminderTime(int hour , int min , Intent pendingIntent,int temp){
         this.hour = hour;
         this.min = min;
         this.pendingIntent = pendingIntent;
+        this.temp = temp;
     }
 }
 

@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -63,6 +64,7 @@ public class SetReminderActivity extends AppCompatActivity {
     TextView ok,cancel,k;
     NumberPicker hour,min;
     Calendar h,calendar;
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +128,6 @@ public class SetReminderActivity extends AppCompatActivity {
             dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
         }
 
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,10 +145,13 @@ public class SetReminderActivity extends AppCompatActivity {
                 pendingIntentArrayList.clear();
                 reminderTime = Paper.book().read("ReminderTimeList");
                 if(reminderTime!=null && reminderTime.size()!=0) {
-                    temp = reminderTime.size();
+                    temp = reminderSharedPreferences.getInt("Reminder",0);
+                    temp = temp + 1;
+                    Log.d("Temp",temp+"");
                 }
                 else{
                     reminderTime = new ArrayList<ReminderTime>();
+                    reminderSharedPreferences.edit().putInt("Reminder",temp).apply();
                 }
 
                 calendar.set(Calendar.HOUR_OF_DAY,hour.getValue());
@@ -165,7 +169,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
 
-                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent));
+                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp));
 
                 Collections.sort(reminderTime, new Comparator<ReminderTime>() {
                     @Override
@@ -188,7 +192,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 }
 
                 Paper.book().write("ReminderTimeList", reminderTime);
-
+                reminderSharedPreferences.edit().putInt("Reminder",temp).apply();
                 setRecylerView();
             }
         });

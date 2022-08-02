@@ -230,6 +230,8 @@ public class MonthGraphFragment extends Fragment {
 
         Log.d("DaysOfMonth",size+"");
         j=1;
+        total = 0;//important
+
         arrayList.clear();
         arrayList = dbHandler.readDataMonthWise(position+1,year);
         Log.d("size",arrayList.size()+"");
@@ -324,7 +326,6 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.avgTextviewProgress.setText(temp+"%");
         else
             MonthReportFragmentBinding.avgTextviewProgress.setText(100+"%");
-        total = 0;//important
 
         setMonthlyData();
         //progressbar();

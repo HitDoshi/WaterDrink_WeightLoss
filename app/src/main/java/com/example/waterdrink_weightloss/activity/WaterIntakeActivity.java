@@ -111,7 +111,7 @@ public class WaterIntakeActivity extends AppCompatActivity
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(userDataSharedPreferences.getBoolean("ReminderOnOff",false)){
+                if(userDataSharedPreferences.getBoolean("ReminderOnOff",true)){
                     bell.setImageResource(R.drawable.bell_off);
                     userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
                 }else{

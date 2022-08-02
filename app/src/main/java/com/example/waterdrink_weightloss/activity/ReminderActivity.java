@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -72,6 +73,7 @@ public class ReminderActivity extends AppCompatActivity {
     NumberPicker hour,min;
     Calendar h;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -231,7 +233,7 @@ public class ReminderActivity extends AppCompatActivity {
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
                 
-                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent));
+                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp));
 
                 Paper.book().write("ReminderTimeList", reminderTime);
             }
@@ -350,7 +352,7 @@ public class ReminderActivity extends AppCompatActivity {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
-                reminderTime.add(new ReminderTime(i,j,intent));
+                reminderTime.add(new ReminderTime(i,j,intent,temp));
 
                 Collections.sort(reminderTime, new Comparator<ReminderTime>() {
                     @Override
