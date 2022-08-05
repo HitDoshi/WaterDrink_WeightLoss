@@ -1,5 +1,6 @@
 package com.example.waterdrink_weightloss.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -34,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
     SharedPreferences themeSharedPref;
     SwitchCompat theme , tips;
     Drawable upArrow;
+    PrefManager prefManager;
     @SuppressLint({"DefaultLocale", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class SettingActivity extends AppCompatActivity {
 
         settingBinding = ActivitySettingBinding.inflate(getLayoutInflater());
 
-        PrefManager prefManager = new PrefManager(getApplicationContext());
+        prefManager = new PrefManager(getApplicationContext());
 
         gender = findViewById(R.id.gender);
         weight = findViewById(R.id.weight);
@@ -83,40 +86,35 @@ public class SettingActivity extends AppCompatActivity {
         gender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefManager.setFirstTimeLaunch(true);
-                startActivity(new Intent(getApplicationContext(), UserInformation.class));
+                userDataSet();
             }
         });
 
         weight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefManager.setFirstTimeLaunch(true);
-                startActivity(new Intent(getApplicationContext(), UserInformation.class));
+                userDataSet();
             }
         });
 
         wake_up_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefManager.setFirstTimeLaunch(true);
-                startActivity(new Intent(getApplicationContext(), UserInformation.class));
+                userDataSet();
             }
         });
 
         bed_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefManager.setFirstTimeLaunch(true);
-                startActivity(new Intent(getApplicationContext(), UserInformation.class));
+                userDataSet();
             }
         });
 
         goal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefManager.setFirstTimeLaunch(true);
-                startActivity(new Intent(getApplicationContext(), UserInformation.class));
+                userDataSet();
             }
         });
 
@@ -137,6 +135,8 @@ public class SettingActivity extends AppCompatActivity {
                 themeSharedPref.edit().putBoolean("Tips",isChecked).apply();
             }
         });
+
+
 
     }
 
@@ -188,6 +188,8 @@ public class SettingActivity extends AppCompatActivity {
         upArrow.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
+
+
 //        settingBinding.t1.setTextColor(Integer.parseInt(String.valueOf(R.color.black)));
 //        settingBinding.t2.setTextColor(getResources().getColor(R.color.dark_purple));
 //        settingBinding.t3.setTextColor(getResources().getColor(R.color.dark_purple));
@@ -198,5 +200,20 @@ public class SettingActivity extends AppCompatActivity {
 //        settingBinding.t8.setTextColor(getResources().getColor(R.color.dark_purple));
 //        settingBinding.personalDetailPart.setTextColor(getResources().getColor(R.color.dark_purple));
 //        settingBinding.generalPart.setTextColor(getResources().getColor(R.color.dark_purple));
+    }
+
+    private void userDataSet(){
+        prefManager.setFirstTimeLaunch(true);
+        startActivity(new Intent(getApplicationContext(), UserInformation.class));
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(getApplicationContext(), WaterIntakeActivity.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

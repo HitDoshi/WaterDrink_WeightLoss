@@ -27,9 +27,9 @@
         android:id="@+id/sedentary">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sedentary"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/p1"
             android:layout_marginLeft="20dp"
             android:id="@+id/i1"
             />
@@ -68,9 +68,9 @@
         android:id="@+id/lightly_activity">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sedentary"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/p2"
             android:id="@+id/i2"
             android:layout_marginLeft="20dp"
             />
@@ -110,9 +110,9 @@
         android:id="@+id/moderate_active">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sedentary"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/p3"
             android:id="@+id/i3"
             android:layout_marginLeft="20dp"
             />
@@ -152,10 +152,10 @@
         android:id="@+id/very_activity">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/i4"
-            android:src="@drawable/sedentary"
+            android:src="@drawable/p4"
             android:layout_marginLeft="20dp"
             />
 

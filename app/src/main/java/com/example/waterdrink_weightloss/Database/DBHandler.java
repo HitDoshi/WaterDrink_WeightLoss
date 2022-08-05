@@ -210,6 +210,55 @@ public class DBHandler extends SQLiteOpenHelper {
         return courseModalArrayList;
     }
 
+    // we have created a new method for reading the courses Week Wise .
+    public ArrayList<DataModel> readDataWeekWise(int day1 ,int month1 , int year1 ,
+                                                 int day7, int month7 , int year7) {
+        // on below line we are creating a
+        // database for reading our database.
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        // on below line we are creating a cursor with query to read data from database.
+
+        //This Condition for No data found write in graph ,if data not in specific date range
+        if(month1==month7)
+        {
+            cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE (day>=" + day1
+                    + " AND month=" + month1 + " AND year=" + year1 +")"
+                    + " AND (day<=" + day7 + " AND month=" + month7
+                    + " AND year=" + year7 + ")", null);
+        }
+        else{
+            cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE (day>=" + day1
+                    + " AND month=" + month1 + " AND year=" + year1 +")"
+                    + " OR (day<=" + day7 + " AND month=" + month7
+                    + " AND year=" + year7 + ")", null);
+        }
+
+        // on below line we are creating a new array list.
+        ArrayList<DataModel> courseModalArrayList = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (cursor.moveToFirst()) {
+            do {
+                // on below line we are adding the data from cursor to our array list.
+                courseModalArrayList.add(new DataModel(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getString(5)));
+                //Toast.makeText(context, cursor.getInt(1)+"", Toast.LENGTH_SHORT).show();
+            } while (cursor.moveToNext());
+            // moving our cursor to next.
+        }
+        // at last closing our cursor
+        // and returning our array list.
+        cursor.close();
+        //Log.d("read",courseModalArrayList.size()+"");
+        return courseModalArrayList;
+    }
+
     // we have created a new method for reading all the courses month and year wise.
     public ArrayList<DataModel> readDataMonthWise(int month,int year) {
         // on below line we are creating a
@@ -266,42 +315,6 @@ public class DBHandler extends SQLiteOpenHelper {
                         cursor.getInt(4),
                         cursor.getString(5)));
                 //Toast.makeText(context, cursor.getInt(4)+"", Toast.LENGTH_SHORT).show();
-            } while (cursor.moveToNext());
-            // moving our cursor to next.
-        }
-        // at last closing our cursor
-        // and returning our array list.
-        cursor.close();
-        //Log.d("read",courseModalArrayList.size()+"");
-        return courseModalArrayList;
-    }
-
-    // we have created a new method for reading the courses Week Wise .
-    public ArrayList<DataModel> readDataWeekWise(int day1 ,int month1 , int year1 ,
-                                                            int day7, int month7 , int year7) {
-        // on below line we are creating a
-        // database for reading our database.
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // on below line we are creating a cursor with query to read data from database.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE (day>=" + day1 + " AND month=" + month1 +
-                " AND year=" + year1 +")" + " OR (day<=" + day7 + " AND month=" + month7 +
-                " AND year=" + year7 + ")", null);
-
-        // on below line we are creating a new array list.
-        ArrayList<DataModel> courseModalArrayList = new ArrayList<>();
-
-        // moving our cursor to first position.
-        if (cursor.moveToFirst()) {
-            do {
-                // on below line we are adding the data from cursor to our array list.
-                courseModalArrayList.add(new DataModel(cursor.getInt(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2),
-                        cursor.getInt(3),
-                        cursor.getInt(4),
-                        cursor.getString(5)));
-                //Toast.makeText(context, cursor.getInt(1)+"", Toast.LENGTH_SHORT).show();
             } while (cursor.moveToNext());
             // moving our cursor to next.
         }

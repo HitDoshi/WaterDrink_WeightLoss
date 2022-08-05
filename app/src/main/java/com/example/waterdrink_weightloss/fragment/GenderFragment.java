@@ -1,9 +1,11 @@
 package com.example.waterdrink_weightloss.fragment;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -81,11 +83,11 @@ public class GenderFragment extends Fragment {
 
         if (!g.equals("-")) {
             if (g.equals("Male")){
-                male.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+                male.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.background_shape));
                 female.setBackgroundColor(0);
             }
             else {
-                female.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+                female.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.background_shape));
                 male.setBackgroundColor(0);
             }
         }
@@ -93,7 +95,8 @@ public class GenderFragment extends Fragment {
         male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                male.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+                male.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.background_shape));
+//                male.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
                 female.setBackgroundColor(0);
                 userDataSharedPreferences.edit().putString("gender","Male").apply();
             }
@@ -102,7 +105,8 @@ public class GenderFragment extends Fragment {
         female.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                female.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+//                female.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
+                female.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.background_shape));
                 male.setBackgroundColor(0);
                 userDataSharedPreferences.edit().putString("gender","Female").apply();
             }

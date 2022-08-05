@@ -10,6 +10,8 @@
         <item name="android:background">@color/white</item>
     </style>
 
+<!-- Theme and tips switch compact color-->
+
     <style name="SwitchCompatTheme" >
         <item name="colorControlActivated">@color/water_color</item>
     </style>
@@ -27,6 +29,8 @@
     <style name="CustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
     </style>
+
+<!-- home fragment bottom cardview corner -->
 
     <style name="ShapeAppearance_custom_corners" parent="">
         <item name="cornerFamily">rounded</item>

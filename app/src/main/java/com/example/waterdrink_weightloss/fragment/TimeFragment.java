@@ -143,6 +143,7 @@ public class TimeFragment extends Fragment {
                 prefManager.setFirstTimeLaunch(false);
                 Intent intent = new Intent(getContext(), LoadingActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
         return view;

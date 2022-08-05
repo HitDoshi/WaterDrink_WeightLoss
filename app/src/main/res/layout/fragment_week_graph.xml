@@ -35,22 +35,28 @@
                     android:text="Week"
                     android:id="@+id/week"
                     android:gravity="center"
+                    android:elevation="5dp"
+                    android:translationZ="5dp"
                     android:background="@drawable/textview_shape"
                     android:layout_marginRight="20dp" />
 
                 <TextView
                     android:id="@+id/month"
+                    android:elevation="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/textview_shape"
                     android:gravity="center"
+                    android:translationZ="5dp"
                     android:text="Month" />
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:elevation="5dp"
                     android:layout_height="wrap_content"
                     android:text="Year"
+                    android:translationZ="5dp"
                     android:id="@+id/year"
                     android:gravity="center"
                     android:background="@drawable/textview_shape" />

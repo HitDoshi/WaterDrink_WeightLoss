@@ -4,18 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable-v24/dialog_shape.xml" value="0.1315" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable-v24/light_dialog_shape.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/arrow_back.xml" value="0.1185" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/background_shape.xml" value="0.1155" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/border_color.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/cardcorner.xml" value="0.1" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/circle.xml" value="0.1315" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/dark_dialog_shape.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/default_dot.xml" value="0.1315" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/feedback.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/history.xml" value="0.1185" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/left_arrow.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/linearlayout_shape.xml" value="0.1315" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/physical_activity_dialog.xml" value="0.1315" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/rate.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/reminder.xml" value="0.1185" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/report.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/right_arrow.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/selected_dot.xml" value="0.1315" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/settings.xml" value="0.1185" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/share.xml" value="0.1155" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/tab_selector.xml" value="0.1315" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/textview_shape.xml" value="0.1315" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/drawable/thumb.xml" value="0.1" />
@@ -24,6 +32,7 @@
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout-v26/fragment_intack_goal.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/activity_age_weight.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/activity_change_user_info.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/activity_exit.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/activity_fragment.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/activity_gender.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/activity_loding.xml" value="0.11145833333333334" />
@@ -41,7 +50,7 @@
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_cup_size.xml" value="0.14" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_drink_report.xml" value="0.12" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_gender.xml" value="0.12552083333333333" />
-        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_home.xml" value="0.14" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_intack_goal.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_intake_goal.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_month_graph.xml" value="0.12552083333333333" />

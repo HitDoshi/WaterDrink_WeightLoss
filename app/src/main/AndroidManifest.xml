@@ -16,10 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrink_WeightLoss">
         <activity
-            android:name=".activity.SetReminderActivity"
-            android:parentActivityName=".activity.WaterIntakeActivity"
-            android:screenOrientation="portrait"
+            android:name=".activity.ExitActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.SetReminderActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.WaterIntakeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashActivity"
             android:exported="false"
@@ -29,10 +32,10 @@
             android:exported="false"
             android:parentActivityName=".activity.WaterIntakeActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activity.SettingActivity"
             android:exported="false"
+            android:noHistory="true"
             android:parentActivityName=".activity.WaterIntakeActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -42,6 +45,7 @@
         <activity
             android:name=".activity.WaterIntakeActivity"
             android:exported="false"
+            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.UserInformation"

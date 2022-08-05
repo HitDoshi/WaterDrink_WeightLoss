@@ -95,13 +95,6 @@ public class SetReminderActivity extends AppCompatActivity {
 
         h = Calendar.getInstance();
         calendar = Calendar.getInstance();
-        hour.setMinValue(0);
-        hour.setMaxValue(23);
-        hour.setValue(h.get(Calendar.HOUR_OF_DAY));
-
-        min.setMinValue(0);
-        min.setMaxValue(59);
-        min.setValue(h.get(Calendar.MINUTE));
 
         if(reminderSharedPreferences.getBoolean("Theme",false)){
             darkStatusBar();
@@ -131,6 +124,15 @@ public class SetReminderActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                h = Calendar.getInstance();
+                hour.setMinValue(h.get(Calendar.HOUR_OF_DAY));
+                hour.setMaxValue(23);
+                hour.setValue(h.get(Calendar.HOUR_OF_DAY));
+
+                min.setMinValue(h.get(Calendar.MINUTE));
+                min.setMaxValue(59);
+                min.setValue(h.get(Calendar.MINUTE));
+
                 set_ReminderDialog.show();
             }
         });
@@ -233,5 +235,11 @@ public class SetReminderActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(text);
         upArrow.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }

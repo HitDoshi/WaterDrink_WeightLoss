@@ -77,4 +77,12 @@ public class UserInformation extends AppCompatActivity {
             }
         });*/
     }
+
+    @Override
+    public void onBackPressed() {
+        PrefManager prefManager = new PrefManager(getApplicationContext());
+        prefManager.setFirstTimeLaunch(false);
+        startActivity(new Intent(this,WaterIntakeActivity.class));
+        super.onBackPressed();
+    }
 }

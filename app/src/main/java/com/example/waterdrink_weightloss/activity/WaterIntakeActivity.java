@@ -76,6 +76,12 @@ public class WaterIntakeActivity extends AppCompatActivity
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         if(userDataSharedPreferences.getBoolean("Theme",false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+        if(userDataSharedPreferences.getBoolean("Theme",false)){
             title.setTextColor(Color.WHITE);
             bar1.setColorFilter(Color.WHITE);
             bar2.setColorFilter(Color.WHITE);
@@ -204,7 +210,8 @@ public class WaterIntakeActivity extends AppCompatActivity
             if(getSupportFragmentManager().
                     findFragmentById(R.id.fragment_container).getClass().getSimpleName().equals("HomeFragment"))
             {
-                finishAffinity();
+                //finishAffinity();
+                startActivity(new Intent(this,ExitActivity.class));
             }
             else{
                 Intent intent = new Intent(this, WaterIntakeActivity.class);
