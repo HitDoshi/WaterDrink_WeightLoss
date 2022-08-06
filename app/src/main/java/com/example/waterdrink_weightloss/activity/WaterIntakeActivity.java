@@ -75,13 +75,13 @@ public class WaterIntakeActivity extends AppCompatActivity
 
         userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
-        if(userDataSharedPreferences.getBoolean("Theme",false)){
+        if(userDataSharedPreferences.getBoolean("Theme",true)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        if(userDataSharedPreferences.getBoolean("Theme",false)){
+        if(userDataSharedPreferences.getBoolean("Theme",true)){
             title.setTextColor(Color.WHITE);
             bar1.setColorFilter(Color.WHITE);
             bar2.setColorFilter(Color.WHITE);

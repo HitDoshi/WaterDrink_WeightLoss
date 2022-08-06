@@ -67,17 +67,17 @@ public class SettingActivity extends AppCompatActivity {
         userDataSharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         themeSharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
 
-        gender.setText(userDataSharedPreferences.getString("gender","21"));
+        gender.setText(userDataSharedPreferences.getString("gender","Male"));
         weight.setText(userDataSharedPreferences.getString("weight","55") + "kg");
         wake_up_time.setText(String.format("%02d",userDataSharedPreferences.getInt("wake_up_hour",7)) + " : "+
                 String.format("%02d",userDataSharedPreferences.getInt("wake_up_min",0)) );
         bed_time.setText(String.format("%02d",userDataSharedPreferences.getInt("bed_hour",11)) + " : "+
                 String.format("%02d",userDataSharedPreferences.getInt("bed_min",0)) );
         goal.setText(userDataSharedPreferences.getInt("target_ml",1500)+ " ml");
-        theme.setChecked(themeSharedPref.getBoolean("Theme",false));
+        theme.setChecked(themeSharedPref.getBoolean("Theme",true));
         tips.setChecked(themeSharedPref.getBoolean("Tips",false));
 
-        if(themeSharedPref.getBoolean("Theme",false)){
+        if(themeSharedPref.getBoolean("Theme",true)){
             darkStatusBar();
         }else{
             lightStatusBar();

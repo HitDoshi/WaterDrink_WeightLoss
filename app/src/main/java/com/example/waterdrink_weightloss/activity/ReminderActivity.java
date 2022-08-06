@@ -120,7 +120,7 @@ public class ReminderActivity extends AppCompatActivity {
             reminder.setChecked(true);
         }//Important.. Write this code before reminder Onclick CheckedChange Listener.
 
-        if(reminderSharedPreferences.getBoolean("Theme",false)){
+        if(reminderSharedPreferences.getBoolean("Theme",true)){
             darkStatusBar();
         }else{
             lightStatusBar();
@@ -134,7 +134,7 @@ public class ReminderActivity extends AppCompatActivity {
         min.setMaxValue(59);
         min.setValue(h.get(Calendar.MINUTE));
 
-        boolean theme = reminderSharedPreferences.getBoolean("Theme",false);
+        boolean theme = reminderSharedPreferences.getBoolean("Theme",true);
 
         if(theme){
             dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);

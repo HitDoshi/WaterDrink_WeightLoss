@@ -98,7 +98,7 @@ public class SetReminderActivity extends AppCompatActivity {
         h = Calendar.getInstance();
         calendar = Calendar.getInstance();
 
-        if(reminderSharedPreferences.getBoolean("Theme",false)){
+        if(reminderSharedPreferences.getBoolean("Theme",true)){
             darkStatusBar();
         }else{
             lightStatusBar();
@@ -113,7 +113,7 @@ public class SetReminderActivity extends AppCompatActivity {
             reminderTime = new ArrayList<ReminderTime>();
         }
 
-        boolean theme = reminderSharedPreferences.getBoolean("Theme",false);
+        boolean theme = reminderSharedPreferences.getBoolean("Theme",true);
 
         if(theme){
             dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);

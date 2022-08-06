@@ -191,7 +191,7 @@ public class HomeFragment extends Fragment{
         i3  = dialogView2.findViewById(R.id.i3);
         i4  = dialogView2.findViewById(R.id.i4);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        boolean theme = sharedPreferences.getBoolean("Theme",true);
 
         if(theme){
             dialogView1.setBackgroundResource(R.drawable.dark_dialog_shape);
@@ -204,50 +204,6 @@ public class HomeFragment extends Fragment{
             dialogView2.setBackgroundResource(R.drawable.light_dialog_shape);
         }
 
-    /*    binding.progressBar.setProgress(90);
-        binding.targetTextview.setText(String.valueOf(90));
-*/
-        /*weather.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                weather_alertDialog.show();
-            }
-        });
-
-        physical.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                physical_alertDialog.show();
-            }
-        });
-
-        weather_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                weather_alertDialog.dismiss();
-            }
-        });
-
-        weather_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                weather_alertDialog.dismiss();
-            }
-        });
-
-        physical_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                physical_alertDialog.dismiss();
-            }
-        });
-
-        physical_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                physical_alertDialog.dismiss();
-            }
-        });*/
         Log.d("HomeFragment","HomeFragment Call");
         return fb.getRoot();
     }
@@ -461,86 +417,7 @@ public class HomeFragment extends Fragment{
 
     void setReminder() throws ParseException {
 
-//        int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
-//        reminderListDataList.clear();
-///*
-//
-//        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-//        df.setTimeZone(TimeZone.getTimeZone("UTC"));
-//        Date d1 = df.parse("13:30:0"); //date 1
-//        Date d2 = df.parse("0:120:0"); // date 2
-//        long sum = d1.getTime() + d2.getTime();
-//*/
-///*
-//        String myTime = "12:42";
-//        SimpleDateFormat df1 = new SimpleDateFormat("HH:mm");
-//        Date d = df1.parse(myTime);
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(d);
-//        cal.add(Calendar.MINUTE, 2);
-//        String newTime = df1.format(cal.getTime());
-//
-//        Log.d("Time",newTime);*/
-//
-//        Calendar calendar = Calendar.getInstance();
-//        Calendar currentTime = Calendar.getInstance();
-//       /* SimpleDateFormat df = new SimpleDateFormat("HH");*/
-//        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-//        /*calendar.set(Calendar.HOUR_OF_DAY,wakeupHour);
-//        calendar.set(Calendar.MINUTE,wakeupMin);
-//        calendar.add(Calendar.MINUTE,interval);*/
-///*
-//
-//        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//
-//        Intent intent = new Intent(getActivity(), ExecutableServices.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-//
-//        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-//        //for repeting
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,
-//                interval*60*1000,pendingIntent );
-//*/
-//
-//      /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
-//        Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
-//
-//        int temp=0;
-//
-//        //Log.d("RealTime",calendar.getTimeInMillis()+"");
-//        while (i<badHour)
-//        {
-//            calendar.set(Calendar.HOUR_OF_DAY,i);
-//            calendar.set(Calendar.MINUTE,j);
-//            calendar.set(Calendar.SECOND,0);
-//            Log.d("Interval",interval+"");
-//            calendar.add(Calendar.MINUTE,interval);
-//            Log.d("Calender",calendar.get(Calendar.HOUR_OF_DAY)+" "+calendar.get(Calendar.MINUTE));
-//
-//            i = calendar.get(Calendar.HOUR_OF_DAY);
-//            j = calendar.get(Calendar.MINUTE);
-//            ReminderListData data = new ReminderListData();
-//            String first , second  ;
-//            first = String.format("%02d", i);
-//            second = String.format("%02d", j);
-//            data.setTime(first+":"+second);
-//            int x = i;
-//            if(System.currentTimeMillis()<calendar.getTimeInMillis()) {
-//                reminderListDataList.add(data);
-//            }
-//
-//           /* Intent intent = new Intent(getActivity(), ReminderBroadCast.class);
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), temp , intent, 0);
-//            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-//            //for repeting
-//            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-//            Log.d("Time",calendar.getTimeInMillis()+"");
-//            pendingIntentArrayList.add(pendingIntent);
-//            Log.d("Start",reminderListDataList.size()+"");
-//            temp++;*/
-//        }
-        reminderListDataList.clear();
+        reminderListDataList = new ArrayList<>();
         sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         reminderListDataList = Paper.book().read("ReminderTimeList");
 

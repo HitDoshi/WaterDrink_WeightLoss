@@ -130,7 +130,7 @@ public class WeekGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        boolean theme = sharedPreferences.getBoolean("Theme",true);
         if(theme){
             fragmentWeekGraphBinding.leftArrow.setColorFilter(Color.WHITE);
             fragmentWeekGraphBinding.rightArrow.setColorFilter(Color.WHITE);
@@ -354,7 +354,7 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.graph.getDescription().setEnabled(false);
             fragmentWeekGraphBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
-            if(sharedPreferences.getBoolean("Theme",false)){
+            if(sharedPreferences.getBoolean("Theme",true)){
                 fragmentWeekGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
                 fragmentWeekGraphBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
                 // setting text color.

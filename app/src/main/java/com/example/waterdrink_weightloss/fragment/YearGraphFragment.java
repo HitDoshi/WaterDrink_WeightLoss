@@ -163,7 +163,7 @@ public class YearGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        boolean theme = sharedPreferences.getBoolean("Theme",true);
         if(theme){
             fragmentYearGraphBinding.leftArrow.setColorFilter(Color.WHITE);
             fragmentYearGraphBinding.rightArrow.setColorFilter(Color.WHITE);
@@ -310,7 +310,7 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.graph.getDescription().setEnabled(false);
             fragmentYearGraphBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
-            if(sharedPreferences.getBoolean("Theme",false)){
+            if(sharedPreferences.getBoolean("Theme",true)){
                 fragmentYearGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
                 fragmentYearGraphBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
                 // setting text color.

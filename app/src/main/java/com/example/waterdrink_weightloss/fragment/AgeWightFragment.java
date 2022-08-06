@@ -135,7 +135,7 @@ public class AgeWightFragment extends Fragment {
         editTarget = view.findViewById(R.id.targetSetEditText);
         setTarget = view.findViewById(R.id.target);
 
-        boolean darkTheme = userDataSharedPreferences.getBoolean("Theme",false);
+        boolean darkTheme = userDataSharedPreferences.getBoolean("Theme",true);
 
         if(darkTheme){
             setTarget.setTextColor(Color.WHITE);

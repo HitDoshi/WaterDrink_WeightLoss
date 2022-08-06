@@ -137,7 +137,7 @@ public class MonthGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",false);
+        boolean theme = sharedPreferences.getBoolean("Theme",true);
         if(theme){
             MonthReportFragmentBinding.leftArrow.setColorFilter(Color.WHITE);
             MonthReportFragmentBinding.rightArrow.setColorFilter(Color.WHITE);
@@ -301,7 +301,7 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.graph.getDescription().setEnabled(false);
             MonthReportFragmentBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
-            if(sharedPreferences.getBoolean("Theme",false)){
+            if(sharedPreferences.getBoolean("Theme",true)){
                 MonthReportFragmentBinding.graph.getXAxis().setTextColor(Color.WHITE);
                 MonthReportFragmentBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
                 // setting text color.

@@ -79,7 +79,7 @@ public class GenderFragment extends Fragment {
         LinearLayout female = view.findViewById(R.id.female);
         //set = view.findViewById(R.id.set);
         userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String g = userDataSharedPreferences.getString("gender","-");
+        String g = userDataSharedPreferences.getString("gender","Male");
 
         if (!g.equals("-")) {
             if (g.equals("Male")){

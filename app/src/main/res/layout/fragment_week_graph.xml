@@ -35,13 +35,11 @@
                     android:text="Week"
                     android:id="@+id/week"
                     android:gravity="center"
-                    android:elevation="5dp"
                     android:background="@drawable/textview_shape"
                     android:layout_marginRight="20dp" />
 
                 <TextView
                     android:id="@+id/month"
-                    android:elevation="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
@@ -51,7 +49,6 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:elevation="5dp"
                     android:layout_height="wrap_content"
                     android:text="Year"
                     android:id="@+id/year"
