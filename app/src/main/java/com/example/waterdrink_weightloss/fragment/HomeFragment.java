@@ -305,29 +305,50 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        fb.linear4.setOnClickListener(new View.OnClickListener() {
+        fb.addGlassLinearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(target_ml!=0) {
-                    total_ml += CupSize;
+                setDrinkWaterData(CupSize);
+            }
+        });
 
-                    if (glass_add_record!=null) {
-                        glass_add_record += "," + String.valueOf(CupSize);
-                    }
-                    else {
-                        glass_add_record = String.valueOf(CupSize);
-                    }
-                    setCompletedData();
-                    dbHandler.updateData(id,day,month,year,total_ml,glass_add_record);
+        fb.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDrinkWaterData(1);
+            }
+        });
 
-                    Log.d("update",glass_add_record+"");
-                }
-                else
-                    Toast.makeText(getContext(), "Please Set Target", Toast.LENGTH_SHORT).show();
+        fb.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDrinkWaterData(-1);
             }
         });
 
         Log.d("onViewCreated","onViewCreated Home Fragment");
+    }
+
+    private void setDrinkWaterData(int drink) {
+        if(target_ml!=0) {
+
+            total_ml += drink;
+
+            /*if (glass_add_record!=null) {
+                glass_add_record += "," + String.valueOf(drink);
+            }
+            else {
+                glass_add_record = String.valueOf(drink);
+            }*/
+
+            setCompletedData();
+            dbHandler.updateData(id,day,month,year,total_ml,glass_add_record);
+
+            Log.d("update",glass_add_record+"");
+            Log.d("Glass",total_ml+"");
+        }
+        else
+            Toast.makeText(getContext(), "SET Water Drink Goal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -401,9 +422,11 @@ public class HomeFragment extends Fragment{
 //            fb.textviewProgress.setText(100 + " %");
         int remain = target_ml - total_ml;
         if (remain>0)
-            fb.rememberWaterText.setText(remain + " ml more");
+            fb.rememberWaterText.setText(remain + " ml Remain");
         else
             fb.rememberWaterText.setText("Completed");
+
+        fb.totalDrink.setText(total_ml +" ml Drink");
     }
 
     @Override

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if(userDataSharedPreferences.getBoolean("Theme",false)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else {
+            userDataSharedPreferences.edit().putBoolean("Theme",false).apply();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 

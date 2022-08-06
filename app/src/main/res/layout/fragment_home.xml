@@ -25,27 +25,18 @@
                 android:layout_marginLeft="30dp"
                 android:src="@drawable/tips_img" />
 
-            <ImageView
-                android:id="@+id/polygone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:src="@drawable/polygon" />
-
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/rectangle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/polygone"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 >
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/rectangle"/>
+                    android:src="@drawable/tip_box"/>
 
                 <TextView
                     android:id="@+id/tip_text"
@@ -115,6 +106,7 @@
                 android:layout_height="match_parent"
                 android:indeterminateOnly="false"
                 android:progress="0"
+                android:background="@drawable/round"
                 android:progressDrawable="@drawable/circle"
                 android:rotation="-90"
                 app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
@@ -123,8 +115,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/relativelayout"
                 app:layout_constraintVertical_bias="0.0"
-                tools:progress="10" />
-
+                tools:progress="0" />
 
                 <TextView
                     android:id="@+id/textview_progress"
@@ -135,50 +126,41 @@
                     android:textColor="@color/water_color"
                     android:textStyle="bold"
                     android:textSize="30dp"
-                    app:layout_constraintStart_toStartOf="@+id/progress_bar"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-                    app:layout_constraintTop_toTopOf="@+id/progress_bar"
-                    app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
+                    app:layout_constraintStart_toStartOf="@+id/relativelayout"
+                    app:layout_constraintEnd_toEndOf="@+id/relativelayout"
+                    app:layout_constraintTop_toTopOf="@+id/relativelayout"
+                    app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
                     tools:text="0%" />
 
                 <TextView
-                    android:id="@+id/remember_water_text"
+                    android:id="@+id/total_drink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
+                    android:layout_marginTop="5dp"
                     android:textStyle="bold"
-                    android:layout_below="@id/textview_progress"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/dark_purple"
                     app:layout_constraintStart_toStartOf="@+id/progress_bar"
                     app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                     app:layout_constraintTop_toTopOf="@+id/textview_progress"
-                    app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-                    tools:text="1250ml more" />
+                    app:layout_constraintBottom_toTopOf="@+id/remember_water_text"
+                    tools:text="0 ml Drink" />
 
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-                    app:layout_constraintTop_toTopOf="@+id/l"
-                    android:gravity="bottom|center"
-                    android:layout_marginTop="100dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:src="@drawable/refresh" />
-
-                    <TextView
+                <TextView
+                        android:id="@+id/remember_water_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="Water"
-                        android:textColor="@color/dark_green" />
-
-                </LinearLayout>-->
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:layout_below="@id/textview_progress"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="@color/dark_purple"
+                        app:layout_constraintStart_toStartOf="@+id/relativelayout"
+                        app:layout_constraintEnd_toEndOf="@+id/relativelayout"
+                        app:layout_constraintTop_toTopOf="@+id/textview_progress"
+                        app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
+                        tools:text="1250 ml remain" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -230,7 +212,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -238,22 +219,31 @@
             app:layout_constraintBottom_toTopOf="@+id/cardview"
             >
 
-            <ImageView
+            <LinearLayout
+                android:id="@+id/add_glass_linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:src="@drawable/water_glass"
                 />
 
             <TextView
                 android:id="@+id/add_glass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textStyle="bold"
                 android:textColor="@color/dark_purple"
                 android:text="300ml"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_marginRight="13dp"
                 />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -266,16 +256,19 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/up_arrow"
-                    />
+                    android:id="@+id/plus"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/plus" />
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/down_arrow"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/minus"
+                    android:layout_gravity="center"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/minus"
                     />
 
             </LinearLayout>

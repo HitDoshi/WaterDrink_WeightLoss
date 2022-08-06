@@ -136,8 +136,6 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void goInLightMode() {
@@ -187,19 +185,6 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(text);
         upArrow.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
-
-
-
-//        settingBinding.t1.setTextColor(Integer.parseInt(String.valueOf(R.color.black)));
-//        settingBinding.t2.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.t3.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.t4.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.t5.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.t6.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.t7.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.t8.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.personalDetailPart.setTextColor(getResources().getColor(R.color.dark_purple));
-//        settingBinding.generalPart.setTextColor(getResources().getColor(R.color.dark_purple));
     }
 
     private void userDataSet(){
