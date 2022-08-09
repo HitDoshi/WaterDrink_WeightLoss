@@ -53,7 +53,7 @@
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_cup_size.xml" value="0.14" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_drink_report.xml" value="0.12" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_gender.xml" value="0.12552083333333333" />
-        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_intack_goal.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_intake_goal.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/layout/fragment_month_graph.xml" value="0.12552083333333333" />
@@ -72,6 +72,7 @@
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/menu/appnavigation.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/menu/fragment_intack_goal.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/menu/option_menu.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/Admin/Documents/WaterDrink_WeightLoss/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1255" />
       </map>
     </option>
   </component>

@@ -5,12 +5,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -48,7 +50,7 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Setting");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        upArrow = getResources().getDrawable(R.drawable.arrow_back);
+        upArrow = this.getDrawable(R.drawable.arrow_back);
 
         //getWindow().setStatusBarColor(Color.TRANSPARENT);
 

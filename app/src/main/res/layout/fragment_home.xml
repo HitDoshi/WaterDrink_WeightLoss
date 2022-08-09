@@ -45,7 +45,7 @@
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="Start drinking first cup water"
+                    android:text="@string/tip1"
                     android:textColor="@color/dark_purple" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -93,11 +93,23 @@
             app:layout_constraintBottom_toTopOf="@+id/dialog_linear3d"
             app:layout_constraintStart_toStartOf="parent">
 
-            <!--
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/img" />-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round"
+                android:layout_margin="15dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="30dp"
+                android:background="@drawable/second_round"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="45dp"
+                android:background="@drawable/second_round"/>
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -106,7 +118,6 @@
                 android:layout_height="match_parent"
                 android:indeterminateOnly="false"
                 android:progress="0"
-                android:background="@drawable/round"
                 android:progressDrawable="@drawable/circle"
                 android:rotation="-90"
                 app:layout_constraintBottom_toBottomOf="@+id/relativelayout"
@@ -117,7 +128,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 tools:progress="0" />
 
-                <TextView
+            <TextView
                     android:id="@+id/textview_progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,7 +151,7 @@
                     android:layout_marginTop="5dp"
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/dark_purple"
+                    android:textColor="@color/light_blue"
                     app:layout_constraintStart_toStartOf="@+id/progress_bar"
                     app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                     app:layout_constraintTop_toTopOf="@+id/textview_progress"
@@ -155,7 +166,7 @@
                         android:textStyle="bold"
                         android:layout_below="@id/textview_progress"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textColor="@color/dark_purple"
+                        android:textColor="@color/light_blue"
                         app:layout_constraintStart_toStartOf="@+id/relativelayout"
                         app:layout_constraintEnd_toEndOf="@+id/relativelayout"
                         app:layout_constraintTop_toTopOf="@+id/textview_progress"

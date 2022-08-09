@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -150,18 +151,13 @@ public class WaterIntakeActivity extends AppCompatActivity
                 return true;
             }
 
-            case R.id.share_app:
+            case  R.id.cupSize:
             {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,getApplicationContext().getPackageName());
-                startActivity(intent);
-                break;
-            }
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
 
-            case R.id.rate_app:
-            {
-//                rateApp_Dialog.show();
+                ft.replace(R.id.fragment_container,new CupSizeFragment());
+                ft.commit();
                 return true;
             }
 
@@ -175,25 +171,64 @@ public class WaterIntakeActivity extends AppCompatActivity
                 return true;
             }
 
-            case R.id.setting:
-            {
-                startActivity(new Intent(this,SettingActivity.class));
-                return true;
-            }
-
             case R.id.reminder:
             {
                 startActivity(new Intent(this,SetReminderActivity.class));
                 return true;
             }
 
-            case  R.id.cupSize:
+            case R.id.setting:
             {
+                startActivity(new Intent(this,SettingActivity.class));
+                return true;
+            }
+
+            case R.id.share_app:
+            {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT,"http://play.google.com/store/apps/details?id=" + getPackageName() +
+                        "\n" + "This App Use For Water Drink Reminder \n " +
+                        "And also user see drink record Day,Month & Year Wise"
+                );
+                startActivity(intent);
+                break;
+            }
+
+            case R.id.rate_app:
+            {
+                userDataSharedPreferences.edit().putBoolean("RateApp",true).apply();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
 
-                ft.replace(R.id.fragment_container,new CupSizeFragment());
+                ft.replace(R.id.fragment_container,new HomeFragment());
                 ft.commit();
+                return true;
+            }
+
+            case R.id.feedback:
+            {
+                Intent feedbackEmail = new Intent(Intent.ACTION_SEND);
+
+                feedbackEmail.setType("text/email");
+                feedbackEmail.putExtra(Intent.EXTRA_EMAIL, new String[] {"hit1.quad@gmail.com"});
+                feedbackEmail.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                startActivity(Intent.createChooser(feedbackEmail, "Send Feedback:"));
+
+                return true;
+            }
+
+            case R.id.more_app:
+            {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/search?q=water+drink+reminder&c=apps") ));
+                return true;
+            }
+
+            case R.id.privacy_policy:
+            {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.freeprivacypolicy.com/live/921751a3-7807-40eb-9f1d-6ba5a221b22b") ));
                 return true;
             }
 
@@ -205,7 +240,8 @@ public class WaterIntakeActivity extends AppCompatActivity
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else {
 
             if(getSupportFragmentManager().
                     findFragmentById(R.id.fragment_container).getClass().getSimpleName().equals("HomeFragment"))

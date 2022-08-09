@@ -20,8 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
@@ -29,7 +31,6 @@ import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,6 +73,13 @@ public class HomeFragment extends Fragment{
     TextView p1,p2,p3,p4;
     LinearLayout sedentary , lightly , moderate , very ;
 
+    //rate dialog
+    AlertDialog rate_us_dialog ;
+    AlertDialog.Builder rate_dialog_builder;
+    View dialogView;
+    TextView later , rate_app;
+    RatingBar ratingBar;
+
     ImageView weather , physical;
     TextView weather_cancel , weather_ok ;
     TextView physical_cancel , physical_ok;
@@ -79,6 +87,7 @@ public class HomeFragment extends Fragment{
     List<ReminderTime> reminderListDataList = new ArrayList<>();
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     int wakeupHour , wakeupMin ,  badHour , badMin , interval=60 ;
+    boolean rate = false;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -116,7 +125,6 @@ public class HomeFragment extends Fragment{
         dialogView1 = getLayoutInflater().inflate(R.layout.weather_dialog,null);
         //Custom Dialog box add
         builder1.setView(dialogView1);
-
         weather_alertDialog = builder1.create();
         weather_alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -125,9 +133,17 @@ public class HomeFragment extends Fragment{
         dialogView2 = getLayoutInflater().inflate(R.layout.physical_activity_dialog,null);
         //Custom Dialog box add
         builder2.setView(dialogView2);
-
         physical_alertDialog = builder2.create();
         physical_alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //rate dialog
+        rate_dialog_builder = new AlertDialog.Builder(getContext());
+        dialogView = getLayoutInflater().inflate(R.layout.rate_app_dialog,null);
+        //Custom Dialog box add
+        rate_dialog_builder.setView(dialogView);
+        rate_us_dialog = rate_dialog_builder.create();
+        rate_us_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         dbHandler = new DBHandler(getContext());
 
     }
@@ -191,7 +207,13 @@ public class HomeFragment extends Fragment{
         i3  = dialogView2.findViewById(R.id.i3);
         i4  = dialogView2.findViewById(R.id.i4);
 
+        //rate_app Dialog
+        later = dialogView.findViewById(R.id.later);
+        rate_app = dialogView.findViewById(R.id.rate);
+        ratingBar = dialogView.findViewById(R.id.ratingBar);
+
         boolean theme = sharedPreferences.getBoolean("Theme",true);
+        rate = sharedPreferences.getBoolean("RateApp",false);
 
         if(theme){
             dialogView1.setBackgroundResource(R.drawable.dark_dialog_shape);
@@ -199,10 +221,41 @@ public class HomeFragment extends Fragment{
 
             dialogView2.setBackgroundResource(R.drawable.dark_dialog_shape);
             setPhysicalDialogDarkMode();
+
         }else{
             dialogView1.setBackgroundResource(R.drawable.light_dialog_shape);
             dialogView2.setBackgroundResource(R.drawable.light_dialog_shape);
+
+            fb.totalDrink.setTextColor(Integer.parseInt(String.valueOf(R.color.dark_blue)));
+            fb.rememberWaterText.setTextColor(Integer.parseInt(String.valueOf(R.color.dark_blue)));
         }
+
+        if(rate){
+            rate_us_dialog.setCancelable(false);
+            rate_us_dialog.show();
+
+            Log.d("Rate Dialog","Display");
+        }
+
+        later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sharedPreferences.edit().putBoolean("RateApp",false).commit();
+                rate = false;
+                rate_us_dialog.dismiss();
+            }
+        });
+
+        rate_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sharedPreferences.edit().putBoolean("RateApp",false).commit();
+                rate = false;
+                rate_us_dialog.dismiss();
+                Toast.makeText(getContext(), "Thank You For Rating", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), ratingBar.getRating() + "", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Log.d("HomeFragment","HomeFragment Call");
         return fb.getRoot();
@@ -368,10 +421,30 @@ public class HomeFragment extends Fragment{
         fb.targetTextview.setText("Drink "+target_ml+" ml");
         percentage = ((int) (  ( (float) (total_ml)) / (float) (target_ml) * 100));
         fb.progressBar.setProgress(percentage);
-        if(percentage>50)
+
+        if(percentage==0)
         {
-            fb.tipText.setText("Hold the water in your mouth for a while before swallowing");
+            fb.tipText.setText(R.string.tip1);
         }
+
+        if(percentage>0)
+        {
+            fb.tipText.setText(R.string.tip2);
+        }
+
+        if(percentage>40){
+            fb.tipText.setText(R.string.tip3);
+        }
+
+        if(percentage>=80){
+            fb.tipText.setText(R.string.tip4);
+        }
+
+        if(percentage>=100)
+        {
+            fb.tipText.setText(R.string.tip5);
+        }
+
 //        if(percentage<100)
             fb.textviewProgress.setText(percentage + " %");
 //        else

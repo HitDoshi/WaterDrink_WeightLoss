@@ -8,4 +8,11 @@
         of the navigation drawer-->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+
+    <string name="tip1">Start drinking first cup water</string>
+    <string name="tip2">Hold the water in your mouth for a while before swallowing</string>
+    <string name="tip3">Let\'s Drink Some Water And Healthy Body</string>
+    <string name="tip4">Let\'s Drink Water And Complete Today Target</string>
+    <string name="tip5">YAY! Target Complete</string>
+
 </resources>

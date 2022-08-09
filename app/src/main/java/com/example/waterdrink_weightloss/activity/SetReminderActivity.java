@@ -73,7 +73,7 @@ public class SetReminderActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getSupportActionBar().setTitle("Reminder");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        upArrow = getResources().getDrawable(R.drawable.arrow_back);
+        upArrow = this.getDrawable(R.drawable.arrow_back);
         setContentView(R.layout.activity_set_reminder);
         recyclerView = findViewById(R.id.setReminderRecylerView);
         floatingActionButton = findViewById(R.id.fab_AddReminder);

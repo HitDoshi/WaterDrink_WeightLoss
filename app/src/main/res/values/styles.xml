@@ -37,4 +37,5 @@
         <item name="cornerSizeTopLeft">20dp</item>
         <item name="cornerSizeTopRight">20dp</item>
     </style>
+
 </resources>
