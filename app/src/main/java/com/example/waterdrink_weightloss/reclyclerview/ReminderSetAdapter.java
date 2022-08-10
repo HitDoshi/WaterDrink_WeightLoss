@@ -65,7 +65,7 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         c.set(Calendar.HOUR,reminderListData.getHour());
         c.set(Calendar.MINUTE,reminderListData.getMin());
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
-                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
+                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(Calendar.AM_PM)==1?"PM":"AM"));
         sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
         boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(!theme)

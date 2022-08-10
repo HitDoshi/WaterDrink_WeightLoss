@@ -120,15 +120,8 @@ public class SetReminderActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                h = Calendar.getInstance();
-                hour.setMinValue(h.get(Calendar.HOUR_OF_DAY));
-                hour.setMaxValue(23);
-                hour.setValue(h.get(Calendar.HOUR_OF_DAY));
 
-                min.setMinValue(h.get(Calendar.MINUTE));
-                min.setMaxValue(59);
-                min.setValue(h.get(Calendar.MINUTE));
-
+                setData();
                 set_ReminderDialog.show();
             }
         });
@@ -245,5 +238,31 @@ public class SetReminderActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setData(){
+
+        h = Calendar.getInstance();
+        //hour.setMinValue(h.get(Calendar.HOUR_OF_DAY));
+        hour.setMaxValue(23);
+        hour.setValue(h.get(Calendar.HOUR_OF_DAY));
+
+        //min.setMinValue(h.get(Calendar.MINUTE));
+        min.setMaxValue(59);
+        min.setValue(h.get(Calendar.MINUTE));
+
+        hour.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+
+        min.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
     }
 }

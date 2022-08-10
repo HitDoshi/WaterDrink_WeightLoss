@@ -65,7 +65,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         c.set(Calendar.HOUR,reminderListData.getHour());
         c.set(Calendar.MINUTE,reminderListData.getMin());
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
-                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
+                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(Calendar.AM_PM)==1?"PM":"AM"));
 //        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
 
         /*holder.imageView.setImageResource(listdata[position].getImgId());*/

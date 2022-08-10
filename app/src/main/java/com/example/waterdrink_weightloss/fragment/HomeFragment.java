@@ -352,13 +352,6 @@ public class HomeFragment extends Fragment{
 
             total_ml += drink;
 
-            /*if (glass_add_record!=null) {
-                glass_add_record += "," + String.valueOf(drink);
-            }
-            else {
-                glass_add_record = String.valueOf(drink);
-            }*/
-
             setCompletedData();
             dbHandler.updateData(id,day,month,year,total_ml,glass_add_record);
 
@@ -382,7 +375,6 @@ public class HomeFragment extends Fragment{
         arrayList = dbHandler.readData();
 
         final Calendar calendar = Calendar.getInstance();
-        //Toast.makeText(this, arrayList.size()  + "", Toast.LENGTH_SHORT).show();
 
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH) + 1;
@@ -513,26 +505,27 @@ public class HomeFragment extends Fragment{
             reminder_layout = false;
         }
 
-        if(tips_layout && !reminder_layout){
-            // Gets linearlayout
-
-// Gets the layout params that will allow you to resize the layout
-            ViewGroup.LayoutParams params = fb.linear4.getLayoutParams();
-// Changes the height and width to the specified *pixels*
-            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            fb.linear4.setLayoutParams(params);
-            Log.d("Layout","Set");
-        }
-        else {
-            // Gets linearlayout
-
-// Gets the layout params that will allow you to resize the layout
-            ViewGroup.LayoutParams params = fb.linear4.getLayoutParams();
-// Changes the height and width to the specified *pixels*
-            params.height = 0;
-            fb.linear4.setLayoutParams(params);
-
-        }
+//        if(tips_layout && !reminder_layout){
+//            // Gets linearlayout
+//
+//// Gets the layout params that will allow you to resize the layout
+//            ViewGroup.LayoutParams params = fb.linear4.getLayoutParams();
+//// Changes the height and width to the specified *pixels*
+//            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//            fb.linear4.setLayoutParams(params);
+//
+//            Log.d("Layout","Set");
+//        }
+//        else {
+//            // Gets linearlayout
+//
+//// Gets the layout params that will allow you to resize the layout
+//            ViewGroup.LayoutParams params = fb.linear4.getLayoutParams();
+//// Changes the height and width to the specified *pixels*
+//            params.height = 0;
+//            fb.linear4.setLayoutParams(params);
+//
+//        }
         //Log.d("Cal",cal.getTime()+"");
     }
 

@@ -91,7 +91,7 @@
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintTop_toBottomOf="@+id/linear2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/dialog_linear3d"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_linear"
             app:layout_constraintVertical_weight="0.45"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -183,7 +183,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:id="@+id/dialog_linear3d"
+            android:id="@+id/dialog_linear"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintVertical_weight="0.05"
@@ -224,7 +224,7 @@
 
         <LinearLayout
             android:id="@+id/linear4"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_linear3d"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_linear"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:orientation="horizontal"
