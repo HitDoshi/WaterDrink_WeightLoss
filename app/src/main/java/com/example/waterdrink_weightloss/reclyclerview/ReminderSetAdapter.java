@@ -7,8 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +21,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
+import com.example.waterdrink_weightloss.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.ReminderActivity;
-import com.example.waterdrink_weightloss.activity.SetReminderActivity;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 
 import java.util.ArrayList;

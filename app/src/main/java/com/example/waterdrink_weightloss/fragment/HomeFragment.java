@@ -3,7 +3,6 @@ package com.example.waterdrink_weightloss.fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,20 +22,18 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
+import com.example.waterdrink_weightloss.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.ReminderTime;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.function.Predicate;
 
 import io.paperdb.Paper;
 

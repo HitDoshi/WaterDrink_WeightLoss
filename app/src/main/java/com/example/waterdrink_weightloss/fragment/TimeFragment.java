@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.PrefManager;
 
 /**

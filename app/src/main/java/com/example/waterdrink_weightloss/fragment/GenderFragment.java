@@ -1,6 +1,5 @@
 package com.example.waterdrink_weightloss.fragment;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,12 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.UserInformation;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 
 /**
  * A simple {@link Fragment} subclass.

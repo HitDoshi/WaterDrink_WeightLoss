@@ -1,4 +1,4 @@
-package com.example.waterdrink_weightloss.activity.Model;
+package com.example.waterdrink_weightloss.Model;
 
 import android.app.AlarmManager;
 import android.app.Application;
@@ -7,9 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
+import com.example.waterdrink_weightloss.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
 import java.text.ParseException;

@@ -1,7 +1,6 @@
 package com.example.waterdrink_weightloss.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -9,15 +8,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +22,14 @@ import android.view.ViewGroup;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
-import com.example.waterdrink_weightloss.adapter.ProgressBarAdapter;
 import com.example.waterdrink_weightloss.databinding.FragmentWeekGraphBinding;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
-import java.nio.file.Watchable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

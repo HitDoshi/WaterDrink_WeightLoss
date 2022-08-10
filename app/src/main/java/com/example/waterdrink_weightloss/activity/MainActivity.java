@@ -14,7 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 
 public class MainActivity extends AppCompatActivity {
 

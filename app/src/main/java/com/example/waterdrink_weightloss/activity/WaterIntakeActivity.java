@@ -17,12 +17,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,13 +28,11 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.fragment.CupSizeFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
 import com.example.waterdrink_weightloss.fragment.WeekGraphFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import io.paperdb.Paper;
 
 public class WaterIntakeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{

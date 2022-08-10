@@ -3,7 +3,6 @@ package com.example.waterdrink_weightloss.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,13 +11,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ReceiverCallNotAllowedException;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -29,13 +26,10 @@ import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
-import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
-import com.example.waterdrink_weightloss.databinding.ActivityReminderBinding;
-import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
+import com.example.waterdrink_weightloss.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.ReminderTime;
+import com.example.waterdrink_weightloss.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderSetAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,7 +39,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import io.paperdb.Paper;
 

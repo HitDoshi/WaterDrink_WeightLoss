@@ -1,9 +1,6 @@
-package com.example.waterdrink_weightloss.activity.Model;
+package com.example.waterdrink_weightloss.Model;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-
-import com.example.waterdrink_weightloss.activity.ReminderActivity;
 
 public class ReminderTime {
 

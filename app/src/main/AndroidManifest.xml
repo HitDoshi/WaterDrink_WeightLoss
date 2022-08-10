@@ -62,7 +62,7 @@
         </activity>
 
         <receiver
-            android:name=".activity.Recevier.ReminderBroadCast"
+            android:name=".Recevier.ReminderBroadCast"
             android:enabled="true"
             android:exported="true" />
     </application>

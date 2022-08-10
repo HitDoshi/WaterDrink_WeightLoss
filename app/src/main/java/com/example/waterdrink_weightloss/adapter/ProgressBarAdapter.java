@@ -10,15 +10,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.PluralsRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class ProgressBarAdapter extends RecyclerView.Adapter<ProgressBarAdapter.ViewHolder> {
 

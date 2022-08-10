@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -26,19 +25,17 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
-import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
+import com.example.waterdrink_weightloss.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.ReminderTime;
+import com.example.waterdrink_weightloss.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.databinding.ActivityReminderBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;

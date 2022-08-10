@@ -1,4 +1,4 @@
-package com.example.waterdrink_weightloss.activity.Recevier;
+package com.example.waterdrink_weightloss.Recevier;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 

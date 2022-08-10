@@ -1,33 +1,23 @@
 package com.example.waterdrink_weightloss.adapter;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.PluralsRes;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
-import com.example.waterdrink_weightloss.activity.Model.PrefKey;
-import com.example.waterdrink_weightloss.activity.PrefManager;
-import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
-import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
-import com.github.mikephil.charting.data.BarEntry;
+import com.example.waterdrink_weightloss.Model.PrefKey;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHolder> {
 
