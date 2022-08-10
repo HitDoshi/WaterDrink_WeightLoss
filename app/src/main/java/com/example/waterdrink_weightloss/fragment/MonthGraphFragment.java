@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.PluralsRes;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,6 +27,7 @@ import com.example.waterdrink_weightloss.BuildConfig;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
 
 import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
@@ -111,7 +113,7 @@ public class MonthGraphFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         dbHandler = new DBHandler(getContext());
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -137,7 +139,7 @@ public class MonthGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",true);
+        boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(theme){
             MonthReportFragmentBinding.leftArrow.setColorFilter(Color.WHITE);
             MonthReportFragmentBinding.rightArrow.setColorFilter(Color.WHITE);
@@ -207,7 +209,7 @@ public class MonthGraphFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        target_ml = sharedPreferences.getInt("target_ml", 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
         calendar = Calendar.getInstance();
         position = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -301,7 +303,7 @@ public class MonthGraphFragment extends Fragment {
             MonthReportFragmentBinding.graph.getDescription().setEnabled(false);
             MonthReportFragmentBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
-            if(sharedPreferences.getBoolean("Theme",true)){
+            if(sharedPreferences.getBoolean(PrefKey.Theme,true)){
                 MonthReportFragmentBinding.graph.getXAxis().setTextColor(Color.WHITE);
                 MonthReportFragmentBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
                 // setting text color.

@@ -14,11 +14,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 
 public class MainActivity extends AppCompatActivity {
 
     Button start ;
     SharedPreferences userDataSharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SplashActivity.class);
         startActivity(intent);
 
-        userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        userDataSharedPreferences.edit().putBoolean("ReminderOnOff",true).apply();
+        userDataSharedPreferences = getSharedPreferences(PrefKey.SharePrefName , Context.MODE_PRIVATE);
+        userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,true).apply();
 
-        if(userDataSharedPreferences.getBoolean("Theme",true)){
+        if(userDataSharedPreferences.getBoolean( PrefKey.Theme ,true)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else {
-            userDataSharedPreferences.edit().putBoolean("Theme",false).apply();
+            userDataSharedPreferences.edit().putBoolean(PrefKey.Theme,false).apply();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 

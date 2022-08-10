@@ -27,6 +27,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.databinding.ActivitySettingBinding;
 import com.example.waterdrink_weightloss.fragment.GenderFragment;
 
@@ -66,20 +67,20 @@ public class SettingActivity extends AppCompatActivity {
         goal = findViewById(R.id.goal);
         tips = findViewById(R.id.hide_tips);
 
-        userDataSharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
-        themeSharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        userDataSharedPreferences = getSharedPreferences(PrefKey.SharePrefName,MODE_PRIVATE);
+        themeSharedPref = getSharedPreferences(PrefKey.SharePrefName,MODE_PRIVATE);
 
-        gender.setText(userDataSharedPreferences.getString("gender","Male"));
-        weight.setText(userDataSharedPreferences.getString("weight","55") + "kg");
-        wake_up_time.setText(String.format("%02d",userDataSharedPreferences.getInt("wake_up_hour",7)) + " : "+
-                String.format("%02d",userDataSharedPreferences.getInt("wake_up_min",0)) );
-        bed_time.setText(String.format("%02d",userDataSharedPreferences.getInt("bed_hour",11)) + " : "+
-                String.format("%02d",userDataSharedPreferences.getInt("bed_min",0)) );
-        goal.setText(userDataSharedPreferences.getInt("target_ml",1500)+ " ml");
-        theme.setChecked(themeSharedPref.getBoolean("Theme",true));
-        tips.setChecked(themeSharedPref.getBoolean("Tips",false));
+        gender.setText(userDataSharedPreferences.getString(PrefKey.Gender,"Male"));
+        weight.setText(userDataSharedPreferences.getString(PrefKey.Weight,"55") + "kg");
+        wake_up_time.setText(String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Wake_up_Hour,7)) + " : "+
+                String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Wake_up_Min,0)) );
+        bed_time.setText(String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Bed_Hour,11)) + " : "+
+                String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Bed_Min,0)) );
+        goal.setText(userDataSharedPreferences.getInt(PrefKey.Target_ml,1500)+ " ml");
+        theme.setChecked(themeSharedPref.getBoolean(PrefKey.Theme,true));
+        tips.setChecked(themeSharedPref.getBoolean(PrefKey.Tips,false));
 
-        if(themeSharedPref.getBoolean("Theme",true)){
+        if(themeSharedPref.getBoolean(PrefKey.Theme,true)){
             darkStatusBar();
         }else{
             lightStatusBar();
@@ -134,7 +135,7 @@ public class SettingActivity extends AppCompatActivity {
         tips.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                themeSharedPref.edit().putBoolean("Tips",isChecked).apply();
+                themeSharedPref.edit().putBoolean(PrefKey.Tips,isChecked).apply();
             }
         });
 
@@ -142,13 +143,13 @@ public class SettingActivity extends AppCompatActivity {
 
     private void goInLightMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        themeSharedPref.edit().putBoolean("Theme",false).apply();
+        themeSharedPref.edit().putBoolean(PrefKey.Theme,false).apply();
         lightStatusBar();
     }
 
     private void goInDarkMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        themeSharedPref.edit().putBoolean("Theme",true).apply();
+        themeSharedPref.edit().putBoolean(PrefKey.Theme,true).apply();
         darkStatusBar();
     }
 

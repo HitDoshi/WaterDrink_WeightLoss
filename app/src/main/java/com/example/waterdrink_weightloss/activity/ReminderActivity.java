@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.databinding.ActivityReminderBinding;
@@ -88,8 +89,8 @@ public class ReminderActivity extends AppCompatActivity {
         reminderBinding = ActivityReminderBinding.inflate(getLayoutInflater());
         Paper.init(this);
 
-        reminderSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        interval = reminderSharedPreferences.getInt("Interval",60);
+        reminderSharedPreferences = getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
+        interval = reminderSharedPreferences.getInt(PrefKey.Interval,60);
 
         builder = new AlertDialog.Builder(this);//this -- important not write other
         dialogView = getLayoutInflater().inflate(R.layout.set_reminder_dialog,null);
@@ -116,11 +117,11 @@ public class ReminderActivity extends AppCompatActivity {
 
         reminder_interval.setText(interval+"");
 
-        if(reminderSharedPreferences.getBoolean("ReminderOnOff",false)){
+        if(reminderSharedPreferences.getBoolean(PrefKey.ReminderOnOff,false)){
             reminder.setChecked(true);
         }//Important.. Write this code before reminder Onclick CheckedChange Listener.
 
-        if(reminderSharedPreferences.getBoolean("Theme",true)){
+        if(reminderSharedPreferences.getBoolean(PrefKey.Theme,true)){
             darkStatusBar();
         }else{
             lightStatusBar();
@@ -134,7 +135,7 @@ public class ReminderActivity extends AppCompatActivity {
         min.setMaxValue(59);
         min.setValue(h.get(Calendar.MINUTE));
 
-        boolean theme = reminderSharedPreferences.getBoolean("Theme",true);
+        boolean theme = reminderSharedPreferences.getBoolean(PrefKey.Theme,true);
 
         if(theme){
             dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
@@ -190,12 +191,12 @@ public class ReminderActivity extends AppCompatActivity {
         sound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(reminderSharedPreferences.getBoolean("Sound",true)){
+                if(reminderSharedPreferences.getBoolean(PrefKey.Sound,true)){
                     sound.setImageResource(R.drawable.sound_off);
-                    reminderSharedPreferences.edit().putBoolean("Sound",false).apply();
+                    reminderSharedPreferences.edit().putBoolean(PrefKey.Sound,false).apply();
                 }else{
                     sound.setImageResource(R.drawable.sound_on);
-                    reminderSharedPreferences.edit().putBoolean("Sound",true).apply();
+                    reminderSharedPreferences.edit().putBoolean(PrefKey.Sound,true).apply();
                 }
             }
         });
@@ -403,26 +404,26 @@ public class ReminderActivity extends AppCompatActivity {
     }
 
     void setSharedPreference(){
-        reminderSharedPreferences.edit().putInt("Reminder",temp).apply();
-        reminderSharedPreferences.edit().putBoolean("ReminderOnOff",true).apply();
+        reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,temp).apply();
+        reminderSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,true).apply();
     }
 
     void getSharedPreference(){
-        temp = reminderSharedPreferences.getInt("Reminder",0);
-        reminderSharedPreferences.edit().putInt("Reminder",0).apply();
-        reminderSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
-        reminderSharedPreferences.getBoolean("ReminderOnOff",false);
+        temp = reminderSharedPreferences.getInt(PrefKey.Reminder_Count,0);
+        reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,0).apply();
+        reminderSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
+        reminderSharedPreferences.getBoolean(PrefKey.ReminderOnOff,false);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        wakeupHour = reminderSharedPreferences.getInt("wake_up_hour",7);
-        wakeupMin = reminderSharedPreferences.getInt("wake_up_min",0);
+        wakeupHour = reminderSharedPreferences.getInt(PrefKey.Wake_up_Hour,7);
+        wakeupMin = reminderSharedPreferences.getInt(PrefKey.Wake_up_Min,0);
 
-        badHour = reminderSharedPreferences.getInt("bed_hour",22);
-        badMin = reminderSharedPreferences.getInt("bed_min",0);
+        badHour = reminderSharedPreferences.getInt(PrefKey.Bed_Hour,22);
+        badMin = reminderSharedPreferences.getInt(PrefKey.Bed_Min,0);
 
         time.setText(String.format("%02d",wakeupHour) + ":" + String.format("%02d",wakeupMin)
                 +" - " + String.format("%02d",badHour) +":" + String.format("%02d",badMin));
@@ -440,19 +441,19 @@ public class ReminderActivity extends AppCompatActivity {
         if(isChange) {
             if (!reminder_interval.getText().toString().equals("")) {
                 if (Integer.parseInt(reminder_interval.getText().toString()) > 0) {
-                    reminderSharedPreferences.edit().putInt("Interval", Integer.parseInt(reminder_interval.getText().toString())).apply();
+                    reminderSharedPreferences.edit().putInt(PrefKey.Interval, Integer.parseInt(reminder_interval.getText().toString())).apply();
                 } else {
                     reminder_interval.setText("60");
-                    reminderSharedPreferences.edit().putInt("Interval", 60).apply();
+                    reminderSharedPreferences.edit().putInt(PrefKey.Interval, 60).apply();
                     Toast.makeText(this, "Please Enter Reminder Interval Greater Then 0 min", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 reminder_interval.setText("60");
-                reminderSharedPreferences.edit().putInt("Interval", 60).apply();
+                reminderSharedPreferences.edit().putInt(PrefKey.Interval, 60).apply();
                 Toast.makeText(this, "Please Enter Reminder Interval Greater Then 0 min", Toast.LENGTH_SHORT).show();
             }
 
-            interval = reminderSharedPreferences.getInt("Interval",60);
+            interval = reminderSharedPreferences.getInt(PrefKey.Interval,60);
 
             try {
                 setReminder();

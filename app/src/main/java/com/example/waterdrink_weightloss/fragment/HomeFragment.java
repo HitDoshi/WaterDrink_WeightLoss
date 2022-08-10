@@ -28,6 +28,7 @@ import android.widget.Toolbar;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.databinding.FragmentHomeBinding;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
@@ -35,6 +36,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.function.Predicate;
 
 import io.paperdb.Paper;
 
@@ -77,7 +79,7 @@ public class HomeFragment extends Fragment{
     AlertDialog rate_us_dialog ;
     AlertDialog.Builder rate_dialog_builder;
     View dialogView;
-    TextView later , rate_app;
+    TextView later , rate_app , text2;
     RatingBar ratingBar;
 
     ImageView weather , physical;
@@ -88,6 +90,7 @@ public class HomeFragment extends Fragment{
     ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     int wakeupHour , wakeupMin ,  badHour , badMin , interval=60 ;
     boolean rate = false;
+    boolean reminder_layout=true , tips_layout=false ;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -117,7 +120,7 @@ public class HomeFragment extends Fragment{
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         Paper.init(getContext());
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
 //        fb = DataBindingUtil.setContentView(getActivity(),R.layout.responsiveui);
         //weather dialog
@@ -211,9 +214,10 @@ public class HomeFragment extends Fragment{
         later = dialogView.findViewById(R.id.later);
         rate_app = dialogView.findViewById(R.id.rate);
         ratingBar = dialogView.findViewById(R.id.ratingBar);
+        text2 = dialogView.findViewById(R.id.t2);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",true);
-        rate = sharedPreferences.getBoolean("RateApp",false);
+        boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
+        rate = sharedPreferences.getBoolean(PrefKey.RateApp,false);
 
         if(theme){
             dialogView1.setBackgroundResource(R.drawable.dark_dialog_shape);
@@ -222,9 +226,13 @@ public class HomeFragment extends Fragment{
             dialogView2.setBackgroundResource(R.drawable.dark_dialog_shape);
             setPhysicalDialogDarkMode();
 
+            dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
+            setRateDialogDarkMode();
+
         }else{
             dialogView1.setBackgroundResource(R.drawable.light_dialog_shape);
             dialogView2.setBackgroundResource(R.drawable.light_dialog_shape);
+            dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
 
             fb.totalDrink.setTextColor(Integer.parseInt(String.valueOf(R.color.dark_blue)));
             fb.rememberWaterText.setTextColor(Integer.parseInt(String.valueOf(R.color.dark_blue)));
@@ -240,7 +248,7 @@ public class HomeFragment extends Fragment{
         later.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedPreferences.edit().putBoolean("RateApp",false).commit();
+                sharedPreferences.edit().putBoolean(PrefKey.RateApp,false).commit();
                 rate = false;
                 rate_us_dialog.dismiss();
             }
@@ -249,7 +257,7 @@ public class HomeFragment extends Fragment{
         rate_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedPreferences.edit().putBoolean("RateApp",false).commit();
+                sharedPreferences.edit().putBoolean(PrefKey.RateApp,false).commit();
                 rate = false;
                 rate_us_dialog.dismiss();
                 Toast.makeText(getContext(), "Thank You For Rating", Toast.LENGTH_SHORT).show();
@@ -268,7 +276,8 @@ public class HomeFragment extends Fragment{
         fb.targetTextview.setText("90");
         */
 
-        if (sharedPreferences.getBoolean("Tips",false)){
+        tips_layout = sharedPreferences.getBoolean(PrefKey.Tips,false) ;
+        if (tips_layout){
             fb.linear1.setVisibility(View.GONE);
         }
 
@@ -364,8 +373,8 @@ public class HomeFragment extends Fragment{
     public void onStart() {
         super.onStart();
 
-        target_ml = sharedPreferences.getInt("target_ml", 1500);
-        CupSize = sharedPreferences.getInt("CupSize", 300);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
+        CupSize = sharedPreferences.getInt(PrefKey.CupSize, 300);
         fb.targetTextview.setText(target_ml + " ml");
         fb.addGlass.setText(CupSize +"ml");
 
@@ -465,13 +474,13 @@ public class HomeFragment extends Fragment{
         Log.d("Resume","Resume HomeFragment");
         try {
 
-            wakeupHour = sharedPreferences.getInt("wake_up_hour",7);
-            wakeupMin = sharedPreferences.getInt("wake_up_min",0);
+            wakeupHour = sharedPreferences.getInt(PrefKey.Wake_up_Hour,7);
+            wakeupMin = sharedPreferences.getInt(PrefKey.Wake_up_Min,0);
 
-            badHour = sharedPreferences.getInt("bed_hour",11);
-            badMin = sharedPreferences.getInt("bed_min",0);
+            badHour = sharedPreferences.getInt(PrefKey.Bed_Hour,11);
+            badMin = sharedPreferences.getInt(PrefKey.Bed_Min,0);
 
-            interval = sharedPreferences.getInt("Interval",60);
+            interval = sharedPreferences.getInt(PrefKey.Interval,60);
 
             setReminder();
         } catch (ParseException e) {
@@ -481,9 +490,9 @@ public class HomeFragment extends Fragment{
 
     void setSharedPreferencesData()
     {
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
-        sharedPreferences.edit().putInt("target_ml",target_ml).putInt("CupSize", CupSize) .apply();
+        sharedPreferences.edit().putInt("target_ml",target_ml).putInt(PrefKey.CupSize, CupSize) .apply();
 
         fb.targetTextview.setText(target_ml + " ml");
     }
@@ -491,16 +500,38 @@ public class HomeFragment extends Fragment{
     void setReminder() throws ParseException {
 
         reminderListDataList = new ArrayList<>();
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
         reminderListDataList = Paper.book().read("ReminderTimeList");
 
-        Log.d("R",sharedPreferences.getBoolean("ReminderOnOff",false)+"");
+        Log.d("R",sharedPreferences.getBoolean(PrefKey.ReminderOnOff,false)+"");
         if(reminderListDataList!=null && reminderListDataList.size()!=0) {
             Log.d("S", reminderListDataList.size() + "");
                 setRecyclerView();
         }
         else{
             fb.cardview.setVisibility(View.GONE);
+            reminder_layout = false;
+        }
+
+        if(tips_layout && !reminder_layout){
+            // Gets linearlayout
+
+// Gets the layout params that will allow you to resize the layout
+            ViewGroup.LayoutParams params = fb.linear4.getLayoutParams();
+// Changes the height and width to the specified *pixels*
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            fb.linear4.setLayoutParams(params);
+            Log.d("Layout","Set");
+        }
+        else {
+            // Gets linearlayout
+
+// Gets the layout params that will allow you to resize the layout
+            ViewGroup.LayoutParams params = fb.linear4.getLayoutParams();
+// Changes the height and width to the specified *pixels*
+            params.height = 0;
+            fb.linear4.setLayoutParams(params);
+
         }
         //Log.d("Cal",cal.getTime()+"");
     }
@@ -544,5 +575,11 @@ public class HomeFragment extends Fragment{
         f2.setColorFilter(Color.WHITE);
         f3.setColorFilter(Color.WHITE);
         f4.setColorFilter(Color.WHITE);
+    }
+
+    private void setRateDialogDarkMode(){
+
+        later.setTextColor(Color.WHITE);
+        text2.setTextColor(Color.WHITE);
     }
 }

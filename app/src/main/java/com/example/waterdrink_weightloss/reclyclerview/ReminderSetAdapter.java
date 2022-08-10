@@ -6,19 +6,24 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.ReminderActivity;
 import com.example.waterdrink_weightloss.activity.SetReminderActivity;
@@ -37,6 +42,7 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
     Activity activity;
     List<ReminderTime> pendingReminderList = new ArrayList<ReminderTime>();
     List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
+    SharedPreferences sharedPreferences;
 
     // RecyclerView recyclerView;
     public ReminderSetAdapter(Activity activity , List<ReminderTime> listdata) {
@@ -54,6 +60,7 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         return viewHolder;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final ReminderTime reminderListData = listdata.get(position);
@@ -64,6 +71,12 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
                 String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
         ReminderActivity reminderActivity = new ReminderActivity();
+        sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
+        boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
+        if(!theme)
+        {
+            holder.linear.setBackgroundColor(activity.getResources().getColor(R.color.light_blue));
+        }
 //        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
 
         /*holder.imageView.setImageResource(listdata[position].getImgId());*/
@@ -105,12 +118,18 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         public ImageView menu;
         public TextView textView;
         public ConstraintLayout linearLayout;
+        public CardView cardView;
+        public LinearLayout linear;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             textView = (TextView) itemView.findViewById(R.id.time);
             menu = (ImageView) itemView.findViewById(R.id.menu);
             linearLayout = (ConstraintLayout) itemView.findViewById(R.id.linearlayout);
+            cardView = (CardView) itemView.findViewById(R.id.cardview);
+            linear = (LinearLayout) itemView.findViewById(R.id.linear);
+
         }
     }
 

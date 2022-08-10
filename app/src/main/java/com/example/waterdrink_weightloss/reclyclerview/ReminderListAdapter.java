@@ -6,6 +6,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,10 +17,12 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.ReminderActivity;
 import com.example.waterdrink_weightloss.activity.SetReminderActivity;
@@ -106,12 +110,14 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         public ImageView menu;
         public TextView textView;
         public ConstraintLayout linearLayout;
+        public CardView cardView;
         public ViewHolder(View itemView) {
             super(itemView);
 
             textView = (TextView) itemView.findViewById(R.id.time);
             menu = (ImageView) itemView.findViewById(R.id.menu);
             linearLayout = (ConstraintLayout) itemView.findViewById(R.id.linearlayout);
+            cardView = (CardView) itemView.findViewById(R.id.cardview) ;
         }
     }
 

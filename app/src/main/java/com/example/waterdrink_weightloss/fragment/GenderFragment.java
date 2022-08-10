@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.UserInformation;
 
 /**
@@ -78,8 +79,8 @@ public class GenderFragment extends Fragment {
         LinearLayout male = view.findViewById(R.id.male);
         LinearLayout female = view.findViewById(R.id.female);
         //set = view.findViewById(R.id.set);
-        userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String g = userDataSharedPreferences.getString("gender","Male");
+        userDataSharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
+        String g = userDataSharedPreferences.getString(PrefKey.Gender,"Male");
 
         if (!g.equals("-")) {
             if (g.equals("Male")){
@@ -98,7 +99,7 @@ public class GenderFragment extends Fragment {
                 male.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.background_shape));
 //                male.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
                 female.setBackgroundColor(0);
-                userDataSharedPreferences.edit().putString("gender","Male").apply();
+                userDataSharedPreferences.edit().putString(PrefKey.Gender,"Male").apply();
             }
         });
 
@@ -108,7 +109,7 @@ public class GenderFragment extends Fragment {
 //                female.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.water_color)));
                 female.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.background_shape));
                 male.setBackgroundColor(0);
-                userDataSharedPreferences.edit().putString("gender","Female").apply();
+                userDataSharedPreferences.edit().putString(PrefKey.Gender,"Female").apply();
             }
         });
 /*

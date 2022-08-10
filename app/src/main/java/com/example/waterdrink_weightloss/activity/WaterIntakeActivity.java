@@ -30,6 +30,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.fragment.CupSizeFragment;
 import com.example.waterdrink_weightloss.fragment.HomeFragment;
 import com.example.waterdrink_weightloss.fragment.WeekGraphFragment;
@@ -74,15 +75,15 @@ public class WaterIntakeActivity extends AppCompatActivity
         bar4 = findViewById(R.id.bar4);
         bell = findViewById(R.id.bell);
 
-        userDataSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        userDataSharedPreferences = getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
-        if(userDataSharedPreferences.getBoolean("Theme",true)){
+        if(userDataSharedPreferences.getBoolean(PrefKey.Theme,true)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        if(userDataSharedPreferences.getBoolean("Theme",true)){
+        if(userDataSharedPreferences.getBoolean(PrefKey.Theme,true)){
             title.setTextColor(Color.WHITE);
             bar1.setColorFilter(Color.WHITE);
             bar2.setColorFilter(Color.WHITE);
@@ -118,12 +119,12 @@ public class WaterIntakeActivity extends AppCompatActivity
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(userDataSharedPreferences.getBoolean("ReminderOnOff",true)){
+                if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
                     bell.setImageResource(R.drawable.bell_off);
-                    userDataSharedPreferences.edit().putBoolean("ReminderOnOff",false).apply();
+                    userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
                 }else{
                     bell.setImageResource(R.drawable.bell_on);
-                    userDataSharedPreferences.edit().putBoolean("ReminderOnOff",true).apply();
+                    userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,true).apply();
                 }
             }
         });
@@ -197,7 +198,7 @@ public class WaterIntakeActivity extends AppCompatActivity
 
             case R.id.rate_app:
             {
-                userDataSharedPreferences.edit().putBoolean("RateApp",true).apply();
+                userDataSharedPreferences.edit().putBoolean(PrefKey.RateApp,true).apply();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
 

@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.Recevier.ReminderBroadCast;
 import com.example.waterdrink_weightloss.databinding.ActivityReminderBinding;
@@ -79,7 +80,7 @@ public class SetReminderActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.fab_AddReminder);
         Paper.init(this);
 
-        reminderSharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        reminderSharedPreferences = getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);//this -- important not write other
         dialogView = getLayoutInflater().inflate(R.layout.set_reminder_dialog,null);
         //Custom Dialog box add
@@ -98,7 +99,7 @@ public class SetReminderActivity extends AppCompatActivity {
         h = Calendar.getInstance();
         calendar = Calendar.getInstance();
 
-        if(reminderSharedPreferences.getBoolean("Theme",true)){
+        if(reminderSharedPreferences.getBoolean(PrefKey.Theme,true)){
             darkStatusBar();
         }else{
             lightStatusBar();
@@ -113,7 +114,7 @@ public class SetReminderActivity extends AppCompatActivity {
             reminderTime = new ArrayList<ReminderTime>();
         }
 
-        boolean theme = reminderSharedPreferences.getBoolean("Theme",true);
+        boolean theme = reminderSharedPreferences.getBoolean(PrefKey.Theme,true);
 
         if(theme){
             dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
@@ -149,13 +150,13 @@ public class SetReminderActivity extends AppCompatActivity {
                 pendingIntentArrayList.clear();
                 reminderTime = Paper.book().read("ReminderTimeList");
                 if(reminderTime!=null && reminderTime.size()!=0) {
-                    temp = reminderSharedPreferences.getInt("Reminder",0);
+                    temp = reminderSharedPreferences.getInt(PrefKey.Reminder_Count,0);
                     temp = temp + 1;
                     Log.d("Temp",temp+"");
                 }
                 else{
                     reminderTime = new ArrayList<ReminderTime>();
-                    reminderSharedPreferences.edit().putInt("Reminder",temp).apply();
+                    reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,temp).apply();
                 }
 
                 calendar.set(Calendar.HOUR_OF_DAY,hour.getValue());
@@ -196,7 +197,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 }
 
                 Paper.book().write("ReminderTimeList", reminderTime);
-                reminderSharedPreferences.edit().putInt("Reminder",temp).apply();
+                reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,temp).apply();
                 setRecylerView();
             }
         });

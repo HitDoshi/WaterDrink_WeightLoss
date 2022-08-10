@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.UserInformation;
 
 /**
@@ -88,13 +89,13 @@ public class AgeWightFragment extends Fragment {
         age = view.findViewById(R.id.select_age);
         weight = view.findViewById(R.id.select_weight);
         //set = view.findViewById(R.id.set);
-        userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        targetSharedPref = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        userDataSharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
+        targetSharedPref = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
         String a1;
         String w1 ;
-        a1  = userDataSharedPreferences.getString("age","21");
-        w1 = userDataSharedPreferences.getString("weight","55");
+        a1  = userDataSharedPreferences.getString(PrefKey.Age,"21");
+        w1 = userDataSharedPreferences.getString(PrefKey.Weight,"55");
         age.setMinValue(1);
         age.setMaxValue(100);
         age.setValue(Integer.parseInt(a1));
@@ -127,7 +128,7 @@ public class AgeWightFragment extends Fragment {
         weight.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
-                userDataSharedPreferences.edit().putString("weight", String.valueOf(newValue)).apply();
+                userDataSharedPreferences.edit().putString(PrefKey.Weight, String.valueOf(newValue)).apply();
             }
         });
 
@@ -135,7 +136,7 @@ public class AgeWightFragment extends Fragment {
         editTarget = view.findViewById(R.id.targetSetEditText);
         setTarget = view.findViewById(R.id.target);
 
-        boolean darkTheme = userDataSharedPreferences.getBoolean("Theme",true);
+        boolean darkTheme = userDataSharedPreferences.getBoolean(PrefKey.Theme,true);
 
         if(darkTheme){
             setTarget.setTextColor(Color.WHITE);
@@ -196,14 +197,14 @@ public class AgeWightFragment extends Fragment {
     }
 
     private void editTargetSharedPref(int target) {
-        targetSharedPref.edit().putInt("target_ml",target).apply();
+        targetSharedPref.edit().putInt(PrefKey.Target_ml,target).apply();
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        int t = targetSharedPref.getInt("target_ml",1500);
+        int t = targetSharedPref.getInt(PrefKey.Target_ml,1500);
         setTarget.setText(t+"ml");
         editTarget.setText(t+"");
         seekBar.setProgress(t-500);

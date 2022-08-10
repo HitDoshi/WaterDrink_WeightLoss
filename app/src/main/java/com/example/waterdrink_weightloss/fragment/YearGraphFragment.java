@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
 import com.example.waterdrink_weightloss.databinding.FragmentMonthGraphBinding;
@@ -107,7 +108,7 @@ public class YearGraphFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHandler = new DBHandler(getContext());
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
         xAxisLabel.add("Jan");
         xAxisLabel.add("Feb");
         xAxisLabel.add("Mar");
@@ -163,7 +164,7 @@ public class YearGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",true);
+        boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(theme){
             fragmentYearGraphBinding.leftArrow.setColorFilter(Color.WHITE);
             fragmentYearGraphBinding.rightArrow.setColorFilter(Color.WHITE);
@@ -195,7 +196,7 @@ public class YearGraphFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        target_ml = sharedPreferences.getInt("target_ml", 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
 
         calendar = Calendar.getInstance();
         position = calendar.get(Calendar.MONTH);
@@ -267,29 +268,6 @@ public class YearGraphFragment extends Fragment {
             total = 0;
         }
 
-       /* for (int i=0;i<arrayList.size();i++) {
-            //Log.d("Achievement", arrayList.get(i).getAchievement() + "");
-
-            if (j != arrayList.get(i).getDay()) {
-                for (int k = j; k < arrayList.get(i).getDay(); k++) {
-                    barEntriesArrayList.add(new BarEntry(j, 50));
-                    //Log.d("Enter", arrayList.get(i).getAchievement() + "");
-                    j++;
-                }
-            }
-
-            barEntriesArrayList.add(new BarEntry(j, arrayList.get(i).getAchievement()));
-            total += arrayList.get(i).getAchievement();
-            //Log.d("Achieve", arrayList.get(i).getAchievement() + "");
-            j++;
-        }*/
-/*
-
-        for (int i=j;i<size;i++){
-            barEntriesArrayList.add(new BarEntry(i,0));
-        }
-*/
-
         if(arrayList.size()>0) {
             // creating a new bar data set.
             barDataSet = new BarDataSet(barEntriesArrayList,null);
@@ -310,7 +288,7 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.graph.getDescription().setEnabled(false);
             fragmentYearGraphBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
-            if(sharedPreferences.getBoolean("Theme",true)){
+            if(sharedPreferences.getBoolean(PrefKey.Theme,true)){
                 fragmentYearGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
                 fragmentYearGraphBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
                 // setting text color.
@@ -337,30 +315,9 @@ public class YearGraphFragment extends Fragment {
             fragmentYearGraphBinding.avgTextviewProgress.setText(100+"%");
 
         setMYearlyData();
-        //progressbar();
+
     }
 
-/*
-    private void progressbar() {
-
-        MonthReportFragmentBinding.w1.setProgress((Integer) barEntriesArrayList.get(1));
-        int temp = ((int) (  ( (float) (int)(barEntriesArrayList.get(1))) / (float) (target_ml) * 100));
-        MonthReportFragmentBinding.nameW1.setText(temp+"%");
-    }*/
-
-    private void setId(){
-/*
-        r = getResources();
-        packageName = getActivity().getPackageName();
-
-        for (int i=0;i<31;i++){
-            progressbar[i] = r.getIdentifier("R.id.w"+i+1,"id",packageName);
-        }
-
-        Log.d("abc",String.valueOf(progressbar[1]));
-        MonthReportFragmentBinding.w1.setProgress(50);
-        MonthReportFragmentBinding.nameW1.setText(50+"%");*/
-    }
 
     private void getTodayRecord()
     {

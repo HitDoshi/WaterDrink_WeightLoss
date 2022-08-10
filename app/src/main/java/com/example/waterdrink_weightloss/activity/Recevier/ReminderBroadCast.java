@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 
@@ -30,9 +31,9 @@ public class ReminderBroadCast extends BroadcastReceiver {
         Paper.init(context);
         SharedPreferences userDataSharedPreferences;
 
-        userDataSharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        userDataSharedPreferences = context.getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
     
-        if(userDataSharedPreferences.getBoolean("ReminderOnOff",true)) {
+        if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)) {
             Vibrator vibrator = (Vibrator) context
                     .getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(1000);

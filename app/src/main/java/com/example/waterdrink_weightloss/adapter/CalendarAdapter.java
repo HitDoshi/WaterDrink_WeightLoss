@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.PluralsRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
+import com.example.waterdrink_weightloss.activity.PrefManager;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListAdapter;
 import com.example.waterdrink_weightloss.reclyclerview.ReminderListData;
 import com.github.mikephil.charting.data.BarEntry;
@@ -52,9 +55,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
         View listItem= layoutInflater.inflate(R.layout.list_date, parent, false);
         CalendarAdapter.ViewHolder viewHolder = new CalendarAdapter.ViewHolder(listItem);
 
-        sharedPreferences = activity.getSharedPreferences("MySharedPref",Context.MODE_PRIVATE);
+        sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
 
-        target_ml = sharedPreferences.getInt("target_ml", 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
 
         return viewHolder;
     }

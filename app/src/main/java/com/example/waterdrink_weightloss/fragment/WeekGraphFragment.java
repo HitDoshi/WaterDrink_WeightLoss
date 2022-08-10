@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import com.example.waterdrink_weightloss.Database.DBHandler;
 import com.example.waterdrink_weightloss.Database.DataModel;
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 import com.example.waterdrink_weightloss.adapter.CalendarAdapter;
 import com.example.waterdrink_weightloss.adapter.ProgressBarAdapter;
@@ -107,7 +108,7 @@ public class WeekGraphFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName , Context.MODE_PRIVATE);
         xAxisLabel.add("Sun");
         xAxisLabel.add("Mon");
         xAxisLabel.add("Tue");
@@ -130,7 +131,7 @@ public class WeekGraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean theme = sharedPreferences.getBoolean("Theme",true);
+        boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(theme){
             fragmentWeekGraphBinding.leftArrow.setColorFilter(Color.WHITE);
             fragmentWeekGraphBinding.rightArrow.setColorFilter(Color.WHITE);
@@ -307,34 +308,6 @@ public class WeekGraphFragment extends Fragment {
             sum = 0;
         }
 
-        // adding new entry to our array list with bar
-        // entry and passing x and y axis value to it.
-    /*    barEntriesArrayList.add(new BarEntry(1f, 4));
-        barEntriesArrayList.add(new BarEntry(2f, 6));
-        barEntriesArrayList.add(new BarEntry(3f, 8));
-        barEntriesArrayList.add(new BarEntry(4f, 2));*/
-/*
-        for (int i=0;i<arrayList.size();i++) {
-            Log.d("Achievement", arrayList.get(i).getAchievement() + "");
-
-            if (j != arrayList.get(i).getDay()) {
-                for (int k = j; k < arrayList.get(i).getDay(); k++) {
-                    barEntriesArrayList.add(new BarEntry(j, 0));
-                    //Log.d("Enter", arrayList.get(i).getAchievement() + "");
-                    j++;
-                }
-            }
-
-            barEntriesArrayList.add(new BarEntry(j, arrayList.get(i).getAchievement()));
-            total += arrayList.get(i).getAchievement();
-            //Log.d("Achieve", arrayList.get(i).getAchievement() + "");
-            j++;
-        }
-
-        for (int i=j;i<=size;i++){
-            barEntriesArrayList.add(new BarEntry(i,0));
-        }*/
-
         if(arrayList.size()>0) {
             // creating a new bar data set.
             barDataSet = new BarDataSet(barEntriesArrayList, null);
@@ -354,7 +327,7 @@ public class WeekGraphFragment extends Fragment {
             fragmentWeekGraphBinding.graph.getDescription().setEnabled(false);
             fragmentWeekGraphBinding.graph.getLegend().setEnabled(false);//small color cube hide
 
-            if(sharedPreferences.getBoolean("Theme",true)){
+            if(sharedPreferences.getBoolean(PrefKey.Theme,true)){
                 fragmentWeekGraphBinding.graph.getXAxis().setTextColor(Color.WHITE);
                 fragmentWeekGraphBinding.graph.getAxisLeft().setTextColor(Color.WHITE);
                 // setting text color.

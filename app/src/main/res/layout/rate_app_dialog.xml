@@ -19,18 +19,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:id="@+id/t1"
         android:textSize="16dp"
         android:textColor="@color/dark_purple"
         android:text="How was your experience with us?"
         />
 
     <TextView
+        android:id="@+id/t2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
         android:text="Tap the star to rate us"
         android:textColor="@color/black"
-        />
+        android:textSize="16dp" />
 
     <RatingBar
         android:id="@+id/ratingBar"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.PluralsRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.databinding.FragmentCupSizeBinding;
 
 /**
@@ -67,7 +69,7 @@ public class CupSizeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
     }
 
     @Override
@@ -157,11 +159,11 @@ public class CupSizeFragment extends Fragment {
             public void onClick(View view) {
 
                 if(fragmentCupSizeBinding.customCupsize.getText() != null){
-                    sharedPreferences.edit().putInt("CupSize",cup_size).apply();
+                    sharedPreferences.edit().putInt(PrefKey.CupSize,cup_size).apply();
                 }
                 else
                 {
-                    sharedPreferences.edit().putInt("CupSize",300).apply();
+                    sharedPreferences.edit().putInt(PrefKey.CupSize,300).apply();
                 }
                 Fragment fragment1 =new HomeFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -175,6 +177,6 @@ public class CupSizeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        fragmentCupSizeBinding.customCupsize.setText(sharedPreferences.getInt("CupSize",300)+"");
+        fragmentCupSizeBinding.customCupsize.setText(sharedPreferences.getInt(PrefKey.CupSize,300)+"");
     }
 }

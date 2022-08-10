@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 import com.example.waterdrink_weightloss.activity.PrefManager;
 
 /**
@@ -80,14 +81,14 @@ public class TimeFragment extends Fragment {
         bed_min = view.findViewById(R.id.bed_min);
 
         set = view.findViewById(R.id.set);
-        userDataSharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        userDataSharedPreferences = getActivity().getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
         int h1,m1,h2,m2;
-        h1 = userDataSharedPreferences.getInt("wake_up_hour",7);
-        m1 = userDataSharedPreferences.getInt("wake_up_min",0);
+        h1 = userDataSharedPreferences.getInt(PrefKey.Wake_up_Hour,7);
+        m1 = userDataSharedPreferences.getInt(PrefKey.Wake_up_Min,0);
 
-        h2 = userDataSharedPreferences.getInt("bed_hour",22);
-        m2 = userDataSharedPreferences.getInt("bed_min",0);
+        h2 = userDataSharedPreferences.getInt(PrefKey.Bed_Hour,11);
+        m2 = userDataSharedPreferences.getInt(PrefKey.Bed_Min,0);
 
         wake_up_hour.setMaxValue(23);
         wake_up_hour.setMinValue(0);
@@ -134,10 +135,10 @@ public class TimeFragment extends Fragment {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userDataSharedPreferences.edit().putInt("wake_up_hour",wake_up_hour.getValue()).apply();
-                userDataSharedPreferences.edit().putInt("wake_up_min",wake_up_min.getValue()).apply();
-                userDataSharedPreferences.edit().putInt("bed_hour",bed_hour.getValue()).apply();
-                userDataSharedPreferences.edit().putInt("bed_min",bed_min.getValue()).apply();
+                userDataSharedPreferences.edit().putInt(PrefKey.Wake_up_Hour,wake_up_hour.getValue()).apply();
+                userDataSharedPreferences.edit().putInt(PrefKey.Wake_up_Min,wake_up_min.getValue()).apply();
+                userDataSharedPreferences.edit().putInt(PrefKey.Bed_Hour,bed_hour.getValue()).apply();
+                userDataSharedPreferences.edit().putInt(PrefKey.Bed_Min,bed_min.getValue()).apply();
 
                 PrefManager prefManager = new PrefManager(getActivity());
                 prefManager.setFirstTimeLaunch(false);

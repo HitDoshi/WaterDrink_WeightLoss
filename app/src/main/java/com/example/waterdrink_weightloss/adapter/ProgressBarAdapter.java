@@ -10,9 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.PluralsRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
+import com.example.waterdrink_weightloss.activity.Model.PrefKey;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,9 +41,9 @@ public class ProgressBarAdapter extends RecyclerView.Adapter<ProgressBarAdapter.
         View listItem= layoutInflater.inflate(R.layout.set_progressbar, parent, false);
         ProgressBarAdapter.ViewHolder viewHolder = new ProgressBarAdapter.ViewHolder(listItem);
 
-        sharedPreferences = activity.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
-        target_ml = sharedPreferences.getInt("target_ml", 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
 
         return viewHolder;
     }
