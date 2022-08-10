@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -337,7 +338,9 @@ public class HomeFragment extends Fragment{
         fb.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setDrinkWaterData(-1);
+
+                if(total_ml>0)
+                    setDrinkWaterData(-1);
             }
         });
 

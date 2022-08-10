@@ -246,11 +246,6 @@ public class ReminderActivity extends AppCompatActivity {
     }
 
     void setReminder() throws ParseException {
-       /* int wakeupHour = 7 ;
-        int wakeupMin = 30 ;
-        int badHour = 22 ;
-        int badMin = 0 ;
-        int interval = 60 ;*/
 
         int i=wakeupHour , j=wakeupMin , min = badMin , hour = badHour ;
         temp = 0 ;
@@ -274,49 +269,10 @@ public class ReminderActivity extends AppCompatActivity {
             reminderTime = new ArrayList<ReminderTime>();
         }
 
-/*
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-        df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date d1 = df.parse("13:30:0"); //date 1
-        Date d2 = df.parse("0:120:0"); // date 2
-        long sum = d1.getTime() + d2.getTime();
-*/
-/*
-        String myTime = "12:42";
-        SimpleDateFormat df1 = new SimpleDateFormat("HH:mm");
-        Date d = df1.parse(myTime);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
-        cal.add(Calendar.MINUTE, 2);
-        String newTime = df1.format(cal.getTime());
-
-        Log.d("Time",newTime);*/
 
         Calendar calendar = Calendar.getInstance();
-        Calendar currentTime = Calendar.getInstance();
-        /* SimpleDateFormat df = new SimpleDateFormat("HH");*/
-        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        /*calendar.set(Calendar.HOUR_OF_DAY,wakeupHour);
-        calendar.set(Calendar.MINUTE,wakeupMin);
-        calendar.add(Calendar.MINUTE,interval);*/
-/*
-
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(getActivity(), ExecutableServices.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-
-        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent );
-        //for repeting
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,
-                interval*60*1000,pendingIntent );
-*/
-      /*  Log.d("aaa", String.valueOf(df.parse(String.valueOf(a)).getHours()));
-        Log.d("Calender",calendar.get(Calendar.HOUR)+" "+calendar.get(Calendar.MINUTE));*/
-
-        //Paper.book().write("PendingReminderList",pendingIntentArrayList);
         Paper.book().write("ReminderTimeList",reminderTime);
-        //Log.d("RealTime",calendar.getTimeInMillis()+"");
+        
         while (i<badHour)
         {
             calendar.set(Calendar.HOUR_OF_DAY,i);
@@ -370,8 +326,7 @@ public class ReminderActivity extends AppCompatActivity {
                 temp++;
                 Log.d("set ",temp+"");
             }
-            //Log.d("Start","start");
-            //alarmManager.cancel(pendingIntent);
+            
         }
 
         Paper.book().write("ReminderTimeList", reminderTime);
@@ -483,10 +438,6 @@ public class ReminderActivity extends AppCompatActivity {
     }
 
     public void lightStatusBar(){
-//        reminderBinding.t1.setTextColor(getResources().getColor(R.color.black));
-//        reminderBinding.t2.setTextColor(Color.BLACK);
-//        reminderBinding.t3.setTextColor(Color.BLACK);
-//        reminderBinding.t4.setTextColor(Color.BLACK);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.TRANSPARENT);

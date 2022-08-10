@@ -49,6 +49,7 @@ public class WaterIntakeActivity extends AppCompatActivity
     Toolbar toolbar;
     TextView title;
     ImageView bar1,bar2,bar3,bar4,bell;
+    boolean bellOnOff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +113,17 @@ public class WaterIntakeActivity extends AppCompatActivity
             }
         });
 
+        bellOnOff = userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true);
+        if(bellOnOff){
+            bell.setImageResource(R.drawable.bell_off);
+        }else{
+            bell.setImageResource(R.drawable.bell_on);
+        }
+
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
+                if(bellOnOff){
                     bell.setImageResource(R.drawable.bell_off);
                     userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
                 }else{

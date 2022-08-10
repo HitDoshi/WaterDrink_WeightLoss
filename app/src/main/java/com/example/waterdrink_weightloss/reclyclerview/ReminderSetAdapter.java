@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.Model.ReminderTime;
-import com.example.waterdrink_weightloss.activity.ReminderActivity;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 
 import java.util.ArrayList;
@@ -67,7 +66,6 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         c.set(Calendar.MINUTE,reminderListData.getMin());
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
                 String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
-        ReminderActivity reminderActivity = new ReminderActivity();
         sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
         boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(!theme)
