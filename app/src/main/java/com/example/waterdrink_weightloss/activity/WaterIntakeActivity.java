@@ -114,16 +114,17 @@ public class WaterIntakeActivity extends AppCompatActivity
         });
 
         bellOnOff = userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true);
+
         if(bellOnOff){
-            bell.setImageResource(R.drawable.bell_off);
-        }else{
             bell.setImageResource(R.drawable.bell_on);
+        }else{
+            bell.setImageResource(R.drawable.bell_off);
         }
 
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(bellOnOff){
+                if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
                     bell.setImageResource(R.drawable.bell_off);
                     userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
                 }else{
