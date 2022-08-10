@@ -230,8 +230,8 @@ public class ReminderActivity extends AppCompatActivity {
                         , pendingIntent);
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
-                
-                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp));
+
+                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp,0));
 
                 Paper.book().write("ReminderTimeList", reminderTime);
             }
@@ -269,7 +269,6 @@ public class ReminderActivity extends AppCompatActivity {
             reminderTime = new ArrayList<ReminderTime>();
         }
 
-
         Calendar calendar = Calendar.getInstance();
         Paper.book().write("ReminderTimeList",reminderTime);
         
@@ -306,7 +305,7 @@ public class ReminderActivity extends AppCompatActivity {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
-                reminderTime.add(new ReminderTime(i,j,intent,temp));
+                reminderTime.add(new ReminderTime(i,j,intent,temp,0));
 
                 Collections.sort(reminderTime, new Comparator<ReminderTime>() {
                     @Override
@@ -357,13 +356,13 @@ public class ReminderActivity extends AppCompatActivity {
 
     void setSharedPreference(){
         reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,temp).apply();
-        reminderSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,true).apply();
+        //reminderSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,true).apply(); EDIT
     }
 
     void getSharedPreference(){
         temp = reminderSharedPreferences.getInt(PrefKey.Reminder_Count,0);
         reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,0).apply();
-        reminderSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
+        //reminderSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
         reminderSharedPreferences.getBoolean(PrefKey.ReminderOnOff,false);
     }
 

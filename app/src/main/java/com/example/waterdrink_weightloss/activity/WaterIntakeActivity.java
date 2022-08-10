@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,7 +50,6 @@ public class WaterIntakeActivity extends AppCompatActivity
     Toolbar toolbar;
     TextView title;
     ImageView bar1,bar2,bar3,bar4,bell;
-    boolean bellOnOff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,12 +113,12 @@ public class WaterIntakeActivity extends AppCompatActivity
             }
         });
 
-        bellOnOff = userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true);
-
-        if(bellOnOff){
+        if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
             bell.setImageResource(R.drawable.bell_on);
+            Log.d("Bell","on");
         }else{
             bell.setImageResource(R.drawable.bell_off);
+            Log.d("Bell","off");
         }
 
         bell.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +127,11 @@ public class WaterIntakeActivity extends AppCompatActivity
                 if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
                     bell.setImageResource(R.drawable.bell_off);
                     userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,false).apply();
+                    Log.d("Bell","on");
                 }else{
                     bell.setImageResource(R.drawable.bell_on);
                     userDataSharedPreferences.edit().putBoolean(PrefKey.ReminderOnOff,true).apply();
+                    Log.d("Bell","off");
                 }
             }
         });

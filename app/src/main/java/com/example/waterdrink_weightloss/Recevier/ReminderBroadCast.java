@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Vibrator;
 import android.util.Log;
 
@@ -31,13 +33,13 @@ public class ReminderBroadCast extends BroadcastReceiver {
         Paper.init(context);
         SharedPreferences userDataSharedPreferences;
 
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         userDataSharedPreferences = context.getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
-    
-        if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)) {
-            Vibrator vibrator = (Vibrator) context
-                    .getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(1000);
-        }
+
+        Vibrator vibrator = (Vibrator) context
+                .getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(1000);
 
         //Toast.makeText(context, "Vibrate", Toast.LENGTH_SHORT).show();
         Log.d("Notification WakeUp","Vibrate");
@@ -46,8 +48,12 @@ public class ReminderBroadCast extends BroadcastReceiver {
                 context,"Drink Water").setContentTitle("Water Drink Reminder")
                 .setSmallIcon(R.drawable.frontpage)
                 .setContentText("Let's Drink Some Water And Healthy Your Body")
-                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)) {
+            builder.setSound(alarmSound);
+        }
 
         Intent intent1 = new Intent(context, WaterIntakeActivity.class);
         intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

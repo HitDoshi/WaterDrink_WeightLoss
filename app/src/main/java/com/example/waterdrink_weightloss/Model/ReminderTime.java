@@ -6,6 +6,7 @@ public class ReminderTime {
 
     int hour , min , temp;
     Intent pendingIntent;
+    long milli_time;
 
     public int getHour() {
         return hour;
@@ -39,11 +40,20 @@ public class ReminderTime {
         this.pendingIntent = pendingIntent;
     }
 
-    public ReminderTime(int hour , int min , Intent pendingIntent,int temp){
+    public long getMilli_time() {
+        return milli_time;
+    }
+
+    public void setMilli_time(long milli_time) {
+        this.milli_time = milli_time;
+    }
+
+    public ReminderTime(int hour , int min , Intent pendingIntent, int temp,long milli_time){
         this.hour = hour;
         this.min = min;
         this.pendingIntent = pendingIntent;
         this.temp = temp;
+        this.milli_time = milli_time ;
     }
 }
 

@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.Model.PrefKey;
@@ -59,7 +60,7 @@ public class SetReminderActivity extends AppCompatActivity {
     View dialogView;
     TextView ok,cancel,k;
     NumberPicker hour,min;
-    Calendar h,calendar;
+    Calendar current_time_calender,calendar;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class SetReminderActivity extends AppCompatActivity {
         ok = dialogView.findViewById(R.id.ok);
         cancel = dialogView.findViewById(R.id.cancel);
 
-        h = Calendar.getInstance();
+        current_time_calender = Calendar.getInstance();
         calendar = Calendar.getInstance();
 
         if(reminderSharedPreferences.getBoolean(PrefKey.Theme,true)){
@@ -131,7 +132,11 @@ public class SetReminderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 set_ReminderDialog.dismiss();
 
+                current_time_calender = Calendar.getInstance();
+                calendar = Calendar.getInstance();
+
                 int temp=0;
+                long time = 0;
                 reminderTime.clear();
                 pendingIntentArrayList.clear();
                 reminderTime = Paper.book().read("ReminderTimeList");
@@ -149,6 +154,19 @@ public class SetReminderActivity extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE,min.getValue());
                 calendar.set(Calendar.SECOND,0);
 
+                if(calendar.getTimeInMillis()>current_time_calender.getTimeInMillis())
+                {
+                    Log.d("Time is Passed","No");
+                    time = 0;
+                    Log.d("Date",calendar.get(Calendar.DATE)+"");
+                }
+                else
+                {
+                    Log.d("Time is Passed","Yes");
+                    time = 86400000;
+                    Log.d("Date",calendar.get(Calendar.DATE)+"");
+                }
+
                 Intent intent = new Intent(getApplicationContext(), ReminderBroadCast.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
                         temp, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -156,25 +174,26 @@ public class SetReminderActivity extends AppCompatActivity {
                 //for repeting
                 AlarmManager alarmManager = (AlarmManager) getApplicationContext().
                         getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pendingIntent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis()+time, pendingIntent);
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
 
-                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp));
+                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp,
+                        calendar.getTimeInMillis()+time));
 
                 Collections.sort(reminderTime, new Comparator<ReminderTime>() {
                     @Override
                     public int compare(ReminderTime reminderTime, ReminderTime t) {
-                        return Integer.compare(reminderTime.getMin(), t.getMin());
+                        return Long.compare(reminderTime.getMilli_time(), t.getMilli_time());
                     }
                 });
 
-                Collections.sort(reminderTime, new Comparator<ReminderTime>() {
-                    @Override
-                    public int compare(ReminderTime reminderTime, ReminderTime t) {
-                        return Integer.compare(reminderTime.getHour(), t.getHour());
-                    }
-                });
+//                Collections.sort(reminderTime, new Comparator<ReminderTime>() {
+//                    @Override
+//                    public int compare(ReminderTime reminderTime, ReminderTime t) {
+//                        return Integer.compare(reminderTime.getHour(), t.getHour());
+//                    }
+//                });
 
                 Log.d("Total set Reminder",reminderTime.size()+" temp(RequestCode)= "+temp);
                 for (int i=0;i<reminderTime.size();i++){
@@ -238,14 +257,14 @@ public class SetReminderActivity extends AppCompatActivity {
 
     public void setData(){
 
-        h = Calendar.getInstance();
+        current_time_calender = Calendar.getInstance();
         //hour.setMinValue(h.get(Calendar.HOUR_OF_DAY));
         hour.setMaxValue(23);
-        hour.setValue(h.get(Calendar.HOUR_OF_DAY));
+        hour.setValue(current_time_calender.get(Calendar.HOUR_OF_DAY));
 
         //min.setMinValue(h.get(Calendar.MINUTE));
         min.setMaxValue(59);
-        min.setValue(h.get(Calendar.MINUTE));
+        min.setValue(current_time_calender.get(Calendar.MINUTE));
 
         hour.setFormatter(new NumberPicker.Formatter() {
             @Override

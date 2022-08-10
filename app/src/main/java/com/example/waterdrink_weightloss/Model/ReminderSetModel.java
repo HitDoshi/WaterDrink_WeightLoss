@@ -91,11 +91,10 @@ public class ReminderSetModel extends Application {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
-                reminderTime.add(new ReminderTime(i, j, intent,temp));
+                reminderTime.add(new ReminderTime(i, j, intent,temp,0));
                 temp++;
                 Log.d("set ", temp + "");
             }
-
         }
 
         Paper.book().write("ReminderTimeList", reminderTime);
