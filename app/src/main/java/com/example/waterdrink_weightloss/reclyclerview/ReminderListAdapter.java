@@ -65,19 +65,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         c.set(Calendar.MINUTE,reminderListData.getMin());
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
                 String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
-//        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
 
-        /*holder.imageView.setImageResource(listdata[position].getImgId());*/
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(view.getContext(),"click on item: "+reminderListData.getTime(),Toast.LENGTH_LONG).show();
-               /* pendingReminderList = Paper.book().read("PendingReminderList");
-                 Log.d("PendingReminderList",pendingReminderList.size()+"");
-                reminderTime = Paper.book().read("PendingReminderList");
-                Log.d("PendingReminderList",reminderTime.size()+"")*/;
-            }
-        });
 
         holder.menu.setOnClickListener(new View.OnClickListener() {
             @Override

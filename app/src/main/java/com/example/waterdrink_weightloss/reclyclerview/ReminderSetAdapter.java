@@ -34,10 +34,7 @@ import io.paperdb.Paper;
 public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.ViewHolder>{
     private List<ReminderTime> listdata;
     List<ReminderListData> l;
-    ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     Activity activity;
-    List<ReminderTime> pendingReminderList = new ArrayList<ReminderTime>();
-    List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
     SharedPreferences sharedPreferences;
 
     // RecyclerView recyclerView;
@@ -65,26 +62,13 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         c.set(Calendar.HOUR,reminderListData.getHour());
         c.set(Calendar.MINUTE,reminderListData.getMin());
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
-                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
+                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get((c.get(Calendar.AM_PM)))==1?"PM":"AM"));
         sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
         boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(!theme)
         {
             holder.linear.setBackgroundColor(activity.getResources().getColor(R.color.light_blue));
         }
-//        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
-
-        /*holder.imageView.setImageResource(listdata[position].getImgId());*/
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(view.getContext(),"click on item: "+reminderListData.getTime(),Toast.LENGTH_LONG).show();
-               /* pendingReminderList = Paper.book().read("PendingReminderList");
-                 Log.d("PendingReminderList",pendingReminderList.size()+"");
-                reminderTime = Paper.book().read("PendingReminderList");
-                Log.d("PendingReminderList",reminderTime.size()+"")*/;
-            }
-        });
 
         holder.menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,12 +136,4 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         });
         popup.show();
     }
-
-    /*public void deleteFirstReminder()
-    {
-        if(listdata.size()>0) {
-            listdata.remove(0);
-            notifyDataSetChanged();
-        }
-    }*/
 }
