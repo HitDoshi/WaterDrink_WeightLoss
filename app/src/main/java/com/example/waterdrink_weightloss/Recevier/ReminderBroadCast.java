@@ -65,6 +65,8 @@ public class ReminderBroadCast extends BroadcastReceiver {
         Paper.book().write("ReminderTimeList",reminderListDataList);
         }
 
+        context.startActivity(new Intent(context,WaterIntakeActivity.class));
+
       /*  ReminderListAdapter reminderListAdapter = new ReminderListAdapter();
         reminderListAdapter.deleteFirstReminder();*/
     }

@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.Model.ReminderTime;
-import com.example.waterdrink_weightloss.activity.ReminderActivity;
 import com.example.waterdrink_weightloss.activity.SetReminderActivity;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 
@@ -65,7 +64,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         c.set(Calendar.HOUR,reminderListData.getHour());
         c.set(Calendar.MINUTE,reminderListData.getMin());
         holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
-                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(Calendar.AM_PM)==1?"PM":"AM"));
+                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get(c.get(Calendar.AM_PM))==1?"PM":"AM"));
 //        Log.d("Size...",reminderActivity.pendingIntentArrayList.size()+"");
 
         /*holder.imageView.setImageResource(listdata[position].getImgId());*/
@@ -97,7 +96,6 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         else {
             activity.startActivity(new Intent(activity, SetReminderActivity.class));
             return 0;
-
         }
     }
 

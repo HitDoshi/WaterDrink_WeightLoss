@@ -212,10 +212,6 @@ public class SetReminderActivity extends AppCompatActivity {
     }
 
     public void lightStatusBar(){
-//        reminderBinding.t1.setTextColor(getResources().getColor(R.color.black));
-//        reminderBinding.t2.setTextColor(Color.BLACK);
-//        reminderBinding.t3.setTextColor(Color.BLACK);
-//        reminderBinding.t4.setTextColor(Color.BLACK);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
