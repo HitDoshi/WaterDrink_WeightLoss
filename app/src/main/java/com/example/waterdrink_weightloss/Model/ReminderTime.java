@@ -5,7 +5,7 @@ import android.content.Intent;
 public class ReminderTime {
 
     int hour , min , temp;
-    Intent pendingIntent;
+    Intent intent;
     long milli_time;
 
     public int getHour() {
@@ -32,12 +32,12 @@ public class ReminderTime {
         this.temp = temp;
     }
 
-    public Intent getPendingIntent() {
-        return pendingIntent;
+    public Intent getIntent() {
+        return intent;
     }
 
-    public void setPendingIntent(Intent pendingIntent) {
-        this.pendingIntent = pendingIntent;
+    public void setIntent(Intent intent) {
+        this.intent = intent;
     }
 
     public long getMilli_time() {
@@ -48,10 +48,10 @@ public class ReminderTime {
         this.milli_time = milli_time;
     }
 
-    public ReminderTime(int hour , int min , Intent pendingIntent, int temp,long milli_time){
+    public ReminderTime(int hour , int min , Intent intent, int temp,long milli_time){
         this.hour = hour;
         this.min = min;
-        this.pendingIntent = pendingIntent;
+        this.intent = intent;
         this.temp = temp;
         this.milli_time = milli_time ;
     }

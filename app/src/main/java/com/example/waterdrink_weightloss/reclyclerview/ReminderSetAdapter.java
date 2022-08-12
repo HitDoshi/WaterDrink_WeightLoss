@@ -25,7 +25,6 @@ import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -120,8 +119,8 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
             public boolean onMenuItemClick(MenuItem item) {
                 AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
                 listdata = Paper.book().read("ReminderTimeList");
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,position,
-                        listdata.get(position).getPendingIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,listdata.get(position).getTemp(),
+                        listdata.get(position).getIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.cancel(pendingIntent);
                 pendingIntent.cancel();
                 listdata.remove(position);

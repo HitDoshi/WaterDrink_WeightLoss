@@ -110,15 +110,27 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
             public boolean onMenuItemClick(MenuItem item) {
                 AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
                 listdata = Paper.book().read("ReminderTimeList");
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,position,
-                        listdata.get(position).getPendingIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,listdata.get(position).getTemp(),
+                        listdata.get(position).getIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.cancel(pendingIntent);
                 pendingIntent.cancel();
                 listdata.remove(position);
                 Paper.book().write("ReminderTimeList",listdata);
 
-                if(listdata.size()!=0)
-                    notifyDataSetChanged();
+                if(listdata.size()!=0) {
+                    Calendar current_time = Calendar.getInstance();
+                    current_time.set(Calendar.HOUR_OF_DAY, 23);
+                    current_time.set(Calendar.MINUTE, 59);
+                    current_time.set(Calendar.SECOND, 59);
+
+                    if (current_time.getTimeInMillis() < listdata.get(0).getMilli_time()) {
+                        activity.startActivity(new Intent(activity, WaterIntakeActivity.class));
+                    }
+                    else
+                    {
+                        notifyDataSetChanged();
+                    }
+                }
                 else
                     activity.startActivity(new Intent(activity, WaterIntakeActivity.class));
                 return true;

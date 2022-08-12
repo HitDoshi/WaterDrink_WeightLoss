@@ -50,7 +50,7 @@ public class ReminderSetModel extends Application {
             for (int k = 0; k < reminderTime.size(); k++) {
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 PendingIntent ped = PendingIntent.getBroadcast(getApplicationContext(), k,
-                        reminderTime.get(k).getPendingIntent(), 0);
+                        reminderTime.get(k).getIntent(), 0);
                 alarmManager.cancel(ped);
                 ped.cancel();
             }

@@ -259,7 +259,7 @@ public class ReminderActivity extends AppCompatActivity {
             for (int k = 0; k < reminderTime.size(); k++) {
                 AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                 PendingIntent ped = PendingIntent.getBroadcast(getApplicationContext(), k,
-                        reminderTime.get(k).getPendingIntent(), 0);
+                        reminderTime.get(k).getIntent(), 0);
                 alarmManager.cancel(ped);
                 ped.cancel();
             }
@@ -344,7 +344,7 @@ public class ReminderActivity extends AppCompatActivity {
             for (int k = 0; k < reminderTime.size(); k++){
                 AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                 PendingIntent p = PendingIntent.getBroadcast(getApplicationContext(), k,
-                        reminderTime.get(k).getPendingIntent(), PendingIntent.FLAG_UPDATE_CURRENT);
+                        reminderTime.get(k).getIntent(), PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.cancel(p);
                 Log.d("remove ",k+"");
                 p.cancel();

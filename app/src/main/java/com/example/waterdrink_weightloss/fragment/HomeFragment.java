@@ -2,9 +2,11 @@ package com.example.waterdrink_weightloss.fragment;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -255,11 +257,20 @@ public class HomeFragment extends Fragment{
         rate_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedPreferences.edit().putBoolean(PrefKey.RateApp,false).commit();
+                sharedPreferences.edit().putBoolean(PrefKey.RateApp,false).apply();
                 rate = false;
                 rate_us_dialog.dismiss();
-                Toast.makeText(getContext(), "Thank You For Rating", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), ratingBar.getRating() + "", Toast.LENGTH_SHORT).show();
+
+                if(ratingBar.getRating()>3) {
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                    //Copy App URL from Google Play Store.
+                    intent.setData(Uri.parse("http://play.google.com/store/apps/details?id=" +
+                            getActivity().getPackageName()));
+
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -572,6 +583,17 @@ public class HomeFragment extends Fragment{
         fb.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fb.recyclerView.setHasFixedSize(true);
         fb.recyclerView.setAdapter(adapter);
+
+        Calendar current_time = Calendar.getInstance();
+        current_time.set(Calendar.HOUR_OF_DAY,23);
+        current_time.set(Calendar.MINUTE,59);
+        current_time.set(Calendar.SECOND,59);
+
+        if(current_time.getTimeInMillis()<reminderListDataList.get(0).getMilli_time())
+        {
+            fb.reminderText.setText("Tomorrow's Reminder");
+        }
+
         //Log.d("Tag",reminderListDataList.size()+"");
     }
 
@@ -608,7 +630,6 @@ public class HomeFragment extends Fragment{
     }
 
     private void setRateDialogDarkMode(){
-
         later.setTextColor(Color.WHITE);
         text2.setTextColor(Color.WHITE);
     }
