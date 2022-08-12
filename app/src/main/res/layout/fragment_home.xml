@@ -263,35 +263,50 @@
                 />
             </LinearLayout>
 
-            <LinearLayout
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                >-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/plus"-->
+<!--                    android:layout_width="15dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/plus" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/minus"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_width="15dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:src="@drawable/minus"-->
+<!--                    />-->
+
+<!--            </LinearLayout>-->
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:src="@drawable/vertical_line"
+                />
+
+            <ImageView
+                android:id="@+id/delete_last"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                >
-
-                <ImageView
-                    android:id="@+id/plus"
-                    android:layout_width="15dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:src="@drawable/plus" />
-
-                <ImageView
-                    android:id="@+id/minus"
-                    android:layout_gravity="center"
-                    android:layout_width="15dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/minus"
-                    />
-
-            </LinearLayout>
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/delete_last"
+                />
 
         </LinearLayout>
 

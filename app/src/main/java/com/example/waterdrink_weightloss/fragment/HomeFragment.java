@@ -328,19 +328,49 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        fb.plus.setOnClickListener(new View.OnClickListener() {
+//        fb.plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setDrinkWaterData(1);
+//            }
+//        });
+//
+//        fb.minus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(total_ml>0)
+//                    setDrinkWaterData(-1);
+//            }
+//        });
+
+        fb.deleteLast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setDrinkWaterData(1);
-            }
-        });
 
-        fb.minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                if(glass_add_record!=null && !glass_add_record.equals("0"))
+                {
+                    glass_add_record_array1 = glass_add_record.split(",");
 
-                if(total_ml>0)
-                    setDrinkWaterData(-1);
+                    glass_add_record = null;
+
+                    int size = glass_add_record_array1.length;
+
+                    total_ml -= Integer.parseInt(glass_add_record_array1[size-1]);
+
+                    for (int i=0;i<size-1;i++)
+                    {
+                        if (i==0)
+                            glass_add_record = glass_add_record_array1[i];
+                        else
+                            glass_add_record = glass_add_record + "," + glass_add_record_array1[i];
+                    }
+
+                    dbHandler.updateData(id,day,month,year,total_ml,glass_add_record);
+
+                    setCompletedData();
+                }
+
             }
         });
 
@@ -351,6 +381,13 @@ public class HomeFragment extends Fragment{
         if(target_ml!=0) {
 
             total_ml += drink;
+
+            if (glass_add_record!=null) {
+                glass_add_record += "," + String.valueOf(CupSize);
+            }
+            else {
+                glass_add_record = String.valueOf(CupSize);
+            }
 
             setCompletedData();
             dbHandler.updateData(id,day,month,year,total_ml,glass_add_record);
