@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
+                    userDataSharedPreferences.edit().putBoolean("FirstTime",false).apply();
                     Intent intent = new Intent(MainActivity.this, UserInformation.class);
                     startActivity(intent);
                 }

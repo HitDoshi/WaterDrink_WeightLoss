@@ -2,16 +2,21 @@ package com.example.waterdrink_weightloss.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.R;
 
 public class SplashActivity extends AppCompatActivity {
+
+    SharedPreferences userDataSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,8 @@ public class SplashActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
+        userDataSharedPreferences = getSharedPreferences(PrefKey.SharePrefName , Context.MODE_PRIVATE);
+
         Log.d("Splash_Activity","Call");
 
         final Handler handler2 = new Handler();
@@ -30,11 +37,19 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 // Do something after 5s = 5000ms
                 //buttons[inew][jnew].setBackgroundColor(Color.BLACK);
-                a();
+
+                if(userDataSharedPreferences.getBoolean("FirstTime",true))
+                    a();
+                else
+                {
+                    startActivity(new Intent(getApplicationContext(),WaterIntakeActivity.class));
+                    finish();
+                }
             }
         }, 2000);
 
     }
+
     public void a() {
         this.finish();
     }
