@@ -105,8 +105,8 @@ public class ReminderActivity extends AppCompatActivity {
         set = findViewById(R.id.set);
         //dialog
         k = dialogView.findViewById(R.id.t);
-        hour = dialogView.findViewById(R.id.hour);
-        min = dialogView.findViewById(R.id.minute);
+//        hour = dialogView.findViewById(R.id.hour);
+//        min = dialogView.findViewById(R.id.minute);
         ok = dialogView.findViewById(R.id.ok);
         cancel = dialogView.findViewById(R.id.cancel);
 

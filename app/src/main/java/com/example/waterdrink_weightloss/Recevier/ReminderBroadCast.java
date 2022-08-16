@@ -57,6 +57,7 @@ public class ReminderBroadCast extends BroadcastReceiver {
                 .setColor(ContextCompat.getColor(context,R.color.water_color))
                 .setContentText("Let's Drink Some Water And Healthy Your Body")
                 .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)) {
@@ -99,7 +100,7 @@ public class ReminderBroadCast extends BroadcastReceiver {
             Paper.book().write("ReminderTimeList",reminderListDataList);
         }
 
-        context.startActivity(new Intent(context,WaterIntakeActivity.class));
+//        context.startActivity(new Intent(context,WaterIntakeActivity.class));
 
       /*  ReminderListAdapter reminderListAdapter = new ReminderListAdapter();
         reminderListAdapter.deleteFirstReminder();*/
