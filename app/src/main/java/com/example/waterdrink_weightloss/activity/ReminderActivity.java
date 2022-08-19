@@ -231,7 +231,7 @@ public class ReminderActivity extends AppCompatActivity {
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
 
-                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp,0));
+                reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp,0,0));
 
                 Paper.book().write("ReminderTimeList", reminderTime);
             }
@@ -305,7 +305,7 @@ public class ReminderActivity extends AppCompatActivity {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 //Log.d("Time", calendar.getTimeInMillis() + "");
                 pendingIntentArrayList.add(pendingIntent);
-                reminderTime.add(new ReminderTime(i,j,intent,temp,0));
+                reminderTime.add(new ReminderTime(i,j,intent,temp,0,0));
 
                 Collections.sort(reminderTime, new Comparator<ReminderTime>() {
                     @Override

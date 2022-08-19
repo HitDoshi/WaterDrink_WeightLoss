@@ -38,4 +38,25 @@
         <item name="cornerSizeTopRight">20dp</item>
     </style>
 
+    <!--  Theme for App -->
+    <style name="AppTheme" parent="Theme.MaterialComponents">
+        ...
+        <item name="materialTimePickerTheme">@style/AppTheme.MaterialTimePickerTheme</item>
+    </style>
+
+    <!-- Theme for Material Time Picker - default for app -->
+    <style name="AppTheme.MaterialTimePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+
+    <style name="YOURSTYLE.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:itemBackground">@color/light_blue</item>
+    </style>
+
+
 </resources>

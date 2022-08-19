@@ -44,6 +44,8 @@ public class ReminderBroadCast extends BroadcastReceiver {
 
         userDataSharedPreferences = context.getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
+        reminderListDataList = Paper.book().read("ReminderTimeList");
+
         Vibrator vibrator = (Vibrator) context
                 .getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000);
@@ -55,7 +57,8 @@ public class ReminderBroadCast extends BroadcastReceiver {
                 context,"Drink Water").setContentTitle("Water Drink Reminder")
                 .setSmallIcon(R.drawable.frontpage)
                 .setColor(ContextCompat.getColor(context,R.color.water_color))
-                .setContentText("Let's Drink Some Water And Healthy Your Body")
+                .setContentText("Let's Drink " + reminderListDataList.get(0).getMl()
+                        + " ml Water And Healthy Your Body")
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
@@ -72,7 +75,6 @@ public class ReminderBroadCast extends BroadcastReceiver {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(new Random().nextInt(),builder.build());
 
-        reminderListDataList = Paper.book().read("ReminderTimeList");
 
         if(reminderListDataList!=null && reminderListDataList.size()!=0)
         {
@@ -93,7 +95,8 @@ public class ReminderBroadCast extends BroadcastReceiver {
 
             reminderListDataList.add(new ReminderTime(
                     reminderListDataList.get(0).getHour(),reminderListDataList.get(0).getMin(),i,
-                    reminderListDataList.get(0).getTemp(),calendar.getTimeInMillis()+86400000
+                    reminderListDataList.get(0).getTemp(),calendar.getTimeInMillis()+86400000,
+                    reminderListDataList.get(0).getMl()
             ));
 
             reminderListDataList.remove(0);

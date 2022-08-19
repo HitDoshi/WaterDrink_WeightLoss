@@ -4,7 +4,7 @@ import android.content.Intent;
 
 public class ReminderTime {
 
-    int hour , min , temp;
+    int hour , min , temp , ml;
     Intent intent;
     long milli_time;
 
@@ -48,12 +48,21 @@ public class ReminderTime {
         this.milli_time = milli_time;
     }
 
-    public ReminderTime(int hour , int min , Intent intent, int temp,long milli_time){
+    public void setMl(int ml) {
+        this.ml = ml;
+    }
+
+    public int getMl() {
+        return ml;
+    }
+
+    public ReminderTime(int hour , int min , Intent intent, int temp, long milli_time, int ml){
         this.hour = hour;
         this.min = min;
         this.intent = intent;
         this.temp = temp;
         this.milli_time = milli_time ;
+        this.ml = ml;
     }
 }
 

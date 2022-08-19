@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,8 @@ import com.example.waterdrink_weightloss.Model.PrefKey;
 import com.example.waterdrink_weightloss.Model.ReminderTime;
 import com.example.waterdrink_weightloss.activity.WaterIntakeActivity;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.List;
 
@@ -46,7 +49,7 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Paper.init(activity);
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.reminder_list, parent, false);
+        View listItem= layoutInflater.inflate(R.layout.reminder_list2, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
 
         return viewHolder;
@@ -57,12 +60,28 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final ReminderTime reminderListData = listdata.get(position);
 
+        int drink_ml = reminderListData.getMl();
+
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR,reminderListData.getHour());
         c.set(Calendar.MINUTE,reminderListData.getMin());
-        holder.textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
+
+        holder.time_textView.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
                 String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get((c.get(Calendar.AM_PM)))==1?"PM":"AM"));
         sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
+
+        holder.ml_textView.setText(drink_ml+ " ml");
+
+        if(drink_ml==300)
+        {
+            holder.glass_img.setImageResource(R.drawable.ml2);
+        }
+
+        if(drink_ml>300)
+        {
+            holder.glass_img.setImageResource(R.drawable.ml3);
+        }
+        
         boolean theme = sharedPreferences.getBoolean(PrefKey.Theme,true);
         if(!theme)
         {
@@ -93,8 +112,8 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView menu;
-        public TextView textView;
+        public ImageView menu,glass_img;
+        public TextView time_textView,ml_textView ;
         public ConstraintLayout linearLayout;
         public CardView cardView;
         public LinearLayout linear;
@@ -102,8 +121,10 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.time);
+            time_textView = (TextView) itemView.findViewById(R.id.time);
+            ml_textView = (TextView) itemView.findViewById(R.id.ml);
             menu = (ImageView) itemView.findViewById(R.id.menu);
+            glass_img = (ImageView) itemView.findViewById(R.id.glass);
             linearLayout = (ConstraintLayout) itemView.findViewById(R.id.linearlayout);
             cardView = (CardView) itemView.findViewById(R.id.cardview);
             linear = (LinearLayout) itemView.findViewById(R.id.linear);
@@ -112,8 +133,28 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
     }
 
     public void openOptionMenu(View v,final int position){
-        PopupMenu popup = new PopupMenu(v.getContext(), v);
+        Context wrapper = new ContextThemeWrapper(activity, R.style.YOURSTYLE_PopupMenu);
+        PopupMenu popup = new PopupMenu(wrapper, v);
         popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
+
+        /*  The below code in try catch is responsible to display icons*/
+
+        try {
+            Field[] fields = popup.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if ("mPopup".equals(field.getName())) {
+                    field.setAccessible(true);
+                    Object menuPopupHelper = field.get(popup);
+                    Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+                    setForceIcons.invoke(menuPopupHelper, true);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -135,4 +176,5 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
         });
         popup.show();
     }
+
 }

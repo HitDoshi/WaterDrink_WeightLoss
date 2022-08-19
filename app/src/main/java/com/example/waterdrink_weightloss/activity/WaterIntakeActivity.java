@@ -41,7 +41,7 @@ public class WaterIntakeActivity extends AppCompatActivity
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-    LinearLayout bar;
+    ImageView bar;
     //rate_app dialog
     AlertDialog rateApp_Dialog;
     AlertDialog.Builder builder1;
@@ -66,10 +66,6 @@ public class WaterIntakeActivity extends AppCompatActivity
         bar = findViewById(R.id.bar);
         toolbar = findViewById(R.id.toolbar);
         title = findViewById(R.id.title);
-        bar1 = findViewById(R.id.bar1);
-        bar2 = findViewById(R.id.bar2);
-        bar3 = findViewById(R.id.bar3);
-        bar4 = findViewById(R.id.bar4);
         bell = findViewById(R.id.bell);
 
         userDataSharedPreferences = getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
@@ -82,11 +78,7 @@ public class WaterIntakeActivity extends AppCompatActivity
 
         if(userDataSharedPreferences.getBoolean(PrefKey.Theme,true)){
             title.setTextColor(Color.WHITE);
-            bar1.setColorFilter(Color.WHITE);
-            bar2.setColorFilter(Color.WHITE);
-            bar3.setColorFilter(Color.WHITE);
-            bar4.setColorFilter(Color.WHITE);
-            bell.setColorFilter(Color.WHITE);
+            bar.setColorFilter(Color.WHITE);
             getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
         }
         else {

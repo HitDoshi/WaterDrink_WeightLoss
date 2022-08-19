@@ -26,6 +26,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -62,11 +64,12 @@ public class SetReminderActivity extends AppCompatActivity {
     Drawable upArrow;
 
     //dialog
-    AlertDialog set_ReminderDialog;
+    AlertDialog set_ml_dialog;
     AlertDialog.Builder builder;
     View dialogView;
-    TextView ok,cancel,k;
-    NumberPicker hour,min;
+    ImageView tick , close;
+    TextView time;
+    EditText set_ml_edittext;
     Calendar current_time_calender,calendar;
 
     TimePickerDialog timedialog;
@@ -89,20 +92,18 @@ public class SetReminderActivity extends AppCompatActivity {
 
         reminderSharedPreferences = getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);//this -- important not write other
-        dialogView = getLayoutInflater().inflate(R.layout.set_reminder_dialog,null);
+        dialogView = getLayoutInflater().inflate(R.layout.drinkml_reminderset,null);
         //Custom Dialog box add
         builder.setView(dialogView);
 
-        set_ReminderDialog = builder.create();
-        set_ReminderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        set_ml_dialog = builder.create();
+        set_ml_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //dialog
-        k = dialogView.findViewById(R.id.t);
-        hour = dialogView.findViewById(R.id.hour);
-        min = dialogView.findViewById(R.id.minute);
-        ok = dialogView.findViewById(R.id.ok);
-        cancel = dialogView.findViewById(R.id.cancel);
-
+        tick = dialogView.findViewById(R.id.tick);
+        set_ml_edittext = dialogView.findViewById(R.id.targetSetEditText);
+        time = dialogView.findViewById(R.id.time);
+        close = dialogView.findViewById(R.id.close);
         current_time_calender = Calendar.getInstance();
         calendar = Calendar.getInstance();
 
@@ -125,7 +126,7 @@ public class SetReminderActivity extends AppCompatActivity {
 
         if(theme){
             dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
-            k.setTextColor(Color.WHITE);
+            set_ml_edittext.setTextColor(Color.WHITE);
             //setWeatherDialogDarkMode();
         }else{
             dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
@@ -159,6 +160,7 @@ public class SetReminderActivity extends AppCompatActivity {
                         .setHour(current_time_calender.get(Calendar.HOUR_OF_DAY))
                         .setMinute(current_time_calender.get(Calendar.MINUTE))
                         .setTitleText("SET REMINDER")
+                        .setTheme(R.style.AppTheme_MaterialTimePickerTheme)
                         .build();
 
                 materialTimePicker.show(getSupportFragmentManager(),"TIMER");
@@ -170,8 +172,17 @@ public class SetReminderActivity extends AppCompatActivity {
                         timer_min = materialTimePicker.getMinute() ;
 //                        Toast.makeText(SetReminderActivity.this, timer_hour+" "+timer_min
 //                                , Toast.LENGTH_SHORT).show();
-                        addSelectedTimer();
 
+                        //addSelectedTimer();
+                        Calendar c = Calendar.getInstance();
+                        c.set(Calendar.HOUR,timer_hour);
+                        c.set(Calendar.MINUTE,timer_min);
+
+                        time.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
+                                String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get((c.get(Calendar.AM_PM)))==1?"PM":"AM"));
+
+                        set_ml_dialog.setCancelable(false);
+                        set_ml_dialog.show();
                     }
                 });
 
@@ -180,55 +191,57 @@ public class SetReminderActivity extends AppCompatActivity {
             }
         });
 
-//        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new
-//                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//                    public boolean onMove(RecyclerView recyclerView,
-//                                          RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                        //final int Position = viewHolder.getAdapterPosition();
-////                   final int toPos = viewHolder.getAdapterPosition();
-////                    // move item in `fromPos` to `toPos` in adapter.
-//
-//                        return true;// true if moved, false otherwise
-//                    }
-//
-//                    @Override
-//                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-//                        //Remove swiped item from list and notify the RecyclerView
-//                        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//
-//                        reminderTime = new ArrayList<>();
-//                        reminderTime = Paper.book().read("ReminderTimeList");
-//                        PendingIntent pendingIntent = PendingIntent.
-//                                getBroadcast(getApplicationContext()
-//                                        ,reminderTime.get(viewHolder.getAdapterPosition()).getTemp(),
-//                                reminderTime.get(viewHolder.getAdapterPosition()).
-//                                        getIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
-//                        alarmManager.cancel(pendingIntent);
-//                        pendingIntent.cancel();
-//                        Log.d("DELETE",reminderTime.get(viewHolder.getAdapterPosition()).getMin()+"");
-//                        reminderTime.remove(viewHolder.getAdapterPosition());
-//                        Paper.book().write("ReminderTimeList",reminderTime);
-//                        setRecylerView();
-//                    }
-//                };
-//
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-//        itemTouchHelper.attachToRecyclerView(recyclerView);
-
-        ok.setOnClickListener(new View.OnClickListener() {
+        tick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                set_ReminderDialog.dismiss();
+                set_ml_dialog.dismiss();
+                addSelectedTimer();
 
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                set_ReminderDialog.dismiss();
+                set_ml_dialog.dismiss();
             }
         });
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                        //final int Position = viewHolder.getAdapterPosition();
+//                   final int toPos = viewHolder.getAdapterPosition();
+//                    // move item in `fromPos` to `toPos` in adapter.
+
+                        return true;// true if moved, false otherwise
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                        //Remove swiped item from list and notify the RecyclerView
+                        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                        reminderTime = new ArrayList<>();
+                        reminderTime = Paper.book().read("ReminderTimeList");
+                        PendingIntent pendingIntent = PendingIntent.
+                                getBroadcast(getApplicationContext()
+                                        ,reminderTime.get(viewHolder.getAdapterPosition()).getTemp(),
+                                reminderTime.get(viewHolder.getAdapterPosition()).
+                                        getIntent(),PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmManager.cancel(pendingIntent);
+                        pendingIntent.cancel();
+                        Log.d("DELETE",reminderTime.get(viewHolder.getAdapterPosition()).getMin()+"");
+                        reminderTime.remove(viewHolder.getAdapterPosition());
+                        Paper.book().write("ReminderTimeList",reminderTime);
+                        setRecylerView();
+                    }
+                };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
     private void setRecylerView() {
@@ -274,27 +287,6 @@ public class SetReminderActivity extends AppCompatActivity {
     public void setData(){
 
         current_time_calender = Calendar.getInstance();
-        //hour.setMinValue(h.get(Calendar.HOUR_OF_DAY));
-        hour.setMaxValue(23);
-        hour.setValue(current_time_calender.get(Calendar.HOUR_OF_DAY));
-
-        //min.setMinValue(h.get(Calendar.MINUTE));
-        min.setMaxValue(59);
-        min.setValue(current_time_calender.get(Calendar.MINUTE));
-
-        hour.setFormatter(new NumberPicker.Formatter() {
-            @Override
-            public String format(int i) {
-                return String.format("%02d", i);
-            }
-        });
-
-        min.setFormatter(new NumberPicker.Formatter() {
-            @Override
-            public String format(int i) {
-                return String.format("%02d", i);
-            }
-        });
 
     }
 
@@ -304,6 +296,7 @@ public class SetReminderActivity extends AppCompatActivity {
 
         int temp=0;
         long time = 0;
+        int edittext_ml = Integer.parseInt(set_ml_edittext.getText().toString());
         reminderTime.clear();
         pendingIntentArrayList.clear();
         reminderTime = Paper.book().read("ReminderTimeList");
@@ -354,7 +347,7 @@ public class SetReminderActivity extends AppCompatActivity {
 
 
         reminderTime.add(new ReminderTime(timer_hour,timer_min,intent,temp,
-                calendar.getTimeInMillis()+time));
+                calendar.getTimeInMillis()+time,edittext_ml));
 
         Collections.sort(reminderTime, new Comparator<ReminderTime>() {
             @Override
@@ -380,4 +373,12 @@ public class SetReminderActivity extends AppCompatActivity {
         reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,temp).apply();
         setRecylerView();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(),WaterIntakeActivity.class));
+        finish();
+    }
+
 }
