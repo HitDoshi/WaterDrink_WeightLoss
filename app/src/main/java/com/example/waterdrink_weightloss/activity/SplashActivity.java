@@ -38,8 +38,10 @@ public class SplashActivity extends AppCompatActivity {
                 // Do something after 5s = 5000ms
                 //buttons[inew][jnew].setBackgroundColor(Color.BLACK);
 
-                if(userDataSharedPreferences.getBoolean("FirstTime",true))
-                    a();
+                if (userDataSharedPreferences.getBoolean("FirstTime", true)){
+                    startActivity(new Intent(getApplicationContext(), FirstTimeActivity.class));
+                    finish();
+                }
                 else
                 {
                     startActivity(new Intent(getApplicationContext(),WaterIntakeActivity.class));
@@ -50,7 +52,4 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    public void a() {
-        this.finish();
-    }
 }

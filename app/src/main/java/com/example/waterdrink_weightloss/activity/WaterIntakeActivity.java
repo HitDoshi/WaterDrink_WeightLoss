@@ -49,7 +49,7 @@ public class WaterIntakeActivity extends AppCompatActivity
     SharedPreferences userDataSharedPreferences;
     Toolbar toolbar;
     TextView title;
-    ImageView bar1,bar2,bar3,bar4,bell;
+    ImageView bell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +79,16 @@ public class WaterIntakeActivity extends AppCompatActivity
         if(userDataSharedPreferences.getBoolean(PrefKey.Theme,true)){
             title.setTextColor(Color.WHITE);
             bar.setColorFilter(Color.WHITE);
+            bell.setColorFilter(Color.WHITE);
             getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
         }
-        else {
+
+        if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
+            bell.setImageResource(R.drawable.bell_on);
+            Log.d("Bell","on");
+        }else{
+            bell.setImageResource(R.drawable.bell_off);
+            Log.d("Bell","off");
         }
 //            toolbar.setBackgroundColor(Integer.parseInt(String.valueOf(R.color.black)));
             toolbar.getBackground().setAlpha(0);
@@ -104,14 +111,6 @@ public class WaterIntakeActivity extends AppCompatActivity
                 drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-
-        if(userDataSharedPreferences.getBoolean(PrefKey.ReminderOnOff,true)){
-            bell.setImageResource(R.drawable.bell_on);
-            Log.d("Bell","on");
-        }else{
-            bell.setImageResource(R.drawable.bell_off);
-            Log.d("Bell","off");
-        }
 
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,9 +186,8 @@ public class WaterIntakeActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,"http://play.google.com/store/apps/details?id=" + getPackageName() +
-                        "\n" + "This App Use For Water Drink Reminder \n " +
-                        "And also user see drink record Day,Month & Year Wise"
+                intent.putExtra(Intent.EXTRA_TEXT,PrefKey.ShareApp_Data_Text1 +"http://play.google.com/store/apps/details?id=" + getPackageName() +
+                PrefKey.ShareApp_Data_Text2
                 );
                 startActivity(intent);
                 break;
@@ -200,7 +198,6 @@ public class WaterIntakeActivity extends AppCompatActivity
                 userDataSharedPreferences.edit().putBoolean(PrefKey.RateApp,true).apply();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-
                 ft.replace(R.id.fragment_container,new HomeFragment());
                 ft.commit();
                 return true;
@@ -209,7 +206,6 @@ public class WaterIntakeActivity extends AppCompatActivity
             case R.id.feedback:
             {
                 Intent feedbackEmail = new Intent(Intent.ACTION_SEND);
-
                 feedbackEmail.setType("text/email");
                 feedbackEmail.putExtra(Intent.EXTRA_EMAIL, new String[] {"hit1.quad@gmail.com"});
                 feedbackEmail.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
@@ -221,14 +217,14 @@ public class WaterIntakeActivity extends AppCompatActivity
             case R.id.more_app:
             {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/search?q=water+drink+reminder&c=apps") ));
+                        Uri.parse(PrefKey.MoreApp) ));
                 return true;
             }
 
             case R.id.privacy_policy:
             {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.freeprivacypolicy.com/live/921751a3-7807-40eb-9f1d-6ba5a221b22b") ));
+                        Uri.parse(PrefKey.Private_Policy) ));
                 return true;
             }
 

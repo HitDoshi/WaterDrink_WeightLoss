@@ -171,7 +171,7 @@ public class AgeWightFragment extends Fragment {
                 if (!editTarget.getText().toString().equals("")) {
                     DrinkTarget = Integer.parseInt(editTarget.getText().toString());
                 } else {
-                    DrinkTarget = 1500;
+                    DrinkTarget = 3000;
                 }
                 setTarget.setText(editTarget.getText() + " ml");
                 editTargetSharedPref(DrinkTarget);
@@ -202,7 +202,7 @@ public class AgeWightFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        int t = targetSharedPref.getInt(PrefKey.Target_ml,1500);
+        int t = targetSharedPref.getInt(PrefKey.Target_ml,3000);
         setTarget.setText(t+"ml");
         editTarget.setText(t+"");
         seekBar.setProgress(t-500);

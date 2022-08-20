@@ -25,7 +25,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
     Activity activity;
     ArrayList<String> name;
     int temp = 0;
-    int target_ml = 1500 ;
+    int target_ml = 3000 ;
     SharedPreferences sharedPreferences;
     Calendar calendar;
     Integer year , size;
@@ -47,7 +47,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
         sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName,Context.MODE_PRIVATE);
 
-        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 3000);
 
         return viewHolder;
     }
@@ -62,7 +62,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
                     *//*total += arrayList.get(j).getAchievement();
                     sum = arrayList.get(j).getAchievement();*//*
                         temp = ((int) (  ( (float) (int)(arrayList.get(j).getAchievement())) /
-                                (float) (1500) * 100));
+                                (float) (3000) * 100));
                     //Toast.makeText(activity, "Hi", Toast.LENGTH_SHORT).show();
                     }
             }*/

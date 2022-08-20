@@ -221,7 +221,7 @@ public class WeekGraphFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        target_ml = sharedPreferences.getInt("target_ml", 1500);
+        target_ml = sharedPreferences.getInt("target_ml", 3000);
 
         SimpleDateFormat FirstDay = new SimpleDateFormat("dd MMM yyyy");
         SimpleDateFormat LastDay = new SimpleDateFormat("dd MMM yyyy");

@@ -66,17 +66,19 @@
             app:layout_constraintTop_toBottomOf="@+id/linear1">
 
             <TextView
+                android:id="@+id/t1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Today's Goal"
-                android:textColor="@color/dark_purple"
+                android:textColor="@color/babyBlue"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/target_textview"
-                android:text="Drink 1500ml"
+                android:text="Drink 3000 ml"
+                android:textStyle="bold"
                 android:textColor="@color/water_color"
                 android:backgroundTint="#00546F"
                 />

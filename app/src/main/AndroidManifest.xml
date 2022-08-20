@@ -16,7 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrink_WeightLoss">
         <activity
+            android:name=".activity.FirstTimeActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".activity.ExitActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.SetReminderActivity"

@@ -68,9 +68,9 @@ public class SettingActivity extends AppCompatActivity {
         weight.setText(userDataSharedPreferences.getString(PrefKey.Weight,"55") + "kg");
         wake_up_time.setText(String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Wake_up_Hour,7)) + " : "+
                 String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Wake_up_Min,0)) );
-        bed_time.setText(String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Bed_Hour,11)) + " : "+
+        bed_time.setText(String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Bed_Hour,22)) + " : "+
                 String.format("%02d",userDataSharedPreferences.getInt(PrefKey.Bed_Min,0)) );
-        goal.setText(userDataSharedPreferences.getInt(PrefKey.Target_ml,1500)+ " ml");
+        goal.setText(userDataSharedPreferences.getInt(PrefKey.Target_ml,3000)+ " ml");
         theme.setChecked(themeSharedPref.getBoolean(PrefKey.Theme,true));
         tips.setChecked(themeSharedPref.getBoolean(PrefKey.Tips,false));
 

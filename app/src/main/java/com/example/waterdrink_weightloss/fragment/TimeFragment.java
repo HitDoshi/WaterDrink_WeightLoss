@@ -87,7 +87,7 @@ public class TimeFragment extends Fragment {
         h1 = userDataSharedPreferences.getInt(PrefKey.Wake_up_Hour,7);
         m1 = userDataSharedPreferences.getInt(PrefKey.Wake_up_Min,0);
 
-        h2 = userDataSharedPreferences.getInt(PrefKey.Bed_Hour,11);
+        h2 = userDataSharedPreferences.getInt(PrefKey.Bed_Hour,22);
         m2 = userDataSharedPreferences.getInt(PrefKey.Bed_Min,0);
 
         wake_up_hour.setMaxValue(23);

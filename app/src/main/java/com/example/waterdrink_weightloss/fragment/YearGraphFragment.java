@@ -187,7 +187,7 @@ public class YearGraphFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 3000);
 
         calendar = Calendar.getInstance();
         position = calendar.get(Calendar.MONTH);

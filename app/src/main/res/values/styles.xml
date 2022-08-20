@@ -53,10 +53,16 @@
         <item name="cornerSizeBottomRight">20dp</item>
     </style>
 
-    <style name="YOURSTYLE.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+    <style name="CustomStyle.PopupMenu" parent="@style/Widget.AppCompat.ListView.DropDown">
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:itemBackground">@color/light_blue</item>
+        <item name="android:itemBackground">@color/babyBlue</item>
+        <item name="android:divider">@color/dark_gray</item>
+        <item name="android:dividerHeight">0.5dp</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
     </style>
-
 
 </resources>

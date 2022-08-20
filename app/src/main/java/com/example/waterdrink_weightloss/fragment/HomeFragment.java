@@ -43,7 +43,7 @@ import io.paperdb.Paper;
 public class HomeFragment extends Fragment{
 
     SharedPreferences sharedPreferences;
-    int CupSize = 300 , target_ml = 1500  ,total_ml = 0;
+    int CupSize = 300 , target_ml = 3000  ,total_ml = 0;
     int id = 0;
     int day,month,year, percentage;
     String glass_add_record=null;
@@ -230,6 +230,8 @@ public class HomeFragment extends Fragment{
             setRateDialogDarkMode();
 
         }else{
+
+            fb.t1.setTextColor(getResources().getColor(R.color.light_black));
             dialogView1.setBackgroundResource(R.drawable.light_dialog_shape);
             dialogView2.setBackgroundResource(R.drawable.light_dialog_shape);
             dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
@@ -414,7 +416,7 @@ public class HomeFragment extends Fragment{
     public void onStart() {
         super.onStart();
 
-        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 3000);
         CupSize = sharedPreferences.getInt(PrefKey.CupSize, 300);
         fb.targetTextview.setText(target_ml + " ml");
         fb.addGlass.setText(CupSize +"ml");
@@ -518,7 +520,7 @@ public class HomeFragment extends Fragment{
             wakeupHour = sharedPreferences.getInt(PrefKey.Wake_up_Hour,7);
             wakeupMin = sharedPreferences.getInt(PrefKey.Wake_up_Min,0);
 
-            badHour = sharedPreferences.getInt(PrefKey.Bed_Hour,11);
+            badHour = sharedPreferences.getInt(PrefKey.Bed_Hour,22);
             badMin = sharedPreferences.getInt(PrefKey.Bed_Min,0);
 
             interval = sharedPreferences.getInt(PrefKey.Interval,60);

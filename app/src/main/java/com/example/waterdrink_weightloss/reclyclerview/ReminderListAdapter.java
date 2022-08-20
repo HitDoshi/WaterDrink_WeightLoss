@@ -48,16 +48,15 @@ import io.paperdb.Paper;
 public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapter.ViewHolder>{
     private List<ReminderTime> listdata;
     List<ReminderListData> l;
-    ArrayList<PendingIntent> pendingIntentArrayList = new ArrayList<PendingIntent>();
     Activity activity;
-    List<ReminderTime> pendingReminderList = new ArrayList<ReminderTime>();
+
     List<ReminderTime> reminderTime = new ArrayList<ReminderTime>();
     MaterialTimePicker materialTimePicker ;
     Calendar current_time_calender;
     AlertDialog set_ml_dialog;
     int timer_hour;
     int timer_min;
-    ImageView tick , close;
+    TextView SET , CANCEL,t1,t2;
     TextView time;
     EditText set_ml_edittext;
     SharedPreferences reminderSharedPreferences;
@@ -70,9 +69,6 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         this.activity = activity;
     }
 
-    public ReminderListAdapter(){
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Paper.init(activity);
@@ -82,17 +78,33 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
         reminderSharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
         builder = new AlertDialog.Builder(activity);//this -- important not write other
-        dialogView = activity.getLayoutInflater().inflate(R.layout.drinkml_reminderset,null);
+        dialogView = activity.getLayoutInflater().inflate(R.layout.drinkml_reminderset, null);
         //Custom Dialog box add
         builder.setView(dialogView);
 
         set_ml_dialog = builder.create();
         set_ml_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        tick = dialogView.findViewById(R.id.tick);
+//        tick = dialogView.findViewById(R.id.tick);
         set_ml_edittext = dialogView.findViewById(R.id.targetSetEditText);
         time = dialogView.findViewById(R.id.time);
-        close = dialogView.findViewById(R.id.close);
+        SET = dialogView.findViewById(R.id.set);
+        CANCEL = dialogView.findViewById(R.id.cancel);
+        t1 = dialogView.findViewById(R.id.t1);
+        t2 = dialogView.findViewById(R.id.t2);
+
+        boolean theme = reminderSharedPreferences.getBoolean(PrefKey.Theme,true);
+
+        if(theme){
+            dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
+            set_ml_edittext.setTextColor(Color.WHITE);
+            t1.setTextColor(Color.WHITE);
+            t2.setTextColor(Color.WHITE);
+            time.setTextColor(Color.WHITE);
+            //setWeatherDialogDarkMode();
+        }else{
+            dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
+        }
 
         return viewHolder;
     }
@@ -144,7 +156,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
     }
 
     public void openOptionMenu(View v,final int position){
-        Context wrapper = new ContextThemeWrapper(activity, R.style.YOURSTYLE_PopupMenu);
+        Context wrapper = new ContextThemeWrapper(activity, R.style.CustomStyle_PopupMenu);
         PopupMenu popup = new PopupMenu(wrapper, v);
         popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
 
@@ -222,6 +234,9 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
                             c.set(Calendar.HOUR,timer_hour);
                             c.set(Calendar.MINUTE,timer_min);
 
+                            time.setText(String.format("%02d",c.get(Calendar.HOUR))+":"+
+                                    String.format("%02d",c.get(Calendar.MINUTE)) + " "+ (c.get((c.get(Calendar.AM_PM)))==1?"PM":"AM"));
+
                             set_ml_dialog.setCancelable(false);
                             set_ml_dialog.show();
 
@@ -230,7 +245,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
                 }
             });
 
-        tick.setOnClickListener(new View.OnClickListener() {
+        SET.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     set_ml_dialog.dismiss();
@@ -239,7 +254,7 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
                 }
             });
 
-        close.setOnClickListener(new View.OnClickListener() {
+        CANCEL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     set_ml_dialog.dismiss();
@@ -261,7 +276,6 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         long time = 0;
         int edittext_ml = Integer.parseInt(set_ml_edittext.getText().toString());
         reminderTime.clear();
-        pendingIntentArrayList.clear();
         reminderTime = Paper.book().read("ReminderTimeList");
         if(reminderTime!=null && reminderTime.size()!=0) {
             temp = reminderSharedPreferences.getInt(PrefKey.Reminder_Count,0);
@@ -311,7 +325,6 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
                 getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis()+time, pendingIntent);
         //Log.d("Time", calendar.getTimeInMillis() + "");
-        pendingIntentArrayList.add(pendingIntent);
 //
 //        reminderTime.add(new ReminderTime(hour.getValue(),min.getValue(),intent,temp,
 //                calendar.getTimeInMillis()+time));
@@ -341,6 +354,9 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
         Paper.book().write("ReminderTimeList", reminderTime);
         reminderSharedPreferences.edit().putInt(PrefKey.Reminder_Count,temp).apply();
+
+        activity.startActivity(new Intent(activity, WaterIntakeActivity.class));
+
     }
 
 }

@@ -22,7 +22,7 @@ public class ProgressBarAdapter extends RecyclerView.Adapter<ProgressBarAdapter.
     ArrayList<Integer> arrayList = new ArrayList<>();
     Activity activity;
     int temp = 0;
-    int target_ml = 1500 ;
+    int target_ml = 3000 ;
     SharedPreferences sharedPreferences;
     // RecyclerView recyclerView;
     public ProgressBarAdapter(Activity activity , int temp) {
@@ -40,7 +40,7 @@ public class ProgressBarAdapter extends RecyclerView.Adapter<ProgressBarAdapter.
 
         sharedPreferences = activity.getSharedPreferences(PrefKey.SharePrefName, Context.MODE_PRIVATE);
 
-        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 1500);
+        target_ml = sharedPreferences.getInt(PrefKey.Target_ml, 3000);
 
         return viewHolder;
     }
@@ -55,7 +55,7 @@ public class ProgressBarAdapter extends RecyclerView.Adapter<ProgressBarAdapter.
                     *//*total += arrayList.get(j).getAchievement();
                     sum = arrayList.get(j).getAchievement();*//*
                         temp = ((int) (  ( (float) (int)(arrayList.get(j).getAchievement())) /
-                                (float) (1500) * 100));
+                                (float) (3000) * 100));
                     //Toast.makeText(activity, "Hi", Toast.LENGTH_SHORT).show();
                     }
             }*/

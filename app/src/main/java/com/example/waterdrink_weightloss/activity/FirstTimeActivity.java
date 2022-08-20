@@ -7,16 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.example.waterdrink_weightloss.R;
 import com.example.waterdrink_weightloss.Model.PrefKey;
+import com.example.waterdrink_weightloss.R;
 
-public class MainActivity extends AppCompatActivity {
+public class FirstTimeActivity extends AppCompatActivity {
 
     Button start ;
     SharedPreferences userDataSharedPreferences;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_first_time);
 
         userDataSharedPreferences = getSharedPreferences(PrefKey.SharePrefName , Context.MODE_PRIVATE);
 
@@ -39,10 +38,23 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        Log.d("MainActivity","Call");
-        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
-        startActivity(intent);
-        finish();
+        //startActivity(new Intent(getApplicationContext(),SplashActivity.class));
 
+        start = findViewById(R.id.start);
+        PrefManager prefManager = new PrefManager(this);
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!prefManager.isFirstTimeLaunch()) {
+                    startActivity(new Intent(getApplicationContext(),WaterIntakeActivity.class));
+                    finish();
+                }
+                else {
+                    //userDataSharedPreferences.edit().putBoolean("FirstTime",false).apply();
+                    startActivity(new Intent(getApplicationContext(),UserInformation.class));
+                }
+            }
+        });
     }
 }

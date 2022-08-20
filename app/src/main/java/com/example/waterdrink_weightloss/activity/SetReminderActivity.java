@@ -67,7 +67,7 @@ public class SetReminderActivity extends AppCompatActivity {
     AlertDialog set_ml_dialog;
     AlertDialog.Builder builder;
     View dialogView;
-    ImageView tick , close;
+    TextView SET,CANCEL,t1,t2 ;
     TextView time;
     EditText set_ml_edittext;
     Calendar current_time_calender,calendar;
@@ -100,10 +100,13 @@ public class SetReminderActivity extends AppCompatActivity {
         set_ml_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //dialog
-        tick = dialogView.findViewById(R.id.tick);
+//        tick = dialogView.findViewById(R.id.tick);
         set_ml_edittext = dialogView.findViewById(R.id.targetSetEditText);
         time = dialogView.findViewById(R.id.time);
-        close = dialogView.findViewById(R.id.close);
+        SET = dialogView.findViewById(R.id.set);
+        CANCEL = dialogView.findViewById(R.id.cancel);
+        t1 = dialogView.findViewById(R.id.t1);
+        t2 = dialogView.findViewById(R.id.t2);
         current_time_calender = Calendar.getInstance();
         calendar = Calendar.getInstance();
 
@@ -127,6 +130,9 @@ public class SetReminderActivity extends AppCompatActivity {
         if(theme){
             dialogView.setBackgroundResource(R.drawable.dark_dialog_shape);
             set_ml_edittext.setTextColor(Color.WHITE);
+            t1.setTextColor(Color.WHITE);
+            t2.setTextColor(Color.WHITE);
+            time.setTextColor(Color.WHITE);
             //setWeatherDialogDarkMode();
         }else{
             dialogView.setBackgroundResource(R.drawable.light_dialog_shape);
@@ -191,7 +197,7 @@ public class SetReminderActivity extends AppCompatActivity {
             }
         });
 
-        tick.setOnClickListener(new View.OnClickListener() {
+        SET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 set_ml_dialog.dismiss();
@@ -200,7 +206,7 @@ public class SetReminderActivity extends AppCompatActivity {
             }
         });
 
-        close.setOnClickListener(new View.OnClickListener() {
+        CANCEL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 set_ml_dialog.dismiss();
