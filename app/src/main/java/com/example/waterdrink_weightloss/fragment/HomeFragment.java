@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -271,6 +272,12 @@ public class HomeFragment extends Fragment{
                             getActivity().getPackageName()));
 
                     startActivity(intent);
+                }
+                else
+                {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(PrefKey.Google_Form));
+                    startActivity(i);
                 }
 
             }

@@ -53,16 +53,29 @@
         <item name="cornerSizeBottomRight">20dp</item>
     </style>
 
-    <style name="CustomStyle.PopupMenu" parent="@style/Widget.AppCompat.ListView.DropDown">
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:itemBackground">@color/babyBlue</item>
-        <item name="android:divider">@color/dark_gray</item>
-        <item name="android:dividerHeight">0.5dp</item>
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">20dp</item>
-        <item name="cornerSizeBottomLeft">20dp</item>
-        <item name="cornerSizeTopRight">20dp</item>
-        <item name="cornerSizeBottomRight">20dp</item>
+<!--    <style name="CustomStyle.PopupMenu" parent="@style/Widget.AppCompat.ListView.DropDown">-->
+<!--        <item name="android:textColor">@android:color/black</item>-->
+<!--        <item name="android:itemBackground">@color/babyBlue</item>-->
+<!--        <item name="android:divider">@color/dark_gray</item>-->
+<!--        <item name="android:dividerHeight">0.5dp</item>-->
+<!--        <item name="cornerFamily">rounded</item>-->
+<!--        <item name="cornerSizeTopLeft">20dp</item>-->
+<!--        <item name="cornerSizeBottomLeft">20dp</item>-->
+<!--        <item name="cornerSizeTopRight">20dp</item>-->
+<!--        <item name="cornerSizeBottomRight">20dp</item>-->
+<!--    </style>-->
+
+    <!-- Popup Menu -->
+    <style name="Widget.MyApp.PopupMenu" parent="@style/Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupMenuStyle">@style/ShapeAppearanceOverlay.MyApp.PopupMenu</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.PopupMenu" parent="">
+        <item name="borderRound">100dp</item>
+        <item name="cornerSizeTopLeft">100dp</item>
+        <item name="cornerSizeBottomLeft">100dp</item>
+        <item name="cornerSizeTopRight">100dp</item>
+        <item name="cornerSizeBottomRight">100dp</item>
     </style>
 
 </resources>

@@ -27,4 +27,6 @@ public class PrefKey {
 
     public final static String ShareApp_Data_Text2 = "\nThis App Use For Drink Water Reminder on Time\n " +
             "And Track your water intake with report chart" ;
+
+    public final static String Google_Form = "https://forms.gle/Cz2irbkjDrWAZvaC7" ;
 }

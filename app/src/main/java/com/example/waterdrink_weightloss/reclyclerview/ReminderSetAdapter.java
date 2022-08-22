@@ -186,7 +186,7 @@ public class ReminderSetAdapter extends RecyclerView.Adapter<ReminderSetAdapter.
     }
 
     public void openOptionMenu(View v,final int position){
-        Context wrapper = new ContextThemeWrapper(activity, R.style.CustomStyle_PopupMenu);
+        Context wrapper = new ContextThemeWrapper(activity, R.style.Widget_MyApp_PopupMenu);
         PopupMenu popup = new PopupMenu(wrapper, v);
         popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
 
