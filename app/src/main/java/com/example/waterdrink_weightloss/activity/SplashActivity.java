@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
                 // Do something after 5s = 5000ms
                 //buttons[inew][jnew].setBackgroundColor(Color.BLACK);
 
-                if (userDataSharedPreferences.getBoolean("FirstTime", true)){
+                if (userDataSharedPreferences.getBoolean(PrefKey.FirstTime, true)){
                     startActivity(new Intent(getApplicationContext(), FirstTimeActivity.class));
                     finish();
                 }

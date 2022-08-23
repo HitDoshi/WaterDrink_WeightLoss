@@ -46,12 +46,13 @@ public class FirstTimeActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userDataSharedPreferences.edit().putBoolean(PrefKey.FirstTime,false).apply();
+
                 if (!prefManager.isFirstTimeLaunch()) {
                     startActivity(new Intent(getApplicationContext(),WaterIntakeActivity.class));
                     finish();
                 }
                 else {
-                    //userDataSharedPreferences.edit().putBoolean("FirstTime",false).apply();
                     startActivity(new Intent(getApplicationContext(),UserInformation.class));
                 }
             }

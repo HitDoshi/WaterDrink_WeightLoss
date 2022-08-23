@@ -4,6 +4,7 @@ public class PrefKey {
 
     public final static String SharePrefName = "MySharedPref" ;
     public final static String ReminderOnOff = "reminderOnOff" ;
+    public final static String FirstTime = "firstTime";
     public final static String Theme = "theme" ;
     public final static String Gender = "gender" ;
     public final static String Weight = "weight" ;
